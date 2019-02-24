@@ -43,11 +43,12 @@ const promptForOverwriteBeforePatch = async dest => {
 
 /**
  *
- * @param {{ templatesDir?: string, filter?: (dest: string) => Promise<boolean> }} param0
+ * @param {{ templatesDir?: string, shouldPromptToOverwritePackageJson?: boolean, forceOverwrites?: boolean }} param0
  */
 const patch = async ({
   templatesDir = resolveTemplatesDir(),
-  filter = promptForOverwriteBeforePatch,
+  shouldPromptToOverwritePackageJson = true,
+  forceOverwrites = false,
 } = {}) => {
   const patchers = [
     {
@@ -55,7 +56,7 @@ const patch = async ({
       contents: async () => JSON.stringify(tsConfig()),
     },
     {
-      file: 'package.json',
+      file: PKG_JSON,
       contents: async () =>
         JSON.stringify(await patchPackageJson({ templatesDir })),
     },
@@ -74,10 +75,22 @@ const patch = async ({
       ...(ext === '.json' && { parser: 'json' }),
     })
 
-    if (oldContents !== newContents) {
-      const effectiveFilter = filter || (_dest => Promise.resolve(true))
+    const prompt = async () => {
+      if (forceOverwrites) {
+        return true
+      }
 
-      const shouldPatch = await effectiveFilter(fullPath)
+      if (item.file === PKG_JSON) {
+        return shouldPromptToOverwritePackageJson
+          ? promptForOverwriteBeforePatch(fullPath)
+          : true
+      } else {
+        return promptForOverwriteBeforePatch(fullPath)
+      }
+    }
+
+    if (oldContents !== newContents) {
+      const shouldPatch = await prompt()
 
       if (!shouldPatch) {
         console.log('patch: skipping', fullPath)

@@ -12,7 +12,7 @@ const npmInitIfRequired = async () => {
 
   const exists = await pathExists(packageJsonPath)
   if (exists) {
-    return
+    return false
   }
 
   const initProcessResult = spawnSync('npm', ['init'], {
@@ -28,6 +28,8 @@ const npmInitIfRequired = async () => {
   if (!existsSync(packageJsonPath)) {
     process.exit(0)
   }
+
+  return true
 }
 
 /**
@@ -67,7 +69,7 @@ const init = async ({ forceOverwrites = false } = {}) => {
     const currentDir = resolve('./')
     const templatesDir = resolveTemplatesDir()
 
-    npmInitIfRequired()
+    const pkgCreated = await npmInitIfRequired()
 
     const copy = () =>
       copyFromTemplates({
@@ -79,6 +81,8 @@ const init = async ({ forceOverwrites = false } = {}) => {
     const generate = () => {
       patch({
         templatesDir,
+        shouldPromptToOverwritePackageJson: !pkgCreated,
+        forceOverwrites,
       })
     }
 
