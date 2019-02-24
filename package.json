@@ -1,7 +1,7 @@
 {
   "name": "@zaripych/ts-deps",
   "version": "1.0.2",
-  "description": "Shared TypeScript related dependencies and libraries to setup typical build/lint/test pipeline and CI/CD pipeline using babel, jest and semantic-release. Meant to be added as dev dependency.",
+  "description": "TypeScript related dependencies and libraries to setup typical build/lint/format/test pipeline and CI/CD pipeline using babel, jest, prettier, tslint and semantic-release. Meant to be added as dev dependency.",
   "main": "lib/index.js",
   "scripts": {
     "test": "jest --color --silent",
