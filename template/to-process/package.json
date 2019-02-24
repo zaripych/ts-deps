@@ -6,6 +6,13 @@
     "build": "node ./scripts/build.js",
     "type-check": "tsc --noEmit"
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "pretty-quick --staged",
+      "pre-push": "check"
+    }
+  },
   "devDependencies": {
     "@zaripych/ts-deps": "../zaripych-ts-deps-v1.0.0.tgz"
   }

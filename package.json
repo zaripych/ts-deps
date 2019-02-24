@@ -13,6 +13,13 @@
   "files": [
     "lib"
   ],
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "pretty-quick --staged",
+      "pre-push": "check"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/zaripych/ts-deps.git"
