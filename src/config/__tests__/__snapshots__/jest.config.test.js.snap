@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`given aliases should work 1`] = `
+Object {
+  "cacheDirectory": ".jest-cache",
+  "collectCoverageFrom": Array [
+    "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
+    "!**/node_modules/**",
+    "!**/*.d.ts",
+  ],
+  "globals": Object {
+    "INTEGRATION_TEST": false,
+  },
+  "moduleFileExtensions": Array [
+    "js",
+    "jsx",
+    "ts",
+    "tsx",
+  ],
+  "moduleNameMapper": Object {
+    "^@shared$": "<rootDir>/src/shared",
+    "^@shared/(.*)$": "<rootDir>/src/shared/$1",
+  },
+  "modulePathIgnorePatterns": Array [
+    "lib",
+  ],
+  "setupFiles": Array [],
+  "testEnvironment": "node",
+  "testMatch": Array [
+    "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+  ],
+  "testPathIgnorePatterns": Array [
+    "/node_modules/",
+    "lib",
+  ],
+  "transform": Object {
+    "^.+\\\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+  },
+}
+`;
+
+exports[`given integration tests should work 1`] = `
+Object {
+  "cacheDirectory": ".jest-cache",
+  "collectCoverageFrom": Array [
+    "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
+    "!**/node_modules/**",
+    "!**/*.d.ts",
+  ],
+  "globals": Object {
+    "INTEGRATION_TEST": false,
+  },
+  "moduleFileExtensions": Array [
+    "js",
+    "jsx",
+    "ts",
+    "tsx",
+  ],
+  "modulePathIgnorePatterns": Array [
+    "lib",
+  ],
+  "setupFiles": Array [],
+  "testEnvironment": "node",
+  "testMatch": Array [
+    "<rootDir>/src/__integration-tests__/**/*.{js,jsx,ts,tsx}",
+  ],
+  "testPathIgnorePatterns": Array [
+    "/node_modules/",
+    "lib",
+  ],
+  "transform": Object {
+    "^.+\\\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+  },
+}
+`;
+
+exports[`given no options should work 1`] = `
+Object {
+  "cacheDirectory": ".jest-cache",
+  "collectCoverageFrom": Array [
+    "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
+    "!**/node_modules/**",
+    "!**/*.d.ts",
+  ],
+  "globals": Object {
+    "INTEGRATION_TEST": false,
+  },
+  "moduleFileExtensions": Array [
+    "js",
+    "jsx",
+    "ts",
+    "tsx",
+  ],
+  "moduleNameMapper": Object {
+    "^@zaripych/ts-deps$": "<rootDir>/src",
+    "^@zaripych/ts-deps/(.*)$": "<rootDir>/src/$1",
+  },
+  "modulePathIgnorePatterns": Array [
+    "lib",
+  ],
+  "setupFiles": Array [],
+  "testEnvironment": "node",
+  "testMatch": Array [
+    "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+  ],
+  "testPathIgnorePatterns": Array [
+    "/node_modules/",
+    "lib",
+  ],
+  "transform": Object {
+    "^.+\\\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+  },
+}
+`;

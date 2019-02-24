@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "test": "jest --color",
+    "clean": "node ./scripts/clean.js",
+    "prebuild": "node ./scripts/clean.js",
+    "build": "node ./scripts/build.js",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@zaripych/ts-deps": "../zaripych-ts-deps-v1.0.0.tgz"
+  }
+}

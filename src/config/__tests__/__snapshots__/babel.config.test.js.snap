@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`excluding tests in the output should work 1`] = `
+Object {
+  "ignore": Array [
+    "src/**/*.d.ts",
+  ],
+  "plugins": Array [
+    "@babel/proposal-class-properties",
+  ],
+  "presets": Array [
+    Array [
+      "@babel/preset-env",
+      Object {
+        "targets": Object {
+          "node": "8.12",
+        },
+      },
+    ],
+    "@babel/preset-typescript",
+  ],
+}
+`;
+
+exports[`given aliases should work 1`] = `
+Object {
+  "ignore": Array [
+    "src/**/*.d.ts",
+  ],
+  "plugins": Array [
+    Array [
+      "module-resolver",
+      Object {
+        "alias": Object {
+          "@feature": "src/feature",
+          "@shared": "src/shared",
+        },
+        "root": Array [
+          "src",
+        ],
+      },
+    ],
+    "@babel/proposal-class-properties",
+  ],
+  "presets": Array [
+    Array [
+      "@babel/preset-env",
+      Object {
+        "targets": Object {
+          "node": "8.12",
+        },
+      },
+    ],
+    "@babel/preset-typescript",
+  ],
+}
+`;
+
+exports[`given no options should work 1`] = `
+Object {
+  "ignore": Array [
+    "src/**/*.d.ts",
+  ],
+  "plugins": Array [
+    Array [
+      "module-resolver",
+      Object {
+        "alias": Object {
+          "@zaripych/ts-deps": "src",
+        },
+        "root": Array [
+          "src",
+        ],
+      },
+    ],
+    "@babel/proposal-class-properties",
+  ],
+  "presets": Array [
+    Array [
+      "@babel/preset-env",
+      Object {
+        "targets": Object {
+          "node": "8.12",
+        },
+      },
+    ],
+    "@babel/preset-typescript",
+  ],
+}
+`;
+
+exports[`given node version should work 1`] = `
+Object {
+  "ignore": Array [
+    "src/**/*.d.ts",
+  ],
+  "plugins": Array [
+    "@babel/proposal-class-properties",
+  ],
+  "presets": Array [
+    Array [
+      "@babel/preset-env",
+      Object {
+        "targets": Object {
+          "node": "10",
+        },
+      },
+    ],
+    "@babel/preset-typescript",
+  ],
+}
+`;
+
+exports[`given options should work 1`] = `
+Object {
+  "ignore": Array [
+    "src/**/*.d.ts",
+  ],
+  "plugins": Array [
+    Array [
+      "module-resolver",
+      Object {
+        "alias": Object {
+          "@shared": "src/shared",
+        },
+        "root": Array [
+          "src",
+        ],
+      },
+    ],
+    "@babel/proposal-class-properties",
+  ],
+  "presets": Array [
+    Array [
+      "@babel/preset-env",
+      Object {
+        "targets": Object {
+          "node": "10",
+        },
+      },
+    ],
+    "@babel/preset-typescript",
+  ],
+}
+`;
