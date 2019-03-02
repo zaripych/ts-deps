@@ -8,7 +8,12 @@ interface IOptions {
   }
 
   /**
-   * Minimum version of the node we want to support
+   * Minimum version of the node we want to support (defaults to 8.12)
    */
   nodeVersion?: string
+
+  /**
+   * Specify exact files to patch when `ts-deps patch` is run
+   */
+  patchOnly?: string[]
 }

@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`pack should work 1`] = `
+Array [
+  "package/lib/cli/ts-deps.js",
+  "package/lib/config/babel.config.js",
+  "package/lib/config/jest.config.js",
+  "package/lib/config/tsconfig.default.json",
+  "package/lib/config/tsconfig.js",
+  "package/lib/defaults.js",
+  "package/lib/helpers.js",
+  "package/lib/index.js",
+  "package/lib/options.js",
+  "package/lib/scripts/build.js",
+  "package/lib/scripts/clean.js",
+  "package/lib/scripts/cli.js",
+  "package/lib/scripts/index.d.ts",
+  "package/lib/scripts/index.js",
+  "package/lib/scripts/init.js",
+  "package/lib/scripts/patch.js",
+  "package/lib/types.d.ts",
+  "package/package.json",
+  "package/template-max/to-copy/babel.config.js",
+  "package/template-max/to-copy/commitlint.config.js",
+  "package/template-max/to-copy/jest.config.integration.js",
+  "package/template-max/to-copy/jest.config.js",
+  "package/template-max/to-copy/prettier.config.js",
+  "package/template-max/to-copy/release.config.js",
+  "package/template-max/to-copy/scripts/build.js",
+  "package/template-max/to-copy/scripts/clean.js",
+  "package/template-max/to-process/package.json",
+]
+`;

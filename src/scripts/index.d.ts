@@ -8,4 +8,17 @@ type BabelBuildParams = Partial<{
   rootDir: string
   unitTestsGlob: string
   integrationTestsGlob: string
+  copyAdditional: string[]
+}>
+
+type PatchParams = Partial<{
+  templatesDir: string
+  forceOverwrites: boolean
+  baseTsConfigLocation: string
+  patchOnly: string[]
+  shouldPromptToOverwritePackageJson: boolean
+}>
+
+type InitParams = Partial<{
+  forceOverwrites: boolean
 }>

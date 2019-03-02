@@ -4,7 +4,7 @@ exports[`given aliases should work 1`] = `
 Object {
   "cacheDirectory": ".jest-cache",
   "collectCoverageFrom": Array [
-    "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
+    "<rootDir>/src/**/*.{js,jsx,ts,tsx,json}",
     "!**/node_modules/**",
     "!**/*.d.ts",
   ],
@@ -16,6 +16,7 @@ Object {
     "jsx",
     "ts",
     "tsx",
+    "json",
   ],
   "moduleNameMapper": Object {
     "^@shared$": "<rootDir>/src/shared",
@@ -27,14 +28,14 @@ Object {
   "setupFiles": Array [],
   "testEnvironment": "node",
   "testMatch": Array [
-    "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+    "<rootDir>/src/**/__tests__/**/*.test.{js,jsx,ts,tsx,json}",
   ],
   "testPathIgnorePatterns": Array [
     "/node_modules/",
     "lib",
   ],
   "transform": Object {
-    "^.+\\\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+    "^.+\\\\.(js|jsx|ts|tsx|json)$": "<rootDir>/node_modules/babel-jest",
   },
 }
 `;
@@ -43,7 +44,7 @@ exports[`given integration tests should work 1`] = `
 Object {
   "cacheDirectory": ".jest-cache",
   "collectCoverageFrom": Array [
-    "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
+    "<rootDir>/src/**/*.{js,jsx,ts,tsx,json}",
     "!**/node_modules/**",
     "!**/*.d.ts",
   ],
@@ -55,6 +56,7 @@ Object {
     "jsx",
     "ts",
     "tsx",
+    "json",
   ],
   "modulePathIgnorePatterns": Array [
     "lib",
@@ -62,14 +64,14 @@ Object {
   "setupFiles": Array [],
   "testEnvironment": "node",
   "testMatch": Array [
-    "<rootDir>/src/__integration-tests__/**/*.{js,jsx,ts,tsx}",
+    "<rootDir>/src/__integration-tests__/**/*.test.{js,jsx,ts,tsx,json}",
   ],
   "testPathIgnorePatterns": Array [
     "/node_modules/",
     "lib",
   ],
   "transform": Object {
-    "^.+\\\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+    "^.+\\\\.(js|jsx|ts|tsx|json)$": "<rootDir>/node_modules/babel-jest",
   },
 }
 `;
@@ -78,7 +80,7 @@ exports[`given no options should work 1`] = `
 Object {
   "cacheDirectory": ".jest-cache",
   "collectCoverageFrom": Array [
-    "<rootDir>/src/**/*.{js,jsx,ts,tsx}",
+    "<rootDir>/src/**/*.{js,jsx,ts,tsx,json}",
     "!**/node_modules/**",
     "!**/*.d.ts",
   ],
@@ -90,10 +92,11 @@ Object {
     "jsx",
     "ts",
     "tsx",
+    "json",
   ],
   "moduleNameMapper": Object {
-    "^@zaripych/ts-deps$": "<rootDir>/src",
-    "^@zaripych/ts-deps/(.*)$": "<rootDir>/src/$1",
+    "^@zaripych/ts-deps$": "<rootDir>/./src",
+    "^@zaripych/ts-deps/(.*)$": "<rootDir>/./src/$1",
   },
   "modulePathIgnorePatterns": Array [
     "lib",
@@ -101,14 +104,14 @@ Object {
   "setupFiles": Array [],
   "testEnvironment": "node",
   "testMatch": Array [
-    "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+    "<rootDir>/src/**/__tests__/**/*.test.{js,jsx,ts,tsx,json}",
   ],
   "testPathIgnorePatterns": Array [
     "/node_modules/",
     "lib",
   ],
   "transform": Object {
-    "^.+\\\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+    "^.+\\\\.(js|jsx|ts|tsx|json)$": "<rootDir>/node_modules/babel-jest",
   },
 }
 `;

@@ -2,9 +2,10 @@
 module.exports = Object.freeze({
   rootDir: 'src',
   outDir: 'lib',
-  extensions: ['js', 'jsx', 'ts', 'tsx'],
+  extensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
+  copyAdditionalFilesAfterBabel: ['**/*.d.ts', '**/*.json'],
   nodeVersion: '8.12',
   unitTestsGlob: 'src/**/__tests__/**',
-  integrationTestsGlob: 'src/__integration_tests__/**',
+  integrationTestsGlob: 'src/__integration-tests__/**',
   optionsFileName: 'ts-deps.config.js',
 })

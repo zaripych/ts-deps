@@ -1,10 +1,12 @@
 {
   "scripts": {
     "test": "jest --color",
+    "integration-test": "jest --config ./jest.config.integration.js --color -i",
     "clean": "node ./scripts/clean.js",
     "prebuild": "node ./scripts/clean.js",
     "build": "node ./scripts/build.js",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "patch": "node ./scripts/patch.js"
   },
   "husky": {
     "hooks": {
@@ -14,6 +16,6 @@
     }
   },
   "devDependencies": {
-    "@zaripych/ts-deps": "../zaripych-ts-deps-v1.0.0.tgz"
+    "@zaripych/ts-deps": ""
   }
 }

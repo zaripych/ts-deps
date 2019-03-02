@@ -28,8 +28,10 @@ const jestConfig = (
       }
     }, {})
 
-  const integrationTestMatch = `<rootDir>${src}/__integration-tests__/**/*.{${exts}}`
-  const unitTestMatch = `<rootDir>${src}/**/__tests__/**/*.{${exts}}`
+  const integrationTestMatch = `<rootDir>/${
+    defaults.integrationTestsGlob
+  }/*.test.{${exts}}`
+  const unitTestMatch = `<rootDir>/${defaults.unitTestsGlob}/*.test.{${exts}}`
 
   return {
     testEnvironment: 'node',

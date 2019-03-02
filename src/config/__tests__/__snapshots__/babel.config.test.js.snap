@@ -4,8 +4,20 @@ exports[`excluding tests in the output should work 1`] = `
 Object {
   "ignore": Array [
     "src/**/*.d.ts",
+    "src/**/*.json",
   ],
   "plugins": Array [
+    Array [
+      "module-resolver",
+      Object {
+        "alias": Object {
+          "@zaripych/ts-deps": "./src",
+        },
+        "root": Array [
+          "src",
+        ],
+      },
+    ],
     "@babel/proposal-class-properties",
   ],
   "presets": Array [
@@ -26,6 +38,7 @@ exports[`given aliases should work 1`] = `
 Object {
   "ignore": Array [
     "src/**/*.d.ts",
+    "src/**/*.json",
   ],
   "plugins": Array [
     Array [
@@ -60,13 +73,14 @@ exports[`given no options should work 1`] = `
 Object {
   "ignore": Array [
     "src/**/*.d.ts",
+    "src/**/*.json",
   ],
   "plugins": Array [
     Array [
       "module-resolver",
       Object {
         "alias": Object {
-          "@zaripych/ts-deps": "src",
+          "@zaripych/ts-deps": "./src",
         },
         "root": Array [
           "src",
@@ -93,8 +107,20 @@ exports[`given node version should work 1`] = `
 Object {
   "ignore": Array [
     "src/**/*.d.ts",
+    "src/**/*.json",
   ],
   "plugins": Array [
+    Array [
+      "module-resolver",
+      Object {
+        "alias": Object {
+          "@zaripych/ts-deps": "./src",
+        },
+        "root": Array [
+          "src",
+        ],
+      },
+    ],
     "@babel/proposal-class-properties",
   ],
   "presets": Array [
@@ -115,6 +141,7 @@ exports[`given options should work 1`] = `
 Object {
   "ignore": Array [
     "src/**/*.d.ts",
+    "src/**/*.json",
   ],
   "plugins": Array [
     Array [

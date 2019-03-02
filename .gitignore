@@ -4,3 +4,6 @@ node_modules
 .jest-cache
 yarn-error.log
 zaripych-ts-deps*
+integration-test-*
+package
+.pnp

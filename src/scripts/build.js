@@ -1,6 +1,9 @@
 // @ts-check
 const { spawn } = require('child_process')
 const defaults = require('../defaults')
+const { copy } = require('fs-extra')
+const fg = require('fast-glob')
+const { join } = require('path')
 
 /**
  * @param {string[]} args All arguments
@@ -18,23 +21,23 @@ const optionalArgBuilder = (args, lookupArgs, values) => {
   }
 
   return values
-    .map(val => [lookupArgs[0], val])
+    .map(val => (val ? [lookupArgs[0], val] : [lookupArgs[0]]))
     .reduce((acc, item) => [...acc, ...item], [])
 }
 
 /**
  * @param {BabelBuildParams} param
  */
-function babelBuild({
+async function babelBuild({
   overrideWithCommandLineArguments = true,
   doNotOutputTests = true,
   logCommandLine = true,
-  exitOnCompletion = true,
   extensions = defaults.extensions,
   outDir = defaults.outDir,
   rootDir = defaults.rootDir,
   unitTestsGlob = defaults.unitTestsGlob,
   integrationTestsGlob = defaults.integrationTestsGlob,
+  copyAdditional = defaults.copyAdditionalFilesAfterBabel,
 } = {}) {
   const exts = extensions.map(ext => `.${ext}`).join(',')
 
@@ -42,6 +45,36 @@ function babelBuild({
 
   const isHelpNeeded =
     args.indexOf('--help') !== -1 || args.indexOf('-h') !== -1
+
+  const skipCopying = args.indexOf('--no-copy-files') !== -1
+
+  if (!isHelpNeeded && !skipCopying && copyAdditional.length > 0) {
+    console.log()
+    console.log(
+      'Copying files not-transformed by babel',
+      copyAdditional.join(','),
+      'from',
+      rootDir
+    )
+
+    /**
+     * @type string[]
+     */
+    const files = await fg(copyAdditional, {
+      cwd: join(process.cwd(), rootDir),
+    })
+
+    await Promise.all(
+      files.map(path => {
+        const src = join(rootDir, path)
+        const dest = join(outDir, path)
+        return copy(src, dest)
+      })
+    )
+
+    console.log('Successfully copied', files.length, 'files')
+    console.log('')
+  }
 
   /**
    * @param {string[]} lookup
@@ -74,23 +107,21 @@ function babelBuild({
     shell: true,
   })
 
-  if (exitOnCompletion) {
-    let childProcessExit = false
-
-    process.on('exit', () => {
-      if (childProcessExit) {
-        return
-      }
-      babelProc.kill()
-    })
-
+  const waitForBabel = new Promise((res, _rej) => {
     babelProc.on('exit', code => {
-      childProcessExit = true
-      process.exit(code)
+      res(code)
     })
-  }
+  })
 
-  return babelProc
+  await waitForBabel
+
+  if (isHelpNeeded) {
+    console.log(`
+  Extra:
+  --no-copy-files                             To skip copying additional files (${copyAdditional.join(
+    ','
+  )})`)
+  }
 }
 
 module.exports = {

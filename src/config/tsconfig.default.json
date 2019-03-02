@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "lib": ["es2017"],
+    "target": "es2017",
+    "baseUrl": ".",
+    "module": "commonjs",
+    "sourceMap": false,
+    "moduleResolution": "node",
+    "allowJs": true,
+    "checkJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": false,
+    "strictNullChecks": true,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  },
+  "compileOnSave": false
+}

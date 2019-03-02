@@ -5,9 +5,12 @@ const defaults = require('../defaults')
 const { trimPathSeparator } = require('../helpers')
 const { options } = require('../options')
 
-const babelConfig = (
-  { aliases, nodeVersion = defaults.nodeVersion } = { ...options() }
-) => {
+const babelConfig = (paramsRaw = {}) => {
+  const { aliases, nodeVersion } = {
+    nodeVersion: defaults.nodeVersion,
+    ...options(),
+    ...paramsRaw,
+  }
   const src = defaults.rootDir
 
   const config = {
@@ -37,7 +40,7 @@ const babelConfig = (
       ],
       '@babel/proposal-class-properties',
     ].filter(Boolean),
-    ignore: [`${src}/**/*.d.ts`],
+    ignore: [`${src}/**/*.d.ts`, `${src}/**/*.json`],
   }
 
   return config
