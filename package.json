@@ -1,6 +1,6 @@
 {
   "name": "@zaripych/ts-deps",
-  "version": "1.0.3-integration-test",
+  "version": "0.0.1-rc1",
   "description": "TypeScript related dependencies and libraries to setup/scaffold typical build/lint/format/test pipeline and CI/CD pipeline using babel, jest, prettier, tslint and semantic-release. Meant to be added as dev dependency.",
   "main": "lib/index.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "build": "node ./scripts/build.js",
     "type-check": "tsc -p . --noEmit",
     "check": "concurrently \"node ./scripts/build.js\" \"tsc --noEmit\"",
-    "patch": "node ./scripts/patch.js"
+    "patch": "node ./scripts/patch.js",
+    "release": "semantic-release"
   },
   "bin": {
     "ts-deps": "./lib/cli/ts-deps.js"
