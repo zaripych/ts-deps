@@ -1,5 +1,5 @@
 {
-  "extends": "@zaripych/ts-deps/lib/config/tsconfig.default.json",
+  "extends": "./src/config/tsconfig.default.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
