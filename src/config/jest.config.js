@@ -16,7 +16,6 @@ const jestConfig = (
   const lib = trimPathSeparator(defaults.outDir)
   const extensions = defaults.extensions
   const exts = defaults.extensions.join(',')
-  const pipedExts = defaults.extensions.join('|')
   const moduleNameMapper =
     aliases &&
     Object.keys(aliases).reduce((acc, key) => {
