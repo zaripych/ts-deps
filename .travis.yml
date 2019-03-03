@@ -30,7 +30,7 @@ jobs:
       deploy:
         provider: script
         script:
-          - yarn run release
+          - yarn run release --dry-run
         skip_cleanup: true
         on:
           branch:

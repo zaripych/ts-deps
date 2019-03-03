@@ -46,9 +46,6 @@ const jestConfig = (
     setupFiles: [],
     ...(moduleNameMapper && { moduleNameMapper }),
     testPathIgnorePatterns: ['/node_modules/', lib],
-    transform: {
-      [`^.+\\.(${pipedExts})$`]: '<rootDir>/node_modules/babel-jest',
-    },
     modulePathIgnorePatterns: [lib],
     globals: {
       INTEGRATION_TEST: false,
