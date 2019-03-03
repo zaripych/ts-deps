@@ -92,7 +92,9 @@ async function babelBuild({
         ...optionalArg(['--extensions'], [exts]),
         ...optionalArg(
           ['--ignore'],
-          doNotOutputTests ? [unitTestsGlob, integrationTestsGlob] : []
+          doNotOutputTests
+            ? [`"${unitTestsGlob}"`, `"${integrationTestsGlob}"`]
+            : []
         ),
         ...args,
       ]

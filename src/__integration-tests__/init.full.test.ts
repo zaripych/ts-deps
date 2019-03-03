@@ -21,6 +21,9 @@ describe('init', () => {
       await emptyDirSafe(initDir)
       await ensureDir(initDir)
 
+      // to maky sure husky will not conflict with hooks of the main repo
+      spawnAndCheck('git', ['init'])
+
       const sourceLocation = join(ROOT, 'test-sources', 'init-full')
 
       await copy(sourceLocation, initDir, {
