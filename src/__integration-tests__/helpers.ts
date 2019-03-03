@@ -1,14 +1,6 @@
 import { spawnSync } from 'child_process'
-import {
-  readFile,
-  writeFile,
-  remove,
-  emptyDir,
-  pathExists,
-  unlink,
-} from 'fs-extra'
+import { readFile, remove, emptyDir, pathExists, unlink } from 'fs-extra'
 import { resolve, join, normalize, relative, isAbsolute } from 'path'
-import { format, resolveConfig } from 'prettier'
 
 export const PKG_JSON = 'package.json'
 export const ROOT = resolve(__dirname, '../../')
@@ -16,8 +8,8 @@ export const ROOT = resolve(__dirname, '../../')
 // - start of the archive file name after yarn pack
 const ARCH_PKG_FILE_NAME = 'zaripych-ts-deps'
 
-export const patchPackageJsonVersion = async () => {
-  console.log('Modifying package json')
+export const packageJsonVersion = async () => {
+  console.log('Retrieving package json')
 
   const packageJsonLocation = join(ROOT, PKG_JSON)
 
@@ -27,20 +19,6 @@ export const patchPackageJsonVersion = async () => {
 
   const pkg = JSON.parse(packageJsonContents) as {
     version: string
-  }
-
-  if (!/-integration-test$/.test(pkg.version)) {
-    pkg.version = `${pkg.version}-integration-test`
-
-    const config = await resolveConfig(packageJsonLocation)
-
-    await writeFile(
-      packageJsonLocation,
-      format(JSON.stringify(pkg), { ...config, parser: 'json' }),
-      {
-        encoding: 'utf-8',
-      }
-    )
   }
 
   return pkg.version
@@ -66,11 +44,11 @@ export const spawnAndCheck = (
 
   console.log(result.output.filter(Boolean).join(''))
 
-  if (result.error) {
+  if (result.error as (Error | undefined)) {
     throw result.error
   }
 
-  if (result.status != 0) {
+  if (result.status !== 0) {
     throw new Error(
       `process ${args[0]} exit with non-zero status code: ${result.status}`
     )
@@ -112,7 +90,7 @@ export const rmDirSafe = async (relativeToRoot: string) => {
 }
 
 export const buildAndPack = async () => {
-  const version = await patchPackageJsonVersion()
+  const version = await packageJsonVersion()
 
   console.log('version', version)
 
@@ -156,7 +134,7 @@ export const unarchiveTarGz = async (cwd: string, tar: string, out: string) => {
 const compareStrings = (a: string, b: string) => (a === b ? 0 : a > b ? 1 : -1)
 
 const comparePathComponents = (a: string[], b: string[]): 0 | 1 | -1 => {
-  if (a.length === 0 && b.length == 0) {
+  if (a.length === 0 && b.length === 0) {
     return 0
   }
   const i = compareStrings(a[0], b[0])

@@ -22,7 +22,7 @@ jobs:
         - time yarn run check
     - stage: test and lint
       script:
-        - time yarn integration-test
+        - time yarn integration
       if: branch = master AND type != pull_request
     - stage: deploy
       script:

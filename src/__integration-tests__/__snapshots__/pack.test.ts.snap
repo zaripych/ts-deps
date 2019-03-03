@@ -7,6 +7,7 @@ Array [
   "package/lib/config/jest.config.js",
   "package/lib/config/tsconfig.default.json",
   "package/lib/config/tsconfig.js",
+  "package/lib/config/tslint.default.json",
   "package/lib/defaults.js",
   "package/lib/helpers.js",
   "package/lib/index.js",
@@ -28,6 +29,7 @@ Array [
   "package/template-max/to-copy/release.config.js",
   "package/template-max/to-copy/scripts/build.js",
   "package/template-max/to-copy/scripts/clean.js",
+  "package/template-max/to-copy/tslint.json",
   "package/template-max/to-process/package.json",
 ]
 `;

@@ -72,6 +72,14 @@ describe('init', () => {
         cwd: initDir,
       })
 
+      spawnAndCheck('npm', ['run', 'lint'], {
+        cwd: initDir,
+      })
+
+      spawnAndCheck('npm', ['run', 'check'], {
+        cwd: initDir,
+      })
+
       const outDir = join(initDir, 'lib')
 
       const libContents = await fg<string>(['**', '!node_modules/**'], {

@@ -80,7 +80,7 @@ const init = async ({ forceOverwrites = false } = {}) => {
 
     const pkgCreated = await npmInitIfRequired()
 
-    const copy = () =>
+    const copyTemplates = () =>
       copyFromTemplates({
         templatesDir,
         currentDir,
@@ -94,7 +94,7 @@ const init = async ({ forceOverwrites = false } = {}) => {
         forceOverwrites,
       })
 
-    await copy()
+    await copyTemplates()
 
     await generate()
   } catch (exc) {

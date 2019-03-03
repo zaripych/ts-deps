@@ -40,5 +40,6 @@ Array [
   "src/other.js",
   "ts-deps.config.js",
   "tsconfig.json",
+  "tslint.json",
 ]
 `;

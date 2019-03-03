@@ -4,10 +4,12 @@
     "prebuild": "node ./scripts/clean.js",
     "clean": "node ./scripts/clean.js",
     "test": "jest --color",
-    "integration-test": "jest --config ./jest.config.integration.js --color -i",
+    "integration": "jest --config ./jest.config.integration.js --color -i",
     "type-check": "tsc -p . --noEmit",
-    "check": "concurrently \"node ./scripts/build.js\" \"tsc -p . --noEmit\"",
-    "patch": "ts-deps patch"
+    "lint": "tslint -p . -t verbose",
+    "check": "concurrently \"node ./scripts/build.js\" \"tsc -p . --noEmit\" \"tslint -p . -t verbose\"",
+    "patch": "ts-deps patch",
+    "release": "semantic-release"
   },
   "husky": {
     "hooks": {

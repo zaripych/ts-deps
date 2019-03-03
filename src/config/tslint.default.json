@@ -1,0 +1,30 @@
+{
+  "extends": ["tslint:recommended", "tslint-config-prettier"],
+  "jsRules": {
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "variable-name": [true, "allow-leading-underscore", "allow-pascal-case"],
+    "no-console": false
+  },
+  "rules": {
+    "object-literal-sort-keys": false,
+    "ordered-imports": false,
+    "variable-name": [true, "allow-leading-underscore", "allow-pascal-case"],
+    "no-console": false,
+    "strict-boolean-expressions": [
+      true,
+      "allow-string",
+      "allow-boolean-or-undefined",
+      "allow-undefined-union",
+      "allow-null-union",
+      "allow-mix",
+      "ignore-rhs"
+    ],
+    "no-unsafe-any": true,
+    "no-any": true,
+    "await-promise": true
+  },
+  "linterOptions": {
+    "exclude": ["src/**/*.test.*"]
+  }
+}

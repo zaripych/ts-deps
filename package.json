@@ -6,12 +6,13 @@
   "scripts": {
     "ts-deps": "node ./src/scripts/cli.js",
     "test": "jest --color",
-    "integration-test": "jest --config ./jest.config.integration.js --color -i",
+    "integration": "jest --config ./jest.config.integration.js --color -i",
     "clean": "node ./scripts/clean.js",
     "prebuild": "node ./scripts/clean.js",
     "build": "node ./scripts/build.js",
     "type-check": "tsc -p . --noEmit",
-    "check": "concurrently \"node ./scripts/build.js\" \"tsc -p . --noEmit\"",
+    "lint": "tslint -p . -t verbose",
+    "check": "concurrently \"node ./scripts/build.js\" \"tsc -p . --noEmit\" \"tslint -p . -t verbose\"",
     "patch": "node ./scripts/patch.js",
     "release": "semantic-release"
   },
