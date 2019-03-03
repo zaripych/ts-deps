@@ -23,7 +23,7 @@ jobs:
     - stage: test and lint
       script:
         - time yarn integration-test
-      if: branch != master OR type = pull_request
+      if: branch = master AND type != pull_request
     - stage: deploy
       script:
         - yarn build
