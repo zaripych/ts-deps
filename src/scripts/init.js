@@ -73,9 +73,9 @@ const copyFromTemplates = async ({
 /**
  * @param {InitParams} param0
  */
-const init = async ({ forceOverwrites = false } = {}) => {
+const init = async ({ forceOverwrites = false, cwd = process.cwd() } = {}) => {
   try {
-    const currentDir = resolve('./')
+    const currentDir = resolve(cwd)
     const templatesDir = resolveTemplatesDir()
 
     const pkgCreated = await npmInitIfRequired()
@@ -92,6 +92,8 @@ const init = async ({ forceOverwrites = false } = {}) => {
         templatesDir,
         shouldPromptToOverwritePackageJson: !pkgCreated,
         forceOverwrites,
+        cwd: currentDir,
+        aggressive: true,
       })
 
     await copyTemplates()

@@ -1,9 +1,11 @@
 coverage
+coverage-*
 lib
 node_modules
 .jest-cache
 yarn-error.log
 zaripych-ts-deps*
+ts-deps*
 integration-test-*
 package
 .pnp

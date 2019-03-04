@@ -5,10 +5,14 @@ const defaults = require('../defaults')
 const { trimPathSeparator } = require('../helpers')
 const { options } = require('../options')
 
+/**
+ * @param {Partial<IBabelConfigParams>} paramsRaw
+ */
 const babelConfig = (paramsRaw = {}) => {
+  const opts = options()
   const { aliases, nodeVersion } = {
-    nodeVersion: defaults.nodeVersion,
-    ...options(),
+    aliases: opts.aliases,
+    nodeVersion: opts.nodeVersion || defaults.nodeVersion,
     ...paramsRaw,
   }
   const src = defaults.rootDir

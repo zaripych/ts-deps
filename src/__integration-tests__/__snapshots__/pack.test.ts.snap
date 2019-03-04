@@ -2,12 +2,14 @@
 
 exports[`pack should work 1`] = `
 Array [
+  "package/README.md",
   "package/lib/cli/ts-deps.js",
   "package/lib/config/babel.config.js",
   "package/lib/config/jest.config.js",
   "package/lib/config/tsconfig.default.json",
   "package/lib/config/tsconfig.js",
   "package/lib/config/tslint.default.json",
+  "package/lib/config/types.d.ts",
   "package/lib/defaults.js",
   "package/lib/helpers.js",
   "package/lib/index.js",
@@ -15,10 +17,12 @@ Array [
   "package/lib/scripts/build.js",
   "package/lib/scripts/clean.js",
   "package/lib/scripts/cli.js",
-  "package/lib/scripts/index.d.ts",
+  "package/lib/scripts/combineCoverage.js",
   "package/lib/scripts/index.js",
   "package/lib/scripts/init.js",
   "package/lib/scripts/patch.js",
+  "package/lib/scripts/patchPackage.js",
+  "package/lib/scripts/types.d.ts",
   "package/lib/types.d.ts",
   "package/package.json",
   "package/template-max/to-copy/babel.config.js",
@@ -29,6 +33,7 @@ Array [
   "package/template-max/to-copy/release.config.js",
   "package/template-max/to-copy/scripts/build.js",
   "package/template-max/to-copy/scripts/clean.js",
+  "package/template-max/to-copy/scripts/combineCoverage.js",
   "package/template-max/to-copy/tslint.json",
   "package/template-max/to-process/package.json",
 ]

@@ -2,4 +2,6 @@
 
 const { jestConfig } = require('./src')
 
-module.exports = jestConfig()
+module.exports = jestConfig({
+  isIntegrationTest: false,
+})

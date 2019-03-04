@@ -1,25 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`init given fresh directory after init should build and test and lint 1`] = `
-Array [
-  "index.js",
-  "max/",
-  "max/index.js",
-  "max/max.js",
-  "min/",
-  "min/index.js",
-  "min/min.js",
-  "other.js",
-]
-`;
-
 exports[`init given fresh directory after init should output correct files 1`] = `
 Array [
   "babel.config.js",
   "commitlint.config.js",
   "jest.config.integration.js",
   "jest.config.js",
-  "package-lock.json",
   "package.json",
   "prettier.config.js",
   "release.config.js",

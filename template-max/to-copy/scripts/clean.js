@@ -1,4 +1,4 @@
 // @ts-check
-const { clean } = require('@zaripych/ts-deps')
+const { clean } = require('ts-deps')
 
 clean()

@@ -11,7 +11,7 @@ Object {
       "module-resolver",
       Object {
         "alias": Object {
-          "@zaripych/ts-deps": "./src",
+          "ts-deps": "./src",
         },
         "root": Array [
           "src",
@@ -80,7 +80,7 @@ Object {
       "module-resolver",
       Object {
         "alias": Object {
-          "@zaripych/ts-deps": "./src",
+          "ts-deps": "./src",
         },
         "root": Array [
           "src",
@@ -114,7 +114,7 @@ Object {
       "module-resolver",
       Object {
         "alias": Object {
-          "@zaripych/ts-deps": "./src",
+          "ts-deps": "./src",
         },
         "root": Array [
           "src",

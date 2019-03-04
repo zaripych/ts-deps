@@ -1,6 +1,6 @@
 'use strict'
 
-const { jestConfig } = require('@zaripych/ts-deps')
+const { jestConfig } = require('ts-deps')
 
 module.exports = jestConfig({
   isIntegrationTest: false,

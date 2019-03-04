@@ -9,9 +9,17 @@ const {
   trimPathSeparator,
 } = require('../helpers')
 
-const jestConfig = (
-  { aliases, isIntegrationTest = false } = { ...options() }
-) => {
+/**
+ *
+ * @param {Partial<IJestConfigParams>} paramsRaw
+ */
+const jestConfig = (paramsRaw = {}) => {
+  const opts = options()
+  const { aliases, isIntegrationTest } = {
+    aliases: opts.aliases,
+    isIntegrationTest: false,
+    ...paramsRaw,
+  }
   const src = ensureStartsWithPathSeparator(defaults.rootDir)
   const lib = trimPathSeparator(defaults.outDir)
   const extensions = defaults.extensions
@@ -36,10 +44,17 @@ const jestConfig = (
     testEnvironment: 'node',
     testMatch: isIntegrationTest ? [integrationTestMatch] : [unitTestMatch],
     cacheDirectory: '.jest-cache',
+    coverageDirectory: isIntegrationTest
+      ? 'coverage-integration'
+      : 'coverage-unit',
+    coverageReporters: ['json'],
     collectCoverageFrom: [
       `<rootDir>${src}/**/*.{${exts}}`,
-      '!**/node_modules/**',
-      '!**/*.d.ts',
+      `!**/node_modules/**`,
+      `!${defaults.integrationTestsGlob}`,
+      `!${defaults.unitTestsGlob}`,
+      `!<rootDir>${src}/**/*.d.ts`,
+      `!<rootDir>${src}/**/*.json`,
     ],
     moduleFileExtensions: extensions,
     setupFiles: [],
@@ -49,6 +64,7 @@ const jestConfig = (
     globals: {
       INTEGRATION_TEST: false,
     },
+    transformIgnorePatterns: [`.*\\.json`, `.*\\.d\\.ts`],
   }
 }
 
