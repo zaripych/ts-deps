@@ -2,9 +2,27 @@
 
 exports[`build should work 1`] = `
 Array [
+  "cli/",
+  "cli/ts-deps.js",
+  "config/",
+  "config/babel.config.js",
+  "config/jest.config.js",
   "config/tsconfig.default.json",
+  "config/tsconfig.js",
   "config/tslint.default.json",
   "config/types.d.ts",
+  "defaults.js",
+  "helpers.js",
+  "index.js",
+  "options.js",
+  "scripts/",
+  "scripts/build.js",
+  "scripts/clean.js",
+  "scripts/cli.js",
+  "scripts/index.js",
+  "scripts/init.js",
+  "scripts/patch.js",
+  "scripts/patchPackage.js",
   "scripts/types.d.ts",
   "types.d.ts",
 ]

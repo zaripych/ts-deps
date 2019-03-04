@@ -13,7 +13,7 @@ jest.setTimeout(2 * 60 * 1000)
 
 describe('patch', () => {
   describe('given fresh directory after init', () => {
-    const initDir = join(ROOT, 'integration-test-init')
+    const initDir = join(ROOT, 'integration-test-patch')
 
     beforeAll(async () => {
       await emptyDirSafe(initDir)
@@ -31,6 +31,7 @@ describe('patch', () => {
 
       await patch({
         forceOverwrites: true,
+        cwd: initDir,
       })
     })
 

@@ -31,6 +31,7 @@ describe('init', () => {
 
       await init({
         forceOverwrites: true,
+        cwd: initDir,
       })
     })
 

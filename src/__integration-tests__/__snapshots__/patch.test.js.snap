@@ -1,17 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`init given fresh directory after init should output correct files 1`] = `
+exports[`patch given fresh directory after init should output correct files 1`] = `
 Array [
-  "babel.config.js",
-  "commitlint.config.js",
-  "jest.config.integration.js",
-  "jest.config.js",
   "package.json",
-  "prettier.config.js",
-  "release.config.js",
-  "scripts/",
-  "scripts/build.js",
-  "scripts/clean.js",
   "src/",
   "src/__tests__/",
   "src/__tests__/max.test.ts",
@@ -26,6 +17,5 @@ Array [
   "src/other.js",
   "ts-deps.config.js",
   "tsconfig.json",
-  "tslint.json",
 ]
 `;
