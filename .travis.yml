@@ -15,6 +15,8 @@ stages:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
+after_success:
+  - cat coverage/lcov.info | ./node_modules/.bin/coveralls
 jobs:
   include:
     - stage: test and lint

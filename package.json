@@ -66,6 +66,7 @@
     "babel-plugin-module-resolver": "3.2.0",
     "commitlint": "7.5.2",
     "concurrently": "4.1.0",
+    "coveralls": "3.0.3",
     "deepmerge": "3.2.0",
     "fast-glob": "2.2.6",
     "fs-extra": "7.0.1",
