@@ -19,6 +19,7 @@ Array [
   "scripts/build.js",
   "scripts/clean.js",
   "scripts/cli.js",
+  "scripts/combineCoverage.js",
   "scripts/index.js",
   "scripts/init.js",
   "scripts/patch.js",

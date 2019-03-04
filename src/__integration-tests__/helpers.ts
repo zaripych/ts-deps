@@ -7,7 +7,7 @@ export const PKG_JSON = 'package.json'
 export const ROOT = resolve(__dirname, '../../')
 
 // - start of the archive file name after yarn pack
-const ARCH_PKG_FILE_NAME = 'zaripych-ts-deps'
+const ARCH_PKG_FILE_NAME = 'ts-deps'
 
 export const packageJsonVersion = async () => {
   console.log('Retrieving package json')

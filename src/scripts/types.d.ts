@@ -40,3 +40,7 @@ type PatchPackageJson = Partial<{
 type PatchCoreOptions = {
   aggressive: boolean
 }
+
+type CombineCoverageParams = {
+  cwd: string
+}

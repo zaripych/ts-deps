@@ -5,6 +5,7 @@
     "clean": "node ./scripts/clean.js",
     "test": "jest --color",
     "integration": "jest --config ./jest.config.integration.js --color -i",
+    "combine-coverage": "node ./scripts/combineCoverage.js",
     "type-check": "tsc -p . --noEmit",
     "lint": "tslint -p . -t verbose",
     "check": "concurrently \"node ./scripts/build.js\" \"tsc -p . --noEmit\" \"tslint -p . -t verbose\"",

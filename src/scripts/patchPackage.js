@@ -30,9 +30,9 @@ const patchPackageJsonCore = (tsDepsPkg, templatePkg, targetPkg, options) => {
         arrayMerge: (_target, source) => source,
       })
 
-  if (targetPkg.dependencies && options.aggressive) {
-    for (const pkgKey of Object.keys(targetPkg.dependencies)) {
-      if (!tsDepsPkg.dependencies || !tsDepsPkg.dependencies[pkgKey]) {
+  if (result.dependencies && options.aggressive && tsDepsPkg.dependencies) {
+    for (const pkgKey of Object.keys(result.dependencies)) {
+      if (!tsDepsPkg.dependencies[pkgKey]) {
         continue
       }
 
@@ -40,9 +40,9 @@ const patchPackageJsonCore = (tsDepsPkg, templatePkg, targetPkg, options) => {
     }
   }
 
-  if (targetPkg.devDependencies) {
-    for (const pkgKey of Object.keys(targetPkg.devDependencies)) {
-      if (!tsDepsPkg.dependencies || !tsDepsPkg.dependencies[pkgKey]) {
+  if (result.devDependencies && tsDepsPkg.dependencies) {
+    for (const pkgKey of Object.keys(result.devDependencies)) {
+      if (!tsDepsPkg.dependencies[pkgKey]) {
         continue
       }
 

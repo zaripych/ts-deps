@@ -5,6 +5,7 @@ const { babelBuild } = require('./scripts/build')
 const { clean } = require('./scripts/clean')
 const { patch } = require('./scripts/patch')
 const { init } = require('./scripts/init')
+const { combineCoverage } = require('./scripts/combineCoverage')
 const defaults = require('./defaults')
 
 module.exports = {
@@ -18,4 +19,5 @@ module.exports = {
   clean,
   init,
   patch,
+  combineCoverage,
 }

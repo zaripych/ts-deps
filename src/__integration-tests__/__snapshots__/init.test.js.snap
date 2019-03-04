@@ -12,6 +12,7 @@ Array [
   "scripts/",
   "scripts/build.js",
   "scripts/clean.js",
+  "scripts/combineCoverage.js",
   "src/",
   "src/__tests__/",
   "src/__tests__/max.test.ts",

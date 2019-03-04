@@ -20,11 +20,11 @@ jobs:
     - stage: test and lint
       script:
         - time yarn run check
-        - time yarn run test
     - stage: test and lint
       script:
+        - time yarn run test
         - time yarn integration-all
-      if: branch = master AND type != pull_request
+        - time yarn combine-coverage
     - stage: deploy
       script:
         - yarn build

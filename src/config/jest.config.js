@@ -44,6 +44,10 @@ const jestConfig = (paramsRaw = {}) => {
     testEnvironment: 'node',
     testMatch: isIntegrationTest ? [integrationTestMatch] : [unitTestMatch],
     cacheDirectory: '.jest-cache',
+    coverageDirectory: isIntegrationTest
+      ? 'coverage-integration'
+      : 'coverage-unit',
+    coverageReporters: ['json'],
     collectCoverageFrom: [
       `<rootDir>${src}/**/*.{${exts}}`,
       `!**/node_modules/**`,

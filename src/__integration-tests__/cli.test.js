@@ -15,7 +15,7 @@ describe('cli', () => {
   })
 
   it('should parge args', () => {
-    require('../scripts/cli')
+    require('../cli/ts-deps.js')
     expect(process.exit).toBeCalled()
   })
 })

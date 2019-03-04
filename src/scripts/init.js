@@ -93,6 +93,7 @@ const init = async ({ forceOverwrites = false, cwd = process.cwd() } = {}) => {
         shouldPromptToOverwritePackageJson: !pkgCreated,
         forceOverwrites,
         cwd: currentDir,
+        aggressive: true,
       })
 
     await copyTemplates()

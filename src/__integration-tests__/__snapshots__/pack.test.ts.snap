@@ -16,6 +16,7 @@ Array [
   "package/lib/scripts/build.js",
   "package/lib/scripts/clean.js",
   "package/lib/scripts/cli.js",
+  "package/lib/scripts/combineCoverage.js",
   "package/lib/scripts/index.js",
   "package/lib/scripts/init.js",
   "package/lib/scripts/patch.js",
@@ -31,6 +32,7 @@ Array [
   "package/template-max/to-copy/release.config.js",
   "package/template-max/to-copy/scripts/build.js",
   "package/template-max/to-copy/scripts/clean.js",
+  "package/template-max/to-copy/scripts/combineCoverage.js",
   "package/template-max/to-copy/tslint.json",
   "package/template-max/to-process/package.json",
 ]

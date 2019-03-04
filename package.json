@@ -1,5 +1,5 @@
 {
-  "name": "@zaripych/ts-deps",
+  "name": "ts-deps",
   "version": "0.0.1",
   "description": "TypeScript related dependencies and libraries to setup/scaffold typical build/lint/format/test pipeline and CI/CD pipeline using babel, jest, prettier, tslint and semantic-release. Meant to be added as dev dependency.",
   "main": "lib/index.js",
@@ -8,6 +8,7 @@
     "test": "jest --color",
     "integration": "jest --config ./jest.config.integration.js --color -i --testPathIgnorePatterns full",
     "integration-all": "jest --config ./jest.config.integration.js --color -i",
+    "combine-coverage": "node ./scripts/combineCoverage.js",
     "clean": "node ./scripts/clean.js",
     "prebuild": "node ./scripts/clean.js",
     "build": "node ./scripts/build.js",

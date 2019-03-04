@@ -11,6 +11,10 @@ Object {
     "!<rootDir>/src/**/*.d.ts",
     "!<rootDir>/src/**/*.json",
   ],
+  "coverageDirectory": "coverage-unit",
+  "coverageReporters": Array [
+    "json",
+  ],
   "globals": Object {
     "INTEGRATION_TEST": false,
   },
@@ -55,6 +59,10 @@ Object {
     "!<rootDir>/src/**/*.d.ts",
     "!<rootDir>/src/**/*.json",
   ],
+  "coverageDirectory": "coverage-integration",
+  "coverageReporters": Array [
+    "json",
+  ],
   "globals": Object {
     "INTEGRATION_TEST": false,
   },
@@ -98,6 +106,10 @@ Object {
     "!src/**/__tests__/**",
     "!<rootDir>/src/**/*.d.ts",
     "!<rootDir>/src/**/*.json",
+  ],
+  "coverageDirectory": "coverage-unit",
+  "coverageReporters": Array [
+    "json",
   ],
   "globals": Object {
     "INTEGRATION_TEST": false,
