@@ -13,7 +13,7 @@ jest.setTimeout(5 * 60 * 1000)
 
 describe('init', () => {
   describe('given fresh directory after init', () => {
-    const initDir = join(ROOT, 'integration-test-init')
+    const initDir = join(ROOT, 'integration-test-init-full')
 
     beforeAll(async () => {
       const { packageLocation } = await buildAndPack()

@@ -6,7 +6,10 @@ Object {
   "collectCoverageFrom": Array [
     "<rootDir>/src/**/*.{js,jsx,ts,tsx,json}",
     "!**/node_modules/**",
-    "!**/*.d.ts",
+    "!src/__integration-tests__/**",
+    "!src/**/__tests__/**",
+    "!<rootDir>/src/**/*.d.ts",
+    "!<rootDir>/src/**/*.json",
   ],
   "globals": Object {
     "INTEGRATION_TEST": false,
@@ -34,9 +37,10 @@ Object {
     "/node_modules/",
     "lib",
   ],
-  "transform": Object {
-    "^.+\\\\.(js|jsx|ts|tsx|json)$": "<rootDir>/node_modules/babel-jest",
-  },
+  "transformIgnorePatterns": Array [
+    ".*\\\\.json",
+    ".*\\\\.d\\\\.ts",
+  ],
 }
 `;
 
@@ -46,43 +50,10 @@ Object {
   "collectCoverageFrom": Array [
     "<rootDir>/src/**/*.{js,jsx,ts,tsx,json}",
     "!**/node_modules/**",
-    "!**/*.d.ts",
-  ],
-  "globals": Object {
-    "INTEGRATION_TEST": false,
-  },
-  "moduleFileExtensions": Array [
-    "js",
-    "jsx",
-    "ts",
-    "tsx",
-    "json",
-  ],
-  "modulePathIgnorePatterns": Array [
-    "lib",
-  ],
-  "setupFiles": Array [],
-  "testEnvironment": "node",
-  "testMatch": Array [
-    "<rootDir>/src/__integration-tests__/**/*.test.{js,jsx,ts,tsx,json}",
-  ],
-  "testPathIgnorePatterns": Array [
-    "/node_modules/",
-    "lib",
-  ],
-  "transform": Object {
-    "^.+\\\\.(js|jsx|ts|tsx|json)$": "<rootDir>/node_modules/babel-jest",
-  },
-}
-`;
-
-exports[`given no options should work 1`] = `
-Object {
-  "cacheDirectory": ".jest-cache",
-  "collectCoverageFrom": Array [
-    "<rootDir>/src/**/*.{js,jsx,ts,tsx,json}",
-    "!**/node_modules/**",
-    "!**/*.d.ts",
+    "!src/__integration-tests__/**",
+    "!src/**/__tests__/**",
+    "!<rootDir>/src/**/*.d.ts",
+    "!<rootDir>/src/**/*.json",
   ],
   "globals": Object {
     "INTEGRATION_TEST": false,
@@ -95,8 +66,52 @@ Object {
     "json",
   ],
   "moduleNameMapper": Object {
-    "^@zaripych/ts-deps$": "<rootDir>/./src",
-    "^@zaripych/ts-deps/(.*)$": "<rootDir>/./src/$1",
+    "^ts-deps$": "<rootDir>/./src",
+    "^ts-deps/(.*)$": "<rootDir>/./src/$1",
+  },
+  "modulePathIgnorePatterns": Array [
+    "lib",
+  ],
+  "setupFiles": Array [],
+  "testEnvironment": "node",
+  "testMatch": Array [
+    "<rootDir>/src/__integration-tests__/**/*.test.{js,jsx,ts,tsx,json}",
+  ],
+  "testPathIgnorePatterns": Array [
+    "/node_modules/",
+    "lib",
+  ],
+  "transformIgnorePatterns": Array [
+    ".*\\\\.json",
+    ".*\\\\.d\\\\.ts",
+  ],
+}
+`;
+
+exports[`given no options should work 1`] = `
+Object {
+  "cacheDirectory": ".jest-cache",
+  "collectCoverageFrom": Array [
+    "<rootDir>/src/**/*.{js,jsx,ts,tsx,json}",
+    "!**/node_modules/**",
+    "!src/__integration-tests__/**",
+    "!src/**/__tests__/**",
+    "!<rootDir>/src/**/*.d.ts",
+    "!<rootDir>/src/**/*.json",
+  ],
+  "globals": Object {
+    "INTEGRATION_TEST": false,
+  },
+  "moduleFileExtensions": Array [
+    "js",
+    "jsx",
+    "ts",
+    "tsx",
+    "json",
+  ],
+  "moduleNameMapper": Object {
+    "^ts-deps$": "<rootDir>/./src",
+    "^ts-deps/(.*)$": "<rootDir>/./src/$1",
   },
   "modulePathIgnorePatterns": Array [
     "lib",
@@ -110,8 +125,9 @@ Object {
     "/node_modules/",
     "lib",
   ],
-  "transform": Object {
-    "^.+\\\\.(js|jsx|ts|tsx|json)$": "<rootDir>/node_modules/babel-jest",
-  },
+  "transformIgnorePatterns": Array [
+    ".*\\\\.json",
+    ".*\\\\.d\\\\.ts",
+  ],
 }
 `;

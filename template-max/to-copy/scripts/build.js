@@ -1,4 +1,4 @@
 // @ts-check
-const { babelBuild } = require('@zaripych/ts-deps')
+const { babelBuild } = require('ts-deps')
 
 babelBuild()

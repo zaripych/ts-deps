@@ -1,5 +1,5 @@
 'use strict'
 
-const { babelConfig } = require('@zaripych/ts-deps')
+const { babelConfig } = require('ts-deps')
 
 module.exports = babelConfig()

@@ -16,4 +16,9 @@ interface IOptions {
    * Specify exact files to patch when `ts-deps patch` is run
    */
   patchOnly?: string[]
+
+  /**
+   * Location of the ts config we should extend from
+   */
+  baseTsConfigLocation?: string
 }

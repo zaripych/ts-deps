@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`given no options should work 1`] = `
+Object {
+  "compilerOptions": Object {
+    "baseUrl": ".",
+    "outDir": "lib",
+    "paths": Object {
+      "ts-deps": Array [
+        "./src",
+      ],
+      "ts-deps/*": Array [
+        "./src/*",
+      ],
+    },
+  },
+  "extends": "./src/config/tsconfig.default.json",
+  "include": Array [
+    "src",
+  ],
+}
+`;
+
+exports[`given options should work 1`] = `
+Object {
+  "compilerOptions": Object {
+    "baseUrl": ".",
+    "outDir": "lib",
+    "paths": Object {
+      "@shared": Array [
+        "../../long/path/src",
+      ],
+      "@shared/*": Array [
+        "../../long/path/src/*",
+      ],
+    },
+  },
+  "extends": "node_modules/my-custom-lib/tsconfig.json",
+  "include": Array [
+    "src",
+  ],
+}
+`;

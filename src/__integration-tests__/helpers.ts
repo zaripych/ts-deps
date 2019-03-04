@@ -1,6 +1,7 @@
 import { spawnSync } from 'child_process'
 import { readFile, remove, emptyDir, pathExists, unlink } from 'fs-extra'
 import { resolve, join, normalize, relative, isAbsolute } from 'path'
+import fg from 'fast-glob'
 
 export const PKG_JSON = 'package.json'
 export const ROOT = resolve(__dirname, '../../')
@@ -152,6 +153,23 @@ const comparePaths = (a: string, b: string) => {
   const componentsB = b.split(seps)
   const result = comparePathComponents(componentsA, componentsB)
   return result
+}
+
+export const sortedDirectoryContents = async (
+  directory: string,
+  patterns: string[] = ['**']
+) => {
+  const results = await fg<string>(patterns, {
+    cwd: directory,
+    unique: true,
+    markDirectories: true,
+    onlyDirectories: false,
+    onlyFiles: false,
+  })
+
+  sortPaths(results)
+
+  return results
 }
 
 export const sortPaths = (files: string[]) => {

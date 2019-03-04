@@ -3,10 +3,15 @@ const { options } = require('../options')
 const { trimPathSeparator } = require('../helpers')
 const defaults = require('../defaults')
 
+/**
+ * @param {Partial<ITsConfigParams>} paramsRaw
+ */
 const tsConfig = (paramsRaw = {}) => {
+  const opts = options()
   const { aliases, baseConfigLocation } = {
-    ...options(),
-    baseConfigLocation: '@zaripych/ts-deps/lib/config/tsconfig.default.json',
+    aliases: opts.aliases,
+    baseConfigLocation:
+      opts.baseTsConfigLocation || 'ts-deps/lib/config/tsconfig.default.json',
     ...paramsRaw,
   }
   const src = defaults.rootDir

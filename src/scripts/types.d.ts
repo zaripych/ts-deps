@@ -14,11 +14,29 @@ type BabelBuildParams = Partial<{
 type PatchParams = Partial<{
   templatesDir: string
   forceOverwrites: boolean
+  aggressive: boolean
   baseTsConfigLocation: string
   patchOnly: string[]
   shouldPromptToOverwritePackageJson: boolean
+  cwd: string
 }>
 
 type InitParams = Partial<{
   forceOverwrites: boolean
+  cwd: string
 }>
+
+type PatchPackageJson = Partial<{
+  name: string
+  version: string
+  dependencies: {
+    [key: string]: string | undefined
+  }
+  devDependencies: {
+    [key: string]: string | undefined
+  }
+}>
+
+type PatchCoreOptions = {
+  aggressive: boolean
+}

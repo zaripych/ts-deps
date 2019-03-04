@@ -6,45 +6,33 @@ const deepmerge = require('deepmerge')
 const { tsConfig } = require('../config/tsconfig')
 const { resolveTemplatesDir, promptForOverwrite } = require('../helpers')
 const { options } = require('../options')
+const { patchPackageJsonCore } = require('./patchPackage')
 const yargs = require('yargs')
 
 const PKG_JSON = 'package.json'
 
 /**
- * @param {{templatesDir: string, toPatch: string|undefined }} param0
+ * @param {{templatesDir: string, toPatch: string|undefined, agressive: boolean | undefined }} param0
  */
-const patchPackageJson = async ({ toPatch, templatesDir }) => {
+const patchPackageJson = async ({ toPatch, templatesDir, agressive }) => {
   const tsDepsPackageJsonPath = join(__dirname, '../../package.json')
-  const sourcePackageJsonPath = join(templatesDir, 'to-process', 'package.json')
+  const templatePackageJsonPath = join(
+    templatesDir,
+    'to-process',
+    'package.json'
+  )
 
   const tsDepsPkg = JSON.parse(
     await readFile(tsDepsPackageJsonPath, { encoding: 'utf-8' })
   )
-  const sourcePkg = JSON.parse(
-    await readFile(sourcePackageJsonPath, { encoding: 'utf-8' })
+  const templatePkg = JSON.parse(
+    await readFile(templatePackageJsonPath, { encoding: 'utf-8' })
   )
   const targetPkg = (toPatch && JSON.parse(toPatch)) || {}
 
-  const result = deepmerge(targetPkg, sourcePkg, {
-    arrayMerge: (_target, source) => source,
+  const result = patchPackageJsonCore(tsDepsPkg, templatePkg, targetPkg, {
+    aggressive: agressive || false,
   })
-
-  if (result.dependencies) {
-    for (const pkgKey of Object.keys(targetPkg.dependencies)) {
-      if (tsDepsPkg.dependencies[pkgKey]) {
-        result.dependencies[pkgKey] = tsDepsPkg.dependencies[pkgKey]
-      }
-    }
-  }
-  if (result.devDependencies) {
-    for (const pkgKey of Object.keys(targetPkg.devDependencies)) {
-      if (tsDepsPkg.dependencies[pkgKey]) {
-        delete result.devDependencies[pkgKey]
-      }
-    }
-  }
-
-  result.devDependencies[tsDepsPkg.name] = tsDepsPkg.version
 
   /**
    * @type Promise<string>
@@ -85,20 +73,16 @@ const patchTsConfig = async ({ baseTsConfigLocation, toPatch }) => {
  * @param {PatchParams} paramsRaw
  */
 const patch = async (paramsRaw = {}) => {
+  const opts = options()
   const {
     templatesDir = resolveTemplatesDir(),
     shouldPromptToOverwritePackageJson = true,
     forceOverwrites = false,
-    baseTsConfigLocation,
-    patchOnly,
-  } = {
-    /**
-     * @type {Array<string>}
-     */
-    patchOnly: [],
-    ...options(),
-    ...paramsRaw,
-  }
+    baseTsConfigLocation = opts.baseTsConfigLocation,
+    patchOnly = opts.patchOnly || [],
+    aggressive = false,
+    cwd = process.cwd(),
+  } = paramsRaw
   const patchers = [
     {
       file: 'tsconfig.json',
@@ -114,11 +98,15 @@ const patch = async (paramsRaw = {}) => {
        * @param {string|undefined} toPatch
        */
       contents: async toPatch =>
-        await patchPackageJson({ toPatch, templatesDir }),
+        await patchPackageJson({
+          toPatch,
+          templatesDir,
+          agressive: aggressive,
+        }),
     },
   ]
 
-  const config = await resolveConfig('./package.json')
+  const config = await resolveConfig(join(cwd, './package.json'))
 
   for (const item of patchers) {
     if (Array.isArray(patchOnly) && patchOnly.length > 0) {
@@ -127,7 +115,7 @@ const patch = async (paramsRaw = {}) => {
       }
     }
 
-    const fullPath = resolve(item.file)
+    const fullPath = resolve(join(cwd, item.file))
 
     const ext = extname(fullPath)
 
