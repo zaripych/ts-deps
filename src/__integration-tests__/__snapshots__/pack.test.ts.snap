@@ -2,6 +2,7 @@
 
 exports[`pack should work 1`] = `
 Array [
+  "package/README.md",
   "package/lib/cli/ts-deps.js",
   "package/lib/config/babel.config.js",
   "package/lib/config/jest.config.js",
