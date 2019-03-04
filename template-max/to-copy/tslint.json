@@ -2,6 +2,6 @@
   "extends": [
     "tslint:recommended",
     "tslint-config-prettier",
-    "@zaripych/ts-deps/lib/config/tslint.default.json"
+    "ts-deps/lib/config/tslint.default.json"
   ]
 }
