@@ -28,7 +28,9 @@ const combineCoverage = (paramsRaw = {}) => {
   const normalizeJestCoverage = obj => {
     const result = obj
     Object.entries(result).forEach(([k, v]) => {
-      if (v && v.data) result[k] = v.data
+      if (v && v.data) {
+        result[k] = v.data
+      }
     })
     return result
   }
