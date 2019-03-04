@@ -1,6 +1,6 @@
 {
   "name": "ts-deps",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "TypeScript related dependencies and libraries to setup/scaffold typical build/lint/format/test pipeline and CI/CD pipeline using babel, jest, prettier, tslint and semantic-release. Meant to be added as dev dependency.",
   "main": "lib/index.js",
   "scripts": {
