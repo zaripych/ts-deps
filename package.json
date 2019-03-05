@@ -7,6 +7,7 @@
     "ts-deps": "node ./src/scripts/cli.js",
     "test": "jest --color",
     "integration": "jest --config ./jest.config.integration.js --color -i --testPathIgnorePatterns full",
+    "integration-long": "jest --config ./jest.config.integration.js --color -i --testPathPattern full",
     "integration-all": "jest --config ./jest.config.integration.js --color -i",
     "combine-coverage": "node ./scripts/combineCoverage.js",
     "clean": "node ./scripts/clean.js",
