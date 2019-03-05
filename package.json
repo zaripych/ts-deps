@@ -86,8 +86,7 @@
   },
   "devDependencies": {
     "@types/node": "8.10.40",
-    "@types/prettier": "1.16.1",
-    "coveralls": "3.0.3"
+    "@types/prettier": "1.16.1"
   },
   "engines": {
     "node": ">= 8.12"
