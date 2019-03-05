@@ -15,18 +15,24 @@ stages:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
+  - yarn global add codecov
 after_success:
-  - cat coverage/lcov.info | ./node_modules/.bin/coveralls
+  - codecov
 jobs:
   include:
     - stage: test and lint
       script:
         - time yarn run check
+        - yarn run release --dry-run
     - stage: test and lint
       script:
-        - time yarn run test
-        - time yarn integration-all
-        - time yarn combine-coverage
+        - time yarn run test --coverage
+    - stage: test and lint
+      script:
+        - time yarn integration --coverage
+    - stage: test and lint
+      script:
+        - time yarn integration-long --coverage
     - stage: deploy
       script:
         - yarn build

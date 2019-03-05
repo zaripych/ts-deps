@@ -14,6 +14,7 @@ Object {
   "coverageDirectory": "coverage-unit",
   "coverageReporters": Array [
     "json",
+    "lcov",
   ],
   "globals": Object {
     "INTEGRATION_TEST": false,
@@ -62,6 +63,7 @@ Object {
   "coverageDirectory": "coverage-integration",
   "coverageReporters": Array [
     "json",
+    "lcov",
   ],
   "globals": Object {
     "INTEGRATION_TEST": false,
@@ -110,6 +112,7 @@ Object {
   "coverageDirectory": "coverage-unit",
   "coverageReporters": Array [
     "json",
+    "lcov",
   ],
   "globals": Object {
     "INTEGRATION_TEST": false,

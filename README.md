@@ -1,8 +1,12 @@
 <h1 align="center">
   <p align="center">ts-deps</p>
   <p align="center" style="font-size: 0.5em">
-    <a href="https://travis-ci.com/zaripych/ts-deps"><img src="https://travis-ci.com/zaripych/ts-deps.svg?branch=master" alt="Travis Build Status"></a>
-    <a href="https://coveralls.io/github/zaripych/ts-deps?branch=master"><img src="https://coveralls.io/repos/github/zaripych/ts-deps/badge.svg?branch=master" alt="Coverage Status"></a>
+    <a href="https://travis-ci.com/zaripych/ts-deps">
+      <img src="https://travis-ci.com/zaripych/ts-deps.svg?branch=master" alt="Travis Build Status">
+    </a>
+    <a href="https://codecov.io/gh/zaripych/ts-deps">
+      <img src="https://codecov.io/gh/zaripych/ts-deps/branch/master/graph/badge.svg" />
+    </a>
   </p>
 </h1>
 
@@ -72,7 +76,7 @@ or
 yarn build
 ```
 
-The code will be transformed and put into `lib` folder.
+The code will be transformed and put into `lib` folder. In addition to that `.json` and `.d.ts` files are copied over as well.
 
 ### Checking your code
 

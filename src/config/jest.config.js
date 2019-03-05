@@ -47,7 +47,7 @@ const jestConfig = (paramsRaw = {}) => {
     coverageDirectory: isIntegrationTest
       ? 'coverage-integration'
       : 'coverage-unit',
-    coverageReporters: ['json'],
+    coverageReporters: ['json', 'lcov'],
     collectCoverageFrom: [
       `<rootDir>${src}/**/*.{${exts}}`,
       `!**/node_modules/**`,
