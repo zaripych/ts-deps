@@ -35,6 +35,7 @@ type PatchPackageJson = Partial<{
   devDependencies: {
     [key: string]: string | undefined
   }
+  [key: string]: unknown
 }>
 
 type PatchCoreOptions = {

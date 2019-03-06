@@ -1,0 +1,14 @@
+{
+  "extends": "./src/config/tsconfig.default.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "ts-deps": ["./src"], "ts-deps/*": ["./src/*"] },
+    "outDir": "lib",
+    "allowJs": false,
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true
+  },
+  "include": ["src"],
+  "exclude": ["src/**/__tests__/**", "src/__integration-tests__/**"]
+}

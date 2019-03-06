@@ -50,12 +50,10 @@ const patchPackageJsonCore = (tsDepsPkg, templatePkg, targetPkg, options) => {
     }
   }
 
-  if (tsDepsPkg.name) {
-    if (!result.devDependencies) {
-      result.devDependencies = {}
-    }
-    result.devDependencies[tsDepsPkg.name] = tsDepsPkg.version
+  if (!result.devDependencies) {
+    result.devDependencies = {}
   }
+  result.devDependencies[tsDepsPkg.name] = tsDepsPkg.version
 
   return result
 }

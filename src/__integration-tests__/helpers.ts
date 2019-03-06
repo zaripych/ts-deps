@@ -155,9 +155,13 @@ const comparePaths = (a: string, b: string) => {
   return result
 }
 
+const sortPaths = (files: string[]) => {
+  files.sort(comparePaths)
+}
+
 export const sortedDirectoryContents = async (
   directory: string,
-  patterns: string[] = ['**']
+  patterns: string[] = ['**', '!node_modules/**', '!.git/**']
 ) => {
   const results = await fg<string>(patterns, {
     cwd: directory,
@@ -165,13 +169,10 @@ export const sortedDirectoryContents = async (
     markDirectories: true,
     onlyDirectories: false,
     onlyFiles: false,
+    dot: true,
   })
 
   sortPaths(results)
 
   return results
-}
-
-export const sortPaths = (files: string[]) => {
-  files.sort(comparePaths)
 }

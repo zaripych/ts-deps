@@ -31,6 +31,7 @@ describe('patch', () => {
 
       await patch({
         forceOverwrites: true,
+        patchOnly: [],
         cwd: initDir,
       })
     })

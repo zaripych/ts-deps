@@ -3,11 +3,11 @@ import {
   ROOT,
   emptyDirSafe,
   spawnAndCheck,
-  sortPaths,
+  sortedDirectoryContents,
 } from './helpers'
 import { join } from 'path'
 import { ensureDir, copy } from 'fs-extra'
-import fg from 'fast-glob'
+import defaults from '../defaults'
 
 jest.setTimeout(5 * 60 * 1000)
 
@@ -26,14 +26,14 @@ describe('init', () => {
         cwd: initDir,
       })
 
+      spawnAndCheck('npm', ['init', '-y'], {
+        cwd: initDir,
+      })
+
       const sourceLocation = join(ROOT, 'test-sources', 'init-full')
 
       await copy(sourceLocation, initDir, {
         overwrite: true,
-      })
-
-      spawnAndCheck('npm', ['init', '-y'], {
-        cwd: initDir,
       })
 
       spawnAndCheck('npm', ['add', 'file:' + packageLocation, '--save-dev'], {
@@ -46,21 +46,17 @@ describe('init', () => {
     })
 
     it('should output correct files', async () => {
-      const contents = await fg<string>(['**', '!node_modules/**'], {
-        cwd: initDir,
-        unique: true,
-        markDirectories: true,
-        onlyDirectories: false,
-        onlyFiles: false,
-      })
-
-      sortPaths(contents)
+      const contents = await sortedDirectoryContents(initDir)
 
       expect(contents).toMatchSnapshot()
     })
 
     it('should build and test and lint', async () => {
       spawnAndCheck('npm', ['run', 'build'], {
+        cwd: initDir,
+      })
+
+      spawnAndCheck('npm', ['run', 'declarations'], {
         cwd: initDir,
       })
 
@@ -80,19 +76,34 @@ describe('init', () => {
         cwd: initDir,
       })
 
-      const outDir = join(initDir, 'lib')
+      // tslint:disable-next-line
+      const outDir = join(initDir, defaults.outDir)
 
-      const libContents = await fg<string>(['**', '!node_modules/**'], {
-        cwd: outDir,
-        unique: true,
-        markDirectories: true,
-        onlyDirectories: false,
-        onlyFiles: false,
-      })
-
-      sortPaths(libContents)
+      const libContents = await sortedDirectoryContents(outDir)
 
       expect(libContents).toMatchSnapshot()
+
+      spawnAndCheck('npm', ['run', 'clean'], {
+        cwd: initDir,
+      })
+    })
+
+    describe('given changes to ts-deps config', () => {
+      beforeAll(async () => {
+        const sourceLocation = join(ROOT, 'test-sources', 'init-full-patch')
+
+        await copy(sourceLocation, initDir, {
+          overwrite: true,
+        })
+
+        spawnAndCheck('npx', ['ts-deps', 'patch'], {
+          cwd: initDir,
+        })
+      })
+
+      it('should patch', () => {
+        return
+      })
     })
   })
 })

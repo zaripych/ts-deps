@@ -1,20 +1,21 @@
 // @ts-check
+
 const { resolve, extname, join } = require('path')
 const { readFile, writeFile, pathExists } = require('fs-extra')
 const { format, resolveConfig } = require('prettier')
-const deepmerge = require('deepmerge')
-const { tsConfig } = require('../config/tsconfig')
 const { resolveTemplatesDir, promptForOverwrite } = require('../helpers')
 const { options } = require('../options')
 const { patchPackageJsonCore } = require('./patchPackage')
+const { patchTsConfigCore } = require('./patchTsConfig')
+const { patchText } = require('./patchText')
 const yargs = require('yargs')
 
 const PKG_JSON = 'package.json'
 
 /**
- * @param {{templatesDir: string, toPatch: string|undefined, agressive: boolean | undefined }} param0
+ * @param {{templatesDir: string, toPatch: string|undefined, aggressive: boolean | undefined }} param0
  */
-const patchPackageJson = async ({ toPatch, templatesDir, agressive }) => {
+const patchPackageJson = async ({ toPatch, templatesDir, aggressive }) => {
   const tsDepsPackageJsonPath = join(__dirname, '../../package.json')
   const templatePackageJsonPath = join(
     templatesDir,
@@ -31,7 +32,7 @@ const patchPackageJson = async ({ toPatch, templatesDir, agressive }) => {
   const targetPkg = (toPatch && JSON.parse(toPatch)) || {}
 
   const result = patchPackageJsonCore(tsDepsPkg, templatePkg, targetPkg, {
-    aggressive: agressive || false,
+    aggressive: aggressive || false,
   })
 
   /**
@@ -41,32 +42,51 @@ const patchPackageJson = async ({ toPatch, templatesDir, agressive }) => {
 }
 
 /**
+ *
+ * @param {{ toPatch?: string, baseTsConfigLocation?: string, aggressive?: boolean, declarations?: boolean}} param0
+ */
+const patchTsConfig = async ({
+  toPatch,
+  baseTsConfigLocation,
+  aggressive = false,
+  declarations = false,
+}) => {
+  const oldConfig = (toPatch && JSON.parse(toPatch)) || {}
+
+  const result = await patchTsConfigCore({
+    oldConfig,
+    baseTsConfigLocation,
+    aggressive,
+    declarations,
+  })
+
+  return JSON.stringify(result)
+}
+
+/**
+ * @param {{toPatch: string | undefined, templatesDir: string}} param0
+ */
+const patchGitignore = async ({ toPatch, templatesDir }) => {
+  const templateGitignorePath = join(templatesDir, 'to-process', 'gitignore')
+
+  const newText = await readFile(templateGitignorePath, { encoding: 'utf-8' })
+
+  const result = await patchText({
+    oldText: toPatch,
+    newText,
+    unique: true,
+  })
+
+  return result
+}
+
+/**
  * @param {string} dest
  */
 const promptForOverwriteBeforePatch = async dest => {
   return pathExists(dest).then(exists =>
     exists ? promptForOverwrite(dest) : Promise.resolve(true)
   )
-}
-
-/**
- *
- * @param {{ toPatch: string|undefined, baseTsConfigLocation: string | undefined}} param0
- */
-const patchTsConfig = async ({ baseTsConfigLocation, toPatch }) => {
-  const oldConfig = (toPatch && JSON.parse(toPatch)) || {}
-
-  const config = tsConfig({
-    ...(baseTsConfigLocation && {
-      baseConfigLocation: baseTsConfigLocation,
-    }),
-  })
-
-  const result = deepmerge(oldConfig, config, {
-    arrayMerge: (_target, source) => source,
-  })
-
-  return JSON.stringify(result)
 }
 
 /**
@@ -83,6 +103,7 @@ const patch = async (paramsRaw = {}) => {
     aggressive = false,
     cwd = process.cwd(),
   } = paramsRaw
+
   const patchers = [
     {
       file: 'tsconfig.json',
@@ -90,7 +111,24 @@ const patch = async (paramsRaw = {}) => {
        * @param {string|undefined} toPatch
        */
       contents: async toPatch =>
-        await patchTsConfig({ toPatch, baseTsConfigLocation }),
+        await patchTsConfig({
+          toPatch,
+          baseTsConfigLocation,
+          aggressive,
+        }),
+    },
+    {
+      file: 'tsconfig.declarations.json',
+      /**
+       * @param {string|undefined} toPatch
+       */
+      contents: async toPatch =>
+        await patchTsConfig({
+          toPatch,
+          baseTsConfigLocation,
+          aggressive,
+          declarations: true,
+        }),
     },
     {
       file: PKG_JSON,
@@ -101,12 +139,24 @@ const patch = async (paramsRaw = {}) => {
         await patchPackageJson({
           toPatch,
           templatesDir,
-          agressive: aggressive,
+          aggressive,
+        }),
+    },
+    {
+      file: '.gitignore',
+      /**
+       * @param {string|undefined} toPatch
+       */
+      contents: async toPatch =>
+        await patchGitignore({
+          toPatch,
+          templatesDir,
         }),
     },
   ]
 
   const config = await resolveConfig(join(cwd, './package.json'))
+  const extensionsToFormat = ['.js', '.ts', '.json', '.jsx', '.tsx']
 
   for (const item of patchers) {
     if (Array.isArray(patchOnly) && patchOnly.length > 0) {
@@ -123,10 +173,15 @@ const patch = async (paramsRaw = {}) => {
       () => Promise.resolve(undefined)
     )
 
-    const newContents = format(await item.contents(oldContents), {
-      ...config,
-      ...(ext === '.json' && { parser: 'json' }),
-    })
+    const unformattedContents = await item.contents(oldContents)
+
+    const newContents =
+      extensionsToFormat.includes(ext) && unformattedContents
+        ? format(unformattedContents, {
+            ...config,
+            ...(ext === '.json' && { parser: 'json' }),
+          })
+        : unformattedContents
 
     const prompt = async () => {
       if (forceOverwrites) {

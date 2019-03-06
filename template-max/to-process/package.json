@@ -1,14 +1,15 @@
 {
   "scripts": {
     "build": "node ./scripts/build.js",
+    "declarations": "tsc -p ./tsconfig.declarations.json",
     "prebuild": "node ./scripts/clean.js",
     "clean": "node ./scripts/clean.js",
     "test": "jest --color",
     "integration": "jest --config ./jest.config.integration.js --color -i",
     "combine-coverage": "node ./scripts/combineCoverage.js",
-    "type-check": "tsc -p . --noEmit",
+    "type-check": "tsc",
     "lint": "tslint -p . -t verbose",
-    "check": "concurrently \"node ./scripts/build.js\" \"tsc -p . --noEmit\" \"tslint -p . -t verbose\"",
+    "check": "concurrently \"node ./scripts/build.js\" \"tsc\" \"tslint -p . -t verbose\"",
     "patch": "ts-deps patch",
     "release": "semantic-release"
   },
@@ -18,8 +19,5 @@
       "pre-commit": "pretty-quick --staged",
       "pre-push": "npm run check"
     }
-  },
-  "devDependencies": {
-    "@zaripych/ts-deps": ""
   }
 }

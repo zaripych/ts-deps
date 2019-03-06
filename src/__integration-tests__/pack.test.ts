@@ -1,12 +1,11 @@
 import { existsSync, ensureDir } from 'fs-extra'
 import { join } from 'path'
-import fg from 'fast-glob'
 import {
   buildAndPack,
   ROOT,
   unarchiveTarGz,
   emptyDirSafe,
-  sortPaths,
+  sortedDirectoryContents,
 } from './helpers'
 
 jest.setTimeout(120000)
@@ -24,15 +23,7 @@ describe('pack', () => {
 
     await unarchiveTarGz(ROOT, packageName, unarchiveDir)
 
-    const allPackageFiles = await fg<string>('**/*.*', {
-      cwd: unarchiveDir,
-      unique: true,
-      markDirectories: true,
-      onlyDirectories: false,
-      onlyFiles: false,
-    })
-
-    sortPaths(allPackageFiles)
+    const allPackageFiles = await sortedDirectoryContents(unarchiveDir)
 
     expect(allPackageFiles).toMatchSnapshot()
   })
