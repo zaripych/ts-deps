@@ -1,3 +1,8 @@
+//@ts-check
+
+/**
+ * @param  {...number} args
+ */
 export function min(...args) {
   return (
     (Array.isArray(args) &&
