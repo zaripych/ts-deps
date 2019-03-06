@@ -1,3 +1,4 @@
+// @ts-check
 import { min } from '@min'
 
 describe('min', () => {
