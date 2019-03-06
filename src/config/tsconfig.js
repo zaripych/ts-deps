@@ -11,7 +11,8 @@ const tsConfig = (paramsRaw = {}) => {
   const { aliases, baseConfigLocation } = {
     aliases: opts.aliases,
     baseConfigLocation:
-      opts.baseTsConfigLocation || 'ts-deps/lib/config/tsconfig.default.json',
+      opts.baseTsConfigLocation ||
+      './node_modules/ts-deps/lib/config/tsconfig.default.json',
     ...paramsRaw,
   }
   const src = defaults.rootDir
@@ -38,6 +39,33 @@ const tsConfig = (paramsRaw = {}) => {
   }
 }
 
+/**
+ * @param {Partial<ITsConfigParams>} paramsRaw
+ */
+const tsConfigDeclarations = (paramsRaw = {}) => {
+  /**
+   * @type {ReturnType<typeof tsConfig> & { exclude?: string[] }}
+   */
+  const defConfig = tsConfig(paramsRaw)
+
+  return {
+    ...defConfig,
+    compilerOptions: {
+      ...defConfig.compilerOptions,
+      allowJs: false,
+      noEmit: false,
+      declaration: true,
+      emitDeclarationOnly: true,
+    },
+    exclude: [
+      ...((Array.isArray(defConfig.exclude) && defConfig.exclude) || []),
+      defaults.unitTestsGlob,
+      defaults.integrationTestsGlob,
+    ],
+  }
+}
+
 module.exports = {
   tsConfig,
+  tsConfigDeclarations,
 }
