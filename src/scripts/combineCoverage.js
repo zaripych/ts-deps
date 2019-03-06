@@ -22,22 +22,9 @@ const combineCoverage = (paramsRaw = {}) => {
 
   const coverageData = filePaths.map(filePath => require(filePath))
 
-  /**
-   * @param {{ [key: string]: { data?: {} } | undefined}} obj
-   */
-  const normalizeJestCoverage = obj => {
-    const result = obj
-    Object.entries(result).forEach(([k, v]) => {
-      if (v && v.data) {
-        result[k] = v.data
-      }
-    })
-    return result
-  }
-
   const map = libCoverage.createCoverageMap()
   for (const data of coverageData) {
-    map.merge(normalizeJestCoverage(data))
+    map.merge(data)
   }
 
   const reporter = createReporter()
