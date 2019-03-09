@@ -1,2 +1,2 @@
 // @ts-check
-export * from './max'
+export * from './max';

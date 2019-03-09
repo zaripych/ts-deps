@@ -1,32 +1,32 @@
-import { patchPackageJsonCore } from '../patchPackage'
+import { patchPackageJsonCore } from '../patchPackage';
 
 describe('patchPackageJsonCore', () => {
   describe('given invalid ts-deps package contents', () => {
-    const tsDepsPkg = {}
-    const templatePkg = {}
-    const targetPkg = {}
+    const tsDepsPkg = {};
+    const templatePkg = {};
+    const targetPkg = {};
 
     it('should throw', () => {
       expect(() =>
         patchPackageJsonCore(tsDepsPkg, templatePkg, targetPkg, {
           aggressive: false,
         })
-      ).toThrow()
+      ).toThrow();
       expect(() =>
         patchPackageJsonCore(tsDepsPkg, templatePkg, targetPkg, {
           aggressive: true,
         })
-      ).toThrow()
-    })
-  })
+      ).toThrow();
+    });
+  });
 
   describe('given valid ts-deps package contents', () => {
     const tsDepsPkg = {
       name: 'ts-deps',
       version: '0.0.1-test',
-    }
-    const templatePkg = {}
-    const targetPkg = {}
+    };
+    const templatePkg = {};
+    const targetPkg = {};
 
     it('should work', () => {
       expect(
@@ -37,14 +37,14 @@ describe('patchPackageJsonCore', () => {
         devDependencies: {
           'ts-deps': '0.0.1-test',
         },
-      })
-    })
-  })
+      });
+    });
+  });
 
   describe('given aggressive mode', () => {
     const opts = {
       aggressive: true,
-    }
+    };
 
     describe('given empty template', () => {
       const tsDepsPkg = {
@@ -58,8 +58,8 @@ describe('patchPackageJsonCore', () => {
         },
         jest: {},
         husky: {},
-      }
-      const templatePkg = {}
+      };
+      const templatePkg = {};
       const targetPkg = {
         scripts: {
           build: 'target',
@@ -75,7 +75,7 @@ describe('patchPackageJsonCore', () => {
           typescript: 'target',
         },
         keywords: ['my-cool-packge'],
-      }
+      };
 
       it('should work', () => {
         expect(
@@ -92,9 +92,9 @@ describe('patchPackageJsonCore', () => {
             'ts-deps': '0.0.1-test',
           },
           keywords: ['my-cool-packge'],
-        })
-      })
-    })
+        });
+      });
+    });
 
     describe('given non-empty template', () => {
       const tsDepsPkg = {
@@ -108,7 +108,7 @@ describe('patchPackageJsonCore', () => {
         },
         jest: {},
         husky: {},
-      }
+      };
       const templatePkg = {
         scripts: {
           build: 'template',
@@ -122,7 +122,7 @@ describe('patchPackageJsonCore', () => {
           typescript: 'template',
         },
         keywords: ['template'],
-      }
+      };
       const targetPkg = {
         scripts: {
           build: 'target',
@@ -138,7 +138,7 @@ describe('patchPackageJsonCore', () => {
           typescript: 'target',
         },
         keywords: ['target'],
-      }
+      };
 
       it('should work', () => {
         expect(
@@ -156,15 +156,15 @@ describe('patchPackageJsonCore', () => {
             'ts-deps': '0.0.1-test',
           },
           keywords: ['template'],
-        })
-      })
-    })
-  })
+        });
+      });
+    });
+  });
 
   describe('given non-aggressive mode', () => {
     const opts = {
       aggressive: false,
-    }
+    };
 
     describe('given empty template', () => {
       const tsDepsPkg = {
@@ -178,10 +178,10 @@ describe('patchPackageJsonCore', () => {
         },
         jest: {},
         husky: {},
-      }
+      };
       const templatePkg = {
         keywords: ['template'],
-      }
+      };
       const targetPkg = {
         scripts: {
           build: 'target',
@@ -197,7 +197,7 @@ describe('patchPackageJsonCore', () => {
           typescript: 'target',
         },
         keywords: ['target'],
-      }
+      };
 
       it('should work', () => {
         expect(
@@ -214,9 +214,9 @@ describe('patchPackageJsonCore', () => {
             'ts-deps': '0.0.1-test',
           },
           keywords: ['target'],
-        })
-      })
-    })
+        });
+      });
+    });
 
     describe('given non-empty template', () => {
       const tsDepsPkg = {
@@ -230,7 +230,7 @@ describe('patchPackageJsonCore', () => {
         },
         jest: {},
         husky: {},
-      }
+      };
       const templatePkg = {
         scripts: {
           build: 'template',
@@ -243,7 +243,7 @@ describe('patchPackageJsonCore', () => {
         devDependencies: {
           typescript: 'template',
         },
-      }
+      };
       const targetPkg = {
         scripts: {
           build: 'target',
@@ -259,7 +259,7 @@ describe('patchPackageJsonCore', () => {
           typescript: 'target',
           original: 'target',
         },
-      }
+      };
 
       it('should work', () => {
         expect(
@@ -277,8 +277,8 @@ describe('patchPackageJsonCore', () => {
             'ts-deps': '0.0.1-test',
             original: 'target',
           },
-        })
-      })
-    })
-  })
-})
+        });
+      });
+    });
+  });
+});

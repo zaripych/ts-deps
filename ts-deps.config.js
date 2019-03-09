@@ -4,4 +4,4 @@ module.exports = {
   },
   patchOnly: ['tsconfig.json', 'tsconfig.declarations.json'],
   baseTsConfigLocation: './src/config/tsconfig.default.json',
-}
+};

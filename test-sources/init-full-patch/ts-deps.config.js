@@ -4,4 +4,4 @@ module.exports = {
     '@min': './src/min',
     '@shared': './src/shared',
   },
-}
+};

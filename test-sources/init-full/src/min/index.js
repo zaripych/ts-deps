@@ -1,2 +1,2 @@
 // @ts-check
-export * from './min'
+export * from './min';

@@ -1,11 +1,11 @@
-const { tsConfig, tsConfigDeclarations } = require('../tsconfig')
+const { tsConfig, tsConfigDeclarations } = require('../tsconfig');
 
 describe('given no options', () => {
   it('should work', () => {
-    const defaultConfig = tsConfig()
-    expect(defaultConfig).toMatchSnapshot()
-  })
-})
+    const defaultConfig = tsConfig();
+    expect(defaultConfig).toMatchSnapshot();
+  });
+});
 
 describe('given options', () => {
   it('should work', () => {
@@ -14,10 +14,10 @@ describe('given options', () => {
         '@shared': '../../long/path/src',
       },
       baseConfigLocation: 'node_modules/my-custom-lib/tsconfig.json',
-    })
-    expect(defaultConfig).toMatchSnapshot()
-  })
-})
+    });
+    expect(defaultConfig).toMatchSnapshot();
+  });
+});
 
 describe('given declarations', () => {
   it('should work', () => {
@@ -26,7 +26,7 @@ describe('given declarations', () => {
         '@shared': '../../long/path/src',
       },
       baseConfigLocation: 'node_modules/my-custom-lib/tsconfig.json',
-    })
-    expect(defaultConfig).toMatchSnapshot()
-  })
-})
+    });
+    expect(defaultConfig).toMatchSnapshot();
+  });
+});

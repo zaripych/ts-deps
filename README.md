@@ -10,6 +10,9 @@
     <a href="https://codecov.io/gh/zaripych/ts-deps">
       <img src="https://codecov.io/gh/zaripych/ts-deps/branch/master/graph/badge.svg" />
     </a>
+    <a href="https://greenkeeper.io/">
+      <img src="https://badges.greenkeeper.io/zaripych/ts-deps.svg" />
+    </a>
   </p>
   <p align="center">dev dependency for your simple TypeScript projects</p>
 </h1>

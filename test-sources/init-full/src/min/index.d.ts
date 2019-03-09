@@ -1,1 +1,1 @@
-export function min<T>(...args: T[]): T | undefined
+export function min<T>(...args: T[]): T | undefined;
