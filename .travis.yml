@@ -30,7 +30,6 @@ jobs:
     - stage: test and lint
       script:
         - time yarn integration --coverage
-        - ls ./integration-test-pkg/package/template-max/to-copy
     - stage: test and lint
       script:
         - time yarn integration-long --coverage
