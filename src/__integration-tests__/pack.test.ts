@@ -21,7 +21,7 @@ describe('pack', () => {
     await emptyDirSafe(unarchiveDir)
     await ensureDir(unarchiveDir)
 
-    await unarchiveTarGz(ROOT, packageName, unarchiveDir)
+    await unarchiveTarGz(join(ROOT, packageName), unarchiveDir)
 
     const allPackageFiles = await sortedDirectoryContents(unarchiveDir)
 

@@ -1,7 +1,17 @@
 import { spawnSync } from 'child_process'
-import { readFile, remove, emptyDir, pathExists, unlink } from 'fs-extra'
+import {
+  readFile,
+  remove,
+  emptyDir,
+  pathExists,
+  unlink,
+  createReadStream,
+  mkdir,
+} from 'fs-extra'
 import { resolve, join, normalize, relative, isAbsolute } from 'path'
 import fg from 'fast-glob'
+import { extract } from 'tar-fs'
+import { createGunzip } from 'zlib'
 
 export const PKG_JSON = 'package.json'
 export const ROOT = resolve(__dirname, '../../')
@@ -120,16 +130,30 @@ const toUnixCompatiblePath = (path: string) => {
   return '/' + path.replace(/\\/g, '/').replace(':', '')
 }
 
-export const unarchiveTarGz = async (cwd: string, tar: string, out: string) => {
-  spawnAndCheck(
-    'tar',
-    ['zxvf', tar, '--directory', toUnixCompatiblePath(out)],
-    {
-      encoding: 'utf-8',
-      shell: true,
-      cwd,
-    }
-  )
+export const unarchiveTarGz = async (tar: string, out: string) => {
+  const outPath = out
+  await mkdir(outPath).catch(() => Promise.resolve())
+  const gunzip = createGunzip()
+  const stream = createReadStream(tar)
+    .pipe(gunzip)
+    .pipe(
+      extract(outPath),
+      { end: true }
+    )
+  return new Promise((res, rej) => {
+    stream.once('end', () => {
+      res()
+    })
+    stream.once('close', () => {
+      res()
+    })
+    stream.once('finish', () => {
+      res()
+    })
+    stream.once('error', err => {
+      rej(err)
+    })
+  })
 }
 
 const compareStrings = (a: string, b: string) => (a === b ? 0 : a > b ? 1 : -1)

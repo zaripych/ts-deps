@@ -87,7 +87,9 @@
   },
   "devDependencies": {
     "@types/node": "8.10.40",
-    "@types/prettier": "1.16.1"
+    "@types/prettier": "1.16.1",
+    "@types/tar-fs": "1.16.1",
+    "tar-fs": "2.0.0"
   },
   "engines": {
     "node": ">= 8.12"
