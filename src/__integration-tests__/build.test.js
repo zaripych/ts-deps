@@ -1,16 +1,19 @@
 // @ts-check
-import { join } from 'path'
-import { ROOT, sortedDirectoryContents } from './helpers'
-const { babelBuild } = require('../scripts')
+import { join } from 'path';
+import { ROOT, sortedDirectoryContents } from './helpers';
+import defaults from '../defaults';
+import { babelBuild } from '../scripts';
 
-jest.setTimeout(120000)
+jest.setTimeout(120000);
 
 describe('build', () => {
   it('should work', async () => {
-    await babelBuild()
+    await babelBuild();
 
-    const buildFiles = await sortedDirectoryContents(join(ROOT, 'lib'))
+    const buildFiles = await sortedDirectoryContents(
+      join(ROOT, defaults.outDir)
+    );
 
-    expect(buildFiles).toMatchSnapshot()
-  })
-})
+    expect(buildFiles).toMatchSnapshot();
+  });
+});

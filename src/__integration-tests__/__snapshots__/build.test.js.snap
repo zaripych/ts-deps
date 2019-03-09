@@ -24,6 +24,8 @@ Array [
   "scripts/init.js",
   "scripts/patch.js",
   "scripts/patchPackage.js",
+  "scripts/patchText.js",
+  "scripts/patchTsConfig.js",
   "scripts/types.d.ts",
   "types.d.ts",
 ]

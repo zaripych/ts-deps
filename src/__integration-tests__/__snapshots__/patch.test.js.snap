@@ -2,6 +2,7 @@
 
 exports[`patch given fresh directory after init should output correct files 1`] = `
 Array [
+  ".gitignore",
   "package.json",
   "src/",
   "src/__tests__/",
@@ -9,13 +10,17 @@ Array [
   "src/__tests__/min.test.js",
   "src/index.ts",
   "src/max/",
+  "src/max/index.d.ts",
   "src/max/index.js",
   "src/max/max.ts",
   "src/min/",
+  "src/min/index.d.ts",
   "src/min/index.js",
   "src/min/min.js",
+  "src/other.d.ts",
   "src/other.js",
   "ts-deps.config.js",
+  "tsconfig.declarations.json",
   "tsconfig.json",
 ]
 `;

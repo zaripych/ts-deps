@@ -1,21 +1,21 @@
 // @ts-check
-'use strict'
+'use strict';
 
-const defaults = require('../defaults')
-const { trimPathSeparator } = require('../helpers')
-const { options } = require('../options')
+const defaults = require('../defaults');
+const { trimPathSeparator } = require('../helpers');
+const { options } = require('../options');
 
 /**
  * @param {Partial<IBabelConfigParams>} paramsRaw
  */
 const babelConfig = (paramsRaw = {}) => {
-  const opts = options()
+  const opts = options();
   const { aliases, nodeVersion } = {
     aliases: opts.aliases,
     nodeVersion: opts.nodeVersion || defaults.nodeVersion,
     ...paramsRaw,
-  }
-  const src = defaults.rootDir
+  };
+  const src = defaults.rootDir;
 
   const config = {
     presets: [
@@ -38,17 +38,17 @@ const babelConfig = (paramsRaw = {}) => {
             return {
               ...acc,
               [key]: trimPathSeparator(aliases[key]),
-            }
+            };
           }, {}),
         },
       ],
       '@babel/proposal-class-properties',
     ].filter(Boolean),
     ignore: [`${src}/**/*.d.ts`, `${src}/**/*.json`],
-  }
+  };
 
-  return config
-}
+  return config;
+};
 
 module.exports = {
   __esModule: {
@@ -56,4 +56,4 @@ module.exports = {
   },
   default: babelConfig(),
   babelConfig,
-}
+};

@@ -1,6 +1,6 @@
 import { patchPackageJsonCore } from '../patchPackage'
 
-describe('patch', () => {
+describe('patchPackageJsonCore', () => {
   describe('given invalid ts-deps package contents', () => {
     const tsDepsPkg = {}
     const templatePkg = {}
@@ -74,6 +74,7 @@ describe('patch', () => {
           tslint: 'target',
           typescript: 'target',
         },
+        keywords: ['my-cool-packge'],
       }
 
       it('should work', () => {
@@ -90,6 +91,7 @@ describe('patch', () => {
           devDependencies: {
             'ts-deps': '0.0.1-test',
           },
+          keywords: ['my-cool-packge'],
         })
       })
     })
@@ -119,6 +121,7 @@ describe('patch', () => {
         devDependencies: {
           typescript: 'template',
         },
+        keywords: ['template'],
       }
       const targetPkg = {
         scripts: {
@@ -134,6 +137,7 @@ describe('patch', () => {
           tslint: 'target',
           typescript: 'target',
         },
+        keywords: ['target'],
       }
 
       it('should work', () => {
@@ -151,6 +155,7 @@ describe('patch', () => {
           devDependencies: {
             'ts-deps': '0.0.1-test',
           },
+          keywords: ['template'],
         })
       })
     })
@@ -174,7 +179,9 @@ describe('patch', () => {
         jest: {},
         husky: {},
       }
-      const templatePkg = {}
+      const templatePkg = {
+        keywords: ['template'],
+      }
       const targetPkg = {
         scripts: {
           build: 'target',
@@ -189,6 +196,7 @@ describe('patch', () => {
           tslint: 'target',
           typescript: 'target',
         },
+        keywords: ['target'],
       }
 
       it('should work', () => {
@@ -205,6 +213,7 @@ describe('patch', () => {
           devDependencies: {
             'ts-deps': '0.0.1-test',
           },
+          keywords: ['target'],
         })
       })
     })
@@ -248,6 +257,7 @@ describe('patch', () => {
           '@babel/core': 'target',
           tslint: 'target',
           typescript: 'target',
+          original: 'target',
         },
       }
 
@@ -265,6 +275,7 @@ describe('patch', () => {
           },
           devDependencies: {
             'ts-deps': '0.0.1-test',
+            original: 'target',
           },
         })
       })
