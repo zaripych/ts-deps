@@ -7,12 +7,13 @@
     <a href="https://codecov.io/gh/zaripych/ts-deps">
       <img src="https://codecov.io/gh/zaripych/ts-deps/branch/master/graph/badge.svg" />
     </a>
+    <a href="https://greenkeeper.io/">
+      <img src="https://badges.greenkeeper.io/zaripych/ts-deps.svg" />
+    </a>
   </p>
 </h1>
 
 ## the single dev dependency for your simple TypeScript Node projects
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/zaripych/ts-deps.svg)](https://greenkeeper.io/)
 
 ### Installation
 
