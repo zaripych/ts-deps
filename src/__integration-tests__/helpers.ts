@@ -123,13 +123,6 @@ export const buildAndPack = async () => {
   return { packageName, packageLocation, version }
 }
 
-const toUnixCompatiblePath = (path: string) => {
-  if (!isAbsolute(path)) {
-    throw new Error('Must be absolute path')
-  }
-  return '/' + path.replace(/\\/g, '/').replace(':', '')
-}
-
 export const unarchiveTarGz = async (tar: string, out: string) => {
   const outPath = out
   await mkdir(outPath).catch(() => Promise.resolve())
