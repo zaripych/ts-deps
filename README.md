@@ -1,6 +1,9 @@
 <h1 align="center">
-  <p align="center">ts-deps</p>
+  ts-deps
   <p align="center" style="font-size: 0.5em">
+    <a href="https://www.npmjs.com/package/ts-deps">
+      <img src="https://img.shields.io/npm/v/ts-deps.svg" >
+    </a>
     <a href="https://travis-ci.com/zaripych/ts-deps">
       <img src="https://travis-ci.com/zaripych/ts-deps.svg?branch=master" alt="Travis Build Status">
     </a>
@@ -8,9 +11,8 @@
       <img src="https://codecov.io/gh/zaripych/ts-deps/branch/master/graph/badge.svg" />
     </a>
   </p>
+  <p align="center">dev dependency for your simple TypeScript projects</p>
 </h1>
-
-## the single dev dependency for your simple TypeScript Node projects
 
 ### Installation
 
