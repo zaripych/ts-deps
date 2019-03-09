@@ -1,6 +1,6 @@
 // @ts-check
 const { spawnSync } = require('child_process')
-const { existsSync, copy, pathExists, stat } = require('fs-extra')
+const { existsSync, copy, pathExists, stat, ensureDir } = require('fs-extra')
 const { resolve, join } = require('path')
 const { patch } = require('./patch')
 const { resolveTemplatesDir, promptForOverwrite } = require('../helpers')
@@ -43,7 +43,7 @@ const copyFromTemplates = async ({
 }) => {
   const toCopyDir = join(templatesDir, 'to-copy')
 
-  return await copy(toCopyDir, currentDir, {
+  await copy(toCopyDir, currentDir, {
     filter: async (_src, dest) => {
       const destStats = await stat(dest).catch(() => Promise.resolve(null))
       if (destStats && destStats.isDirectory()) {
@@ -68,6 +68,19 @@ const copyFromTemplates = async ({
     },
     overwrite: true,
   })
+
+  const directories = [
+    //
+    'src',
+    'src/__tests__',
+    'src/__integration-tests__',
+  ]
+
+  await Promise.all(
+    directories
+      .map(dir => join(currentDir, dir))
+      .map(dir => ensureDir(dir).catch(() => Promise.resolve()))
+  )
 }
 
 /**

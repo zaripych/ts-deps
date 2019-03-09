@@ -35,6 +35,7 @@ Array [
   "scripts/clean.js",
   "scripts/combineCoverage.js",
   "src/",
+  "src/__integration-tests__/",
   "src/__tests__/",
   "src/__tests__/max.test.ts",
   "src/__tests__/min.test.js",

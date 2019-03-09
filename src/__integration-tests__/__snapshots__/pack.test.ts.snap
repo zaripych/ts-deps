@@ -45,7 +45,6 @@ Array [
   "package/template-max/to-copy/scripts/build.js",
   "package/template-max/to-copy/scripts/clean.js",
   "package/template-max/to-copy/scripts/combineCoverage.js",
-  "package/template-max/to-copy/src/",
   "package/template-max/to-copy/tslint.json",
   "package/template-max/to-process/",
   "package/template-max/to-process/gitignore",
