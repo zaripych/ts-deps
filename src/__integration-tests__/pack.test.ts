@@ -1,30 +1,30 @@
-import { existsSync, ensureDir } from 'fs-extra'
-import { join } from 'path'
+import { existsSync, ensureDir } from 'fs-extra';
+import { join } from 'path';
 import {
   buildAndPack,
   ROOT,
   unarchiveTarGz,
   emptyDirSafe,
   sortedDirectoryContents,
-} from './helpers'
+} from './helpers';
 
-jest.setTimeout(120000)
+jest.setTimeout(120000);
 
 describe('pack', () => {
   it('should work', async () => {
-    const { packageLocation, packageName } = await buildAndPack()
+    const { packageLocation, packageName } = await buildAndPack();
 
-    expect(existsSync(packageLocation)).toBe(true)
+    expect(existsSync(packageLocation)).toBe(true);
 
-    const unarchiveDir = join(ROOT, 'integration-test-pkg')
+    const unarchiveDir = join(ROOT, 'integration-test-pkg');
 
-    await emptyDirSafe(unarchiveDir)
-    await ensureDir(unarchiveDir)
+    await emptyDirSafe(unarchiveDir);
+    await ensureDir(unarchiveDir);
 
-    await unarchiveTarGz(join(ROOT, packageName), unarchiveDir)
+    await unarchiveTarGz(join(ROOT, packageName), unarchiveDir);
 
-    const allPackageFiles = await sortedDirectoryContents(unarchiveDir)
+    const allPackageFiles = await sortedDirectoryContents(unarchiveDir);
 
-    expect(allPackageFiles).toMatchSnapshot()
-  })
-})
+    expect(allPackageFiles).toMatchSnapshot();
+  });
+});

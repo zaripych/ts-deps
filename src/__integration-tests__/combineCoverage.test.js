@@ -1,12 +1,12 @@
 // @ts-check
-const { clean, combineCoverage } = require('../scripts')
+const { clean, combineCoverage } = require('../scripts');
 
-jest.setTimeout(120000)
+jest.setTimeout(120000);
 
 describe('combineCoverage', () => {
   it('should work', async () => {
-    await clean()
+    await clean();
 
-    await combineCoverage()
-  })
-})
+    await combineCoverage();
+  });
+});

@@ -1,15 +1,15 @@
 // @ts-check
 // @ts-ignore
-const libCoverage = require('istanbul-lib-coverage')
+const libCoverage = require('istanbul-lib-coverage');
 // @ts-ignore
-const { createReporter } = require('istanbul-api')
-const fg = require('fast-glob')
+const { createReporter } = require('istanbul-api');
+const fg = require('fast-glob');
 
 /**
  * @param {Partial<CombineCoverageParams>} paramsRaw
  */
 const combineCoverage = (paramsRaw = {}) => {
-  const cwd = paramsRaw.cwd || process.cwd()
+  const cwd = paramsRaw.cwd || process.cwd();
 
   /**
    * @type {string[]}
@@ -18,20 +18,20 @@ const combineCoverage = (paramsRaw = {}) => {
     cwd,
     onlyFiles: true,
     absolute: true,
-  })
+  });
 
-  const coverageData = filePaths.map(filePath => require(filePath))
+  const coverageData = filePaths.map(filePath => require(filePath));
 
-  const map = libCoverage.createCoverageMap()
+  const map = libCoverage.createCoverageMap();
   for (const data of coverageData) {
-    map.merge(data)
+    map.merge(data);
   }
 
-  const reporter = createReporter()
-  reporter.addAll(['json', 'lcov', 'text'])
-  reporter.write(map)
-}
+  const reporter = createReporter();
+  reporter.addAll(['json', 'lcov', 'text']);
+  reporter.write(map);
+};
 
 module.exports = {
   combineCoverage,
-}
+};

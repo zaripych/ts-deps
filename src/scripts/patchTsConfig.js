@@ -1,11 +1,11 @@
 // @ts-check
-const { tsConfig, tsConfigDeclarations } = require('../config/tsconfig')
-const deepmerge = require('deepmerge')
+const { tsConfig, tsConfigDeclarations } = require('../config/tsconfig');
+const deepmerge = require('deepmerge');
 
 const defaultDeps = Object.freeze({
   tsConfig,
   tsConfigDeclarations,
-})
+});
 
 /**
  *
@@ -19,23 +19,23 @@ const patchTsConfigCore = async (
     ...(baseTsConfigLocation && {
       baseConfigLocation: baseTsConfigLocation,
     }),
-  }
+  };
 
   const config = declarations
     ? deps.tsConfigDeclarations(tsParams)
-    : deps.tsConfig(tsParams)
+    : deps.tsConfig(tsParams);
 
   const result = aggressive
     ? config
     : deepmerge(oldConfig, config, {
         arrayMerge: (_target, source) => source,
-      })
+      });
 
-  return result
-}
+  return result;
+};
 
-patchTsConfigCore.defaultDeps = defaultDeps
+patchTsConfigCore.defaultDeps = defaultDeps;
 
 module.exports = {
   patchTsConfigCore,
-}
+};
