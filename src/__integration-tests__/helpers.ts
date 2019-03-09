@@ -8,7 +8,7 @@ import {
   createReadStream,
   mkdir,
 } from 'fs-extra'
-import { resolve, join, normalize, relative, isAbsolute } from 'path'
+import { resolve, join, normalize, relative } from 'path'
 import fg from 'fast-glob'
 import { extract } from 'tar-fs'
 import { createGunzip } from 'zlib'
