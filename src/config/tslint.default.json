@@ -22,7 +22,8 @@
     ],
     "no-unsafe-any": true,
     "no-any": true,
-    "await-promise": true
+    "await-promise": true,
+    "no-floating-promises": true
   },
   "linterOptions": {
     "exclude": ["src/**/*.test.*"]

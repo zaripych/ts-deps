@@ -2,12 +2,8 @@
   "extends": "./src/config/tsconfig.default.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "@zaripych/ts-deps": ["./src"],
-      "@zaripych/ts-deps/*": ["./src/*"]
-    },
+    "paths": { "ts-deps": ["./src"], "ts-deps/*": ["./src/*"] },
     "outDir": "lib"
   },
-  "include": ["src"],
-  "exclude": ["./test-sources/**/*.*"]
+  "include": ["src"]
 }

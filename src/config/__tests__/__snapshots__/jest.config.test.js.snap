@@ -15,6 +15,7 @@ Object {
   "coverageReporters": Array [
     "json",
     "lcov",
+    "text",
   ],
   "globals": Object {
     "INTEGRATION_TEST": false,
@@ -64,6 +65,7 @@ Object {
   "coverageReporters": Array [
     "json",
     "lcov",
+    "text",
   ],
   "globals": Object {
     "INTEGRATION_TEST": false,
@@ -113,6 +115,7 @@ Object {
   "coverageReporters": Array [
     "json",
     "lcov",
+    "text",
   ],
   "globals": Object {
     "INTEGRATION_TEST": false,

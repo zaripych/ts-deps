@@ -1,5 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`given declarations should work 1`] = `
+Object {
+  "compilerOptions": Object {
+    "allowJs": false,
+    "baseUrl": ".",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "outDir": "lib",
+    "paths": Object {
+      "@shared": Array [
+        "../../long/path/src",
+      ],
+      "@shared/*": Array [
+        "../../long/path/src/*",
+      ],
+    },
+  },
+  "exclude": Array [
+    "src/**/__tests__/**",
+    "src/__integration-tests__/**",
+  ],
+  "extends": "node_modules/my-custom-lib/tsconfig.json",
+  "include": Array [
+    "src",
+  ],
+}
+`;
+
 exports[`given no options should work 1`] = `
 Object {
   "compilerOptions": Object {

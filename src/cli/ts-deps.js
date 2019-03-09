@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('../scripts/cli')
+require('../scripts/cli');

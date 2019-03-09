@@ -4,8 +4,5 @@ lib
 node_modules
 .jest-cache
 yarn-error.log
-zaripych-ts-deps*.tgz
-ts-deps*.tgz
-integration-test-*
 package
 .pnp

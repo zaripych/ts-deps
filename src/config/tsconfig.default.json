@@ -23,7 +23,8 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": false,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "noEmit": true
   },
   "compileOnSave": false
 }
