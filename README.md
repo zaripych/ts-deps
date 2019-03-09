@@ -12,6 +12,8 @@
 
 ## the single dev dependency for your simple TypeScript Node projects
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/zaripych/ts-deps.svg)](https://greenkeeper.io/)
+
 ### Installation
 
 ```
