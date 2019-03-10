@@ -86,7 +86,7 @@
     "yargs": "13.2.2"
   },
   "devDependencies": {
-    "@types/node": "11.11.0",
+    "@types/node": "8.10.43",
     "@types/prettier": "1.16.1",
     "@types/tar-fs": "1.16.1",
     "tar-fs": "2.0.0"
