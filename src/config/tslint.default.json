@@ -23,7 +23,8 @@
     "no-unsafe-any": true,
     "no-any": true,
     "await-promise": true,
-    "no-floating-promises": true
+    "no-floating-promises": true,
+    "no-restricted-globals": [true, "name", "length", "event"]
   },
   "linterOptions": {
     "exclude": ["src/**/*.test.*"]
