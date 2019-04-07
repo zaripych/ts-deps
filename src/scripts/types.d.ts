@@ -11,19 +11,26 @@ type BabelBuildParams = Partial<{
   copyAdditional: string[];
 }>;
 
+type TemplateInfo = {
+  type: 'directory' | 'package' | 'default';
+  dir: string;
+};
+
 type PatchParams = Partial<{
-  templatesDir: string;
+  template: string;
   forceOverwrites: boolean;
   aggressive: boolean;
   baseTsConfigLocation: string;
   patchOnly: string[];
-  shouldPromptToOverwritePackageJson: boolean;
   cwd: string;
+
+  initializedTemplates: TemplateInfo[];
 }>;
 
 type InitParams = Partial<{
-  forceOverwrites: boolean;
+  template: string;
   cwd: string;
+  force: boolean;
 }>;
 
 type PatchPackageJson = Partial<{

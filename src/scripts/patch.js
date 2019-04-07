@@ -3,7 +3,7 @@
 const { resolve, extname, join } = require('path');
 const { readFile, writeFile, pathExists } = require('fs-extra');
 const { format, resolveConfig } = require('prettier');
-const { resolveTemplatesDir, promptForOverwrite } = require('../helpers');
+const { initializeTemplates, promptForOverwrite } = require('../helpers');
 const { options } = require('../options');
 const { patchPackageJsonCore } = require('./patchPackage');
 const { patchTsConfigCore } = require('./patchTsConfig');
@@ -69,6 +69,11 @@ const patchTsConfig = async ({
 const patchGitignore = async ({ toPatch, templatesDir }) => {
   const templateGitignorePath = join(templatesDir, 'to-process', 'gitignore');
 
+  const sourceExists = await pathExists(templateGitignorePath);
+  if (!sourceExists) {
+    return toPatch;
+  }
+
   const newText = await readFile(templateGitignorePath, { encoding: 'utf-8' });
 
   const result = await patchText({
@@ -90,21 +95,45 @@ const promptForOverwriteBeforePatch = async dest => {
 };
 
 /**
- * @param {PatchParams} paramsRaw
+ * @param {TemplateInfo} template
+ * @param {PatchParams} params
  */
-const patch = async (paramsRaw = {}) => {
-  const opts = options();
-  const {
-    templatesDir = resolveTemplatesDir(),
-    shouldPromptToOverwritePackageJson = true,
-    forceOverwrites = false,
-    baseTsConfigLocation = opts.baseTsConfigLocation,
-    patchOnly = opts.patchOnly || [],
-    aggressive = false,
-    cwd = process.cwd(),
-  } = paramsRaw;
+const buildPatcherPerTemplate = (template, params) => {
+  return [
+    {
+      file: PKG_JSON,
+      /**
+       * @param {string|undefined} toPatch
+       */
+      contents: async toPatch =>
+        await patchPackageJson({
+          toPatch,
+          templatesDir: template.dir,
+          aggressive: params.aggressive,
+        }),
+    },
+    {
+      file: '.gitignore',
+      /**
+       * @param {string|undefined} toPatch
+       */
+      contents: async toPatch =>
+        await patchGitignore({
+          toPatch,
+          templatesDir: template.dir,
+        }),
+    },
+  ];
+};
 
-  const patchers = [
+/**
+ * @param {TemplateInfo[]} templates
+ * @param {PatchParams} params
+ */
+const buildPatchers = (templates, params) => {
+  const { baseTsConfigLocation, aggressive } = params;
+
+  const defaultPatchers = [
     {
       file: 'tsconfig.json',
       /**
@@ -130,44 +159,69 @@ const patch = async (paramsRaw = {}) => {
           declarations: true,
         }),
     },
-    {
-      file: PKG_JSON,
-      /**
-       * @param {string|undefined} toPatch
-       */
-      contents: async toPatch =>
-        await patchPackageJson({
-          toPatch,
-          templatesDir,
-          aggressive,
-        }),
-    },
-    {
-      file: '.gitignore',
-      /**
-       * @param {string|undefined} toPatch
-       */
-      contents: async toPatch =>
-        await patchGitignore({
-          toPatch,
-          templatesDir,
-        }),
-    },
   ];
 
-  const config = await resolveConfig(join(cwd, './package.json'));
-  const extensionsToFormat = ['.js', '.ts', '.json', '.jsx', '.tsx'];
+  return [
+    ...defaultPatchers,
+    ...templates
+      .map(template => buildPatcherPerTemplate(template, params))
+      .reduce((acc, patchers) => [...acc, ...patchers], []),
+  ];
+};
+
+/**
+ * @param {string|undefined} unformattedContents
+ * @param {string} fullPath
+ * @param {{}|null} prettierConfig
+ */
+const prettierFormat = (unformattedContents, fullPath, prettierConfig) => {
+  const ext = extname(fullPath);
+  const prettierExtensionsToFormat = ['.js', '.ts', '.json', '.jsx', '.tsx'];
+
+  if (unformattedContents && prettierExtensionsToFormat.includes(ext)) {
+    return format(unformattedContents, {
+      ...prettierConfig,
+      ...(ext === '.json' && { parser: 'json' }),
+    });
+  } else {
+    return unformattedContents;
+  }
+};
+
+/**
+ * @param {PatchParams} paramsRaw
+ */
+const patch = async (paramsRaw = {}) => {
+  const cwd = paramsRaw.cwd || process.cwd();
+  const opts = options(cwd);
+
+  const params = {
+    cwd,
+    aggressive: false,
+    patchOnly: opts.patchOnly || [],
+    baseTsConfigLocation: opts.baseTsConfigLocation,
+    forceOverwrites: false,
+    ...paramsRaw,
+  };
+
+  const templates =
+    params.initializedTemplates ||
+    (await initializeTemplates(params.template, params.cwd));
+
+  const patchers = buildPatchers(templates, params);
+
+  const prettierConfig = await resolveConfig(
+    join(params.cwd, './package.json')
+  );
 
   for (const item of patchers) {
-    if (Array.isArray(patchOnly) && patchOnly.length > 0) {
-      if (!patchOnly.includes(item.file)) {
+    if (Array.isArray(params.patchOnly) && params.patchOnly.length > 0) {
+      if (!params.patchOnly.includes(item.file)) {
         continue;
       }
     }
 
-    const fullPath = resolve(join(cwd, item.file));
-
-    const ext = extname(fullPath);
+    const fullPath = resolve(join(params.cwd, item.file));
 
     const oldContents = await readFile(fullPath, { encoding: 'utf-8' }).catch(
       () => Promise.resolve(undefined)
@@ -175,26 +229,18 @@ const patch = async (paramsRaw = {}) => {
 
     const unformattedContents = await item.contents(oldContents);
 
-    const newContents =
-      extensionsToFormat.includes(ext) && unformattedContents
-        ? format(unformattedContents, {
-            ...config,
-            ...(ext === '.json' && { parser: 'json' }),
-          })
-        : unformattedContents;
+    const newContents = prettierFormat(
+      unformattedContents,
+      fullPath,
+      prettierConfig
+    );
 
     const prompt = async () => {
-      if (forceOverwrites) {
+      if (params.forceOverwrites) {
         return true;
       }
 
-      if (item.file === PKG_JSON) {
-        return shouldPromptToOverwritePackageJson
-          ? promptForOverwriteBeforePatch(fullPath)
-          : true;
-      } else {
-        return promptForOverwriteBeforePatch(fullPath);
-      }
+      return promptForOverwriteBeforePatch(fullPath);
     };
 
     if (oldContents !== newContents) {
@@ -220,18 +266,23 @@ const patch = async (paramsRaw = {}) => {
  * @param {import('yargs').Arguments} args
  */
 async function patchHandler(args) {
-  await patch({
-    ...(typeof args.interactive === 'boolean' && {
-      forceOverwrites: !args.interactive,
-    }),
-    ...(typeof args.only === 'string' && {
-      patchOnly: [args.only],
-    }),
-    ...(typeof args.only !== 'string' &&
-      Array.isArray(args.only) && {
-        patchOnly: args.only,
+  try {
+    await patch({
+      ...(typeof args.interactive === 'boolean' && {
+        forceOverwrites: !args.interactive,
       }),
-  });
+      ...(typeof args.only === 'string' && {
+        patchOnly: [args.only],
+      }),
+      ...(typeof args.only !== 'string' &&
+        Array.isArray(args.only) && {
+          patchOnly: args.only,
+        }),
+    });
+  } catch (err) {
+    console.error('💥  ', err);
+    process.exit(1);
+  }
 }
 
 const patchCliModule = {

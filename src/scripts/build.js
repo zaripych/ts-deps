@@ -37,7 +37,7 @@ async function babelBuild({
   rootDir = defaults.rootDir,
   unitTestsGlob = defaults.unitTestsGlob,
   integrationTestsGlob = defaults.integrationTestsGlob,
-  copyAdditional = defaults.copyAdditionalFilesAfterBabel,
+  copyAdditional = defaults.copyAdditional,
 } = {}) {
   const exts = extensions.map(ext => `.${ext}`).join(',');
 
@@ -51,7 +51,7 @@ async function babelBuild({
   if (!isHelpNeeded && !skipCopying && copyAdditional.length > 0) {
     console.log();
     console.log(
-      'Copying files not-transformed by babel',
+      '🚚  Copying files not-transformed by babel',
       copyAdditional.join(','),
       'from',
       rootDir
@@ -72,7 +72,7 @@ async function babelBuild({
       })
     );
 
-    console.log('Successfully copied', files.length, 'files');
+    console.log('✔  Successfully copied', files.length, 'files');
     console.log('');
   }
 
@@ -93,20 +93,20 @@ async function babelBuild({
         ...optionalArg(
           ['--ignore'],
           doNotOutputTests
-            ? [`"${unitTestsGlob}"`, `"${integrationTestsGlob}"`]
+            ? [`${unitTestsGlob}`, `${integrationTestsGlob}`]
             : []
         ),
         ...args,
       ];
 
   if (logCommandLine) {
-    console.log('babel', spawnArgs.join(' '));
+    console.log('🚀  babel', spawnArgs.join(' '));
   }
 
   const babelProc = spawn('babel', spawnArgs, {
     env: process.env,
     stdio: 'inherit',
-    shell: true,
+    shell: process.platform === 'win32',
   });
 
   const waitForBabel = new Promise((res, _rej) => {

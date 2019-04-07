@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`npmPullTemplate given fresh directory should output correct files 1`] = `
+Array [
+  "to-copy/",
+  "to-copy/.yarnrc",
+  "to-copy/babel.config.js",
+  "to-copy/commitlint.config.js",
+  "to-copy/jest.config.integration.js",
+  "to-copy/jest.config.js",
+  "to-copy/prettier.config.js",
+  "to-copy/release.config.js",
+  "to-copy/scripts/",
+  "to-copy/scripts/build.js",
+  "to-copy/scripts/clean.js",
+  "to-copy/scripts/combineCoverage.js",
+  "to-copy/tslint.json",
+  "to-process/",
+  "to-process/gitignore",
+  "to-process/package.json",
+]
+`;

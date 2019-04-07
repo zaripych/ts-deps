@@ -28,15 +28,15 @@ describe('patch', () => {
       spawnAndCheck('npm', ['init', '-y'], {
         cwd: initDir,
       });
+    });
 
+    it('should output correct files', async () => {
       await patch({
         forceOverwrites: true,
         patchOnly: [],
         cwd: initDir,
       });
-    });
 
-    it('should output correct files', async () => {
       const contents = await sortedDirectoryContents(initDir, [
         '**',
         '!node_modules/**',

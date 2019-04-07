@@ -4,21 +4,21 @@ interface IOptions {
    * and relative-to-root directory location the module maps to
    */
   aliases?: {
-    [moduleId: string]: string
-  }
+    [moduleId: string]: string;
+  };
 
   /**
    * Minimum version of the node we want to support (defaults to 8.12)
    */
-  nodeVersion?: string
+  nodeVersion?: string;
 
   /**
    * Specify exact files to patch when `ts-deps patch` is run
    */
-  patchOnly?: string[]
+  patchOnly?: string[];
 
   /**
    * Location of the ts config we should extend from
    */
-  baseTsConfigLocation?: string
+  baseTsConfigLocation?: string;
 }

@@ -1,30 +1,35 @@
 // @ts-check
-const { existsSync } = require('fs')
-const { resolve } = require('path')
-const { optionsFileName } = require('./defaults')
+const { existsSync } = require('fs');
+const { resolve } = require('path');
+const { optionsFileName } = require('./defaults');
 
 /**
  * @type {IOptions | null}
  */
-let opts = null
+let opts = null;
 
 /**
+ * @param {string|undefined} cwd
  * @returns {IOptions}
  */
-function options() {
+function options(cwd = process.cwd()) {
   if (opts) {
-    return opts
+    return opts;
   }
-  const path = resolve(optionsFileName)
-  const exists = existsSync(path)
+
+  const path = resolve(cwd, optionsFileName);
+
+  const exists = existsSync(path);
 
   if (exists) {
-    return (opts = require(path))
+    opts = require(path);
   } else {
-    return {}
+    opts = {};
   }
+
+  return opts || {};
 }
 
 module.exports = {
   options,
-}
+};

@@ -1,4 +1,6 @@
 // @ts-check
-const { clean } = require('ts-deps')
+'use strict';
 
-clean()
+const { clean } = require('ts-deps');
+
+clean();

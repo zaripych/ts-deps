@@ -8,6 +8,7 @@ Array [
   "src/__tests__/",
   "src/__tests__/max.test.ts",
   "src/__tests__/min.test.js",
+  "src/__tests__/test.d.ts",
   "src/index.ts",
   "src/max/",
   "src/max/index.d.ts",
