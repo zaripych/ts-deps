@@ -1,5 +1,5 @@
-'use strict'
+'use strict';
 
-const { babelConfig } = require('ts-deps')
+const { babelConfig } = require('ts-deps');
 
-module.exports = babelConfig()
+module.exports = babelConfig();

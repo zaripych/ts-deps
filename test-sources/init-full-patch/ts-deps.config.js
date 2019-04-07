@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   aliases: {
     '@max': './src/max',

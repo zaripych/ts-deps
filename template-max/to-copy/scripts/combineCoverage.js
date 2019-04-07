@@ -1,4 +1,6 @@
 // @ts-check
-const { combineCoverage } = require('ts-deps')
+'use strict';
 
-combineCoverage()
+const { combineCoverage } = require('ts-deps');
+
+combineCoverage();

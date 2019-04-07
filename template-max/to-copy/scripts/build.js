@@ -1,4 +1,6 @@
 // @ts-check
-const { babelBuild } = require('ts-deps')
+'use strict';
 
-babelBuild()
+const { babelBuild } = require('ts-deps');
+
+babelBuild();
