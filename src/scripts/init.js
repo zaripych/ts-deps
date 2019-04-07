@@ -98,10 +98,11 @@ const errorIfNotEmpty = async (cwd, force) => {
 
   if (dirContentsFiltered.length > 0) {
     if (!currentDirectoryContents.includes('.git')) {
-      throw new Error(
+      console.log(
         '🚨  Oops. It seems that current directory contains files other than package.json but git is not initialized. ' +
           'The init command overwrites files, so it is recommended to initialize a git repository for backup.'
       );
+      throw new Error('Current directory not quite empty');
     }
 
     const untrackedFilesCmd = spawnSync(
@@ -118,10 +119,11 @@ const errorIfNotEmpty = async (cwd, force) => {
       untrackedFilesCmd.stdout &&
       untrackedFilesCmd.stdout.trim().length > 0
     ) {
-      throw new Error(
+      console.log(
         '🚨  Oops. It seems that current directory contains untracked files. ' +
           'The init command overwrites files, so it is recommended to at least stage current changes in git before initializing.'
       );
+      throw new Error('Current directory not quite empty');
     }
   }
 };

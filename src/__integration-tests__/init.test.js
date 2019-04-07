@@ -25,8 +25,6 @@ describe('init', () => {
     });
 
     it('should output correct files', async () => {
-      console.log('initDir', initDir);
-
       await init({
         cwd: initDir,
       });

@@ -51,7 +51,7 @@ async function babelBuild({
   if (!isHelpNeeded && !skipCopying && copyAdditional.length > 0) {
     console.log();
     console.log(
-      'Copying files not-transformed by babel',
+      '🚚  Copying files not-transformed by babel',
       copyAdditional.join(','),
       'from',
       rootDir
@@ -72,7 +72,7 @@ async function babelBuild({
       })
     );
 
-    console.log('Successfully copied', files.length, 'files');
+    console.log('✔  Successfully copied', files.length, 'files');
     console.log('');
   }
 
@@ -100,7 +100,7 @@ async function babelBuild({
       ];
 
   if (logCommandLine) {
-    console.log('babel', spawnArgs.join(' '));
+    console.log('🚀  babel', spawnArgs.join(' '));
   }
 
   const babelProc = spawn('babel', spawnArgs, {

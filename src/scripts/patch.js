@@ -214,8 +214,6 @@ const patch = async (paramsRaw = {}) => {
     join(params.cwd, './package.json')
   );
 
-  console.log('params.patchOnly', params.patchOnly);
-
   for (const item of patchers) {
     if (Array.isArray(params.patchOnly) && params.patchOnly.length > 0) {
       if (!params.patchOnly.includes(item.file)) {
