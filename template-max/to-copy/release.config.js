@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   plugins: [
     '@semantic-release/commit-analyzer',
@@ -13,4 +15,4 @@ module.exports = {
     ],
     '@semantic-release/github',
   ],
-}
+};

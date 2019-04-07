@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "custom": "echo This is custom template addition"
+  },
+  "dependencies": {
+    "express": "latest"
+  }
+}

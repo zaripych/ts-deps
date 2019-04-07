@@ -1,6 +1,6 @@
 {
   "name": "ts-deps",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "TypeScript related dependencies and libraries to setup/scaffold typical build/lint/format/test pipeline and CI/CD pipeline using babel, jest, prettier, tslint and semantic-release. Meant to be added as dev dependency.",
   "main": "lib/index.js",
   "scripts": {
@@ -59,7 +59,6 @@
     "@commitlint/cli": "7.5.2",
     "@commitlint/config-conventional": "7.5.0",
     "@semantic-release/exec": "3.3.2",
-    "@semantic-release/git": "7.0.8",
     "@types/fs-extra": "5.0.5",
     "@types/inquirer": "6.0.0",
     "@types/jest": "24.0.11",
@@ -78,18 +77,18 @@
     "pretty-quick": "1.10.0",
     "rxjs": "6.4.0",
     "rxjs-tslint-rules": "4.19.0",
-    "semantic-release": "15.13.3",
+    "semantic-release": "16.0.0-beta.18",
     "source-map-support": "0.5.11",
     "tslint": "5.13.1",
     "tslint-config-prettier": "1.18.0",
     "typescript": "3.3.3333",
-    "yargs": "13.2.2"
+    "yargs": "13.2.2",
+    "tar-fs": "2.0.0"
   },
   "devDependencies": {
     "@types/node": "8.10.43",
     "@types/prettier": "1.16.1",
-    "@types/tar-fs": "1.16.1",
-    "tar-fs": "2.0.0"
+    "@types/tar-fs": "1.16.1"
   },
   "engines": {
     "node": ">= 8.12"

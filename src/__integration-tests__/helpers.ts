@@ -45,7 +45,7 @@ export const spawnAndCheck = (
 
   const effectiveOpts = {
     ...opts,
-    shell: true,
+    shell: process.platform === 'win32',
     encoding: 'utf-8',
   };
 
@@ -107,7 +107,7 @@ export const buildAndPack = async () => {
 
   spawnAndCheck('yarn', ['build'], {
     cwd: ROOT,
-    shell: true,
+    shell: process.platform === 'win32',
   });
 
   const packageName = `${ARCH_PKG_FILE_NAME}-v${version}.tgz`;
@@ -117,7 +117,7 @@ export const buildAndPack = async () => {
 
   spawnAndCheck('yarn', ['pack'], {
     cwd: ROOT,
-    shell: true,
+    shell: process.platform === 'win32',
   });
 
   return { packageName, packageLocation, version };

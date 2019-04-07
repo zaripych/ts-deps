@@ -1,15 +1,23 @@
 // @ts-check
 const { spawnSync } = require('child_process');
-const { existsSync, copy, pathExists, stat, ensureDir } = require('fs-extra');
+const {
+  existsSync,
+  copy,
+  pathExists,
+  stat,
+  ensureDir,
+  remove,
+  readdir,
+} = require('fs-extra');
 const { resolve, join } = require('path');
 const { patch } = require('./patch');
-const { resolveTemplatesDir, promptForOverwrite } = require('../helpers');
+const { initializeTemplates } = require('../helpers');
 const yargs = require('yargs');
 
-const PCG_JSON = 'package.json';
+const PKG_JSON = 'package.json';
 
 const npmInitIfRequired = async () => {
-  const packageJsonPath = resolve(PCG_JSON);
+  const packageJsonPath = resolve(PKG_JSON);
 
   const exists = await pathExists(packageJsonPath);
   if (exists) {
@@ -18,8 +26,8 @@ const npmInitIfRequired = async () => {
 
   const initProcessResult = spawnSync('npm', ['init'], {
     stdio: 'inherit',
-    encoding: 'utf-8',
-    shell: true,
+    encoding: 'utf8',
+    shell: process.platform === 'win32',
   });
 
   if (initProcessResult.status !== 0) {
@@ -34,42 +42,30 @@ const npmInitIfRequired = async () => {
 };
 
 /**
- * @param {{ templatesDir: string, currentDir: string, forceOverwrites: boolean }} param0
+ * @param {{ templateDirs: string[], currentDir: string }} param0
  */
-const copyFromTemplates = async ({
-  templatesDir,
-  currentDir,
-  forceOverwrites,
-}) => {
-  const toCopyDir = join(templatesDir, 'to-copy');
+const copyFromTemplates = async ({ templateDirs, currentDir }) => {
+  for (const templateDir of templateDirs) {
+    const toCopyDir = join(templateDir, 'to-copy');
 
-  await copy(toCopyDir, currentDir, {
-    filter: async (_src, dest) => {
-      const destStats = await stat(dest).catch(() => Promise.resolve(null));
-      if (destStats && destStats.isDirectory()) {
+    await copy(toCopyDir, currentDir, {
+      filter: async (_src, dest) => {
+        const destStats = await stat(dest).catch(() => Promise.resolve(null));
+        if (destStats && destStats.isDirectory()) {
+          return true;
+        }
+
+        if (dest !== currentDir) {
+          console.log('init: writing', dest);
+        }
+
         return true;
-      }
+      },
+      overwrite: true,
+    });
+  }
 
-      if (dest !== currentDir) {
-        console.log('init: writing', dest);
-      }
-
-      if (
-        dest === currentDir ||
-        forceOverwrites ||
-        promptForOverwrite.state.overwriteAll
-      ) {
-        return Promise.resolve(true);
-      }
-
-      return pathExists(dest).then(exists =>
-        exists ? promptForOverwrite(dest) : Promise.resolve(true)
-      );
-    },
-    overwrite: true,
-  });
-
-  const directories = [
+  const dirsToCreate = [
     //
     'src',
     'src/__tests__',
@@ -77,56 +73,115 @@ const copyFromTemplates = async ({
   ];
 
   await Promise.all(
-    directories
+    dirsToCreate
       .map(dir => join(currentDir, dir))
       .map(dir => ensureDir(dir).catch(() => Promise.resolve()))
   );
 };
 
 /**
- * @param {InitParams} param0
+ * @param {string} cwd
+ * @param {boolean | undefined} force
  */
-const init = async ({ forceOverwrites = false, cwd = process.cwd() } = {}) => {
-  try {
-    const currentDir = resolve(cwd);
-    const templatesDir = resolveTemplatesDir();
+const errorIfNotEmpty = async (cwd, force) => {
+  if (force) {
+    return;
+  }
 
-    const pkgCreated = await npmInitIfRequired();
+  const ignoreFiles = ['package.json'];
 
-    const copyTemplates = () =>
-      copyFromTemplates({
-        templatesDir,
-        currentDir,
-        forceOverwrites,
-      });
+  const currentDirectoryContents = await readdir(cwd);
 
-    const generate = () =>
-      patch({
-        templatesDir,
-        shouldPromptToOverwritePackageJson: !pkgCreated,
-        forceOverwrites,
-        cwd: currentDir,
-        aggressive: true,
-      });
+  const dirContentsFiltered = currentDirectoryContents.filter(
+    item => !item.startsWith('.') && !ignoreFiles.includes(item)
+  );
 
-    await copyTemplates();
+  if (dirContentsFiltered.length > 0) {
+    if (!currentDirectoryContents.includes('.git')) {
+      throw new Error(
+        '🚨  Oops. It seems that current directory contains files other than package.json but git is not initialized. ' +
+          'The init command overwrites files, so it is recommended to initialize a git repository for backup.'
+      );
+    }
 
-    await generate();
-  } catch (exc) {
-    console.error('Sorry, but something went wrong', exc);
-    process.exit(-1);
+    const untrackedFilesCmd = spawnSync(
+      'git',
+      ['ls-files', '--other', '--directory', '--exclude-standard'],
+      {
+        cwd,
+        encoding: 'utf8',
+        shell: process.platform === 'win32',
+      }
+    );
+
+    if (
+      untrackedFilesCmd.stdout &&
+      untrackedFilesCmd.stdout.trim().length > 0
+    ) {
+      throw new Error(
+        '🚨  Oops. It seems that current directory contains untracked files. ' +
+          'The init command overwrites files, so it is recommended to at least stage current changes in git before initializing.'
+      );
+    }
   }
 };
 
 /**
- * @param {import('yargs').Arguments<{ force: boolean }>} args
+ * @param {InitParams} param0
+ */
+const init = async ({ cwd = process.cwd(), template, force } = {}) => {
+  const currentDir = resolve(cwd);
+
+  await errorIfNotEmpty(currentDir, force);
+
+  const templates = await initializeTemplates(template, currentDir);
+
+  await npmInitIfRequired();
+
+  const copyTemplates = () =>
+    copyFromTemplates({
+      templateDirs: templates.map(item => item.dir),
+      currentDir,
+    });
+
+  const generate = () =>
+    patch({
+      initializedTemplates: templates,
+      cwd: currentDir,
+      forceOverwrites: true,
+      aggressive: true,
+    });
+
+  await copyTemplates();
+
+  await generate();
+
+  if (template) {
+    for (const tmplt of templates) {
+      if (tmplt.type === 'package') {
+        await remove(join(currentDir, tmplt.dir));
+      }
+    }
+  }
+};
+
+/**
+ * @param {import('yargs').Arguments<{ force: boolean, template?: string }>} args
  */
 async function initHandler(args) {
-  await init({
-    ...(typeof args.force === 'boolean' && {
-      forceOverwrites: args.force,
-    }),
-  });
+  try {
+    await init({
+      ...(args.template && {
+        template: args.template,
+      }),
+      ...(typeof args.force === 'boolean' && {
+        force: args.force,
+      }),
+    });
+  } catch (err) {
+    console.error('💥  ', err);
+    process.exit(1);
+  }
 }
 
 const initCliModule = {
@@ -136,15 +191,22 @@ const initCliModule = {
    */
   builder: y =>
     y
-      .boolean('force')
-      .describe('force', 'Force overwrite/patch all files')
-      .default('force', false),
+      .option('template', {
+        string: true,
+        description:
+          'Name of the package to use as template, or path to a template directory',
+      })
+      .option('force', {
+        boolean: true,
+        default: false,
+        description: 'Disable non-empty directory warning',
+      }),
   /**
-   * @param {import('yargs').Arguments<{ force: boolean }>} args
+   * @param {import('yargs').Arguments<{ force: boolean, template?: string }>} args
    */
   handler: initHandler,
   describe:
-    "Initialize new package, or integrate with existing package - the cli will ask to overwrite/patch files unless '--force' flag is passed",
+    'Initialize new package, or integrate with existing package - the cli will overwrite existing files',
 };
 
 async function initCli() {

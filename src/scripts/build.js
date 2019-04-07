@@ -37,7 +37,7 @@ async function babelBuild({
   rootDir = defaults.rootDir,
   unitTestsGlob = defaults.unitTestsGlob,
   integrationTestsGlob = defaults.integrationTestsGlob,
-  copyAdditional = defaults.copyAdditionalFilesAfterBabel,
+  copyAdditional = defaults.copyAdditional,
 } = {}) {
   const exts = extensions.map(ext => `.${ext}`).join(',');
 
@@ -106,7 +106,7 @@ async function babelBuild({
   const babelProc = spawn('babel', spawnArgs, {
     env: process.env,
     stdio: 'inherit',
-    shell: true,
+    shell: process.platform === 'win32',
   });
 
   const waitForBabel = new Promise((res, _rej) => {
