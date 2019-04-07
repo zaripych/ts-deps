@@ -93,7 +93,7 @@ async function babelBuild({
         ...optionalArg(
           ['--ignore'],
           doNotOutputTests
-            ? [`"${unitTestsGlob}"`, `"${integrationTestsGlob}"`]
+            ? [`${unitTestsGlob}`, `${integrationTestsGlob}`]
             : []
         ),
         ...args,
