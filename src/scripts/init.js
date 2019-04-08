@@ -88,7 +88,13 @@ const errorIfNotEmpty = async (cwd, force) => {
     return;
   }
 
-  const ignoreFiles = ['package.json'];
+  // a minimum set of files that are safe
+  const ignoreFiles = [
+    'package.json',
+    'yarn.lock',
+    'package-lock.json',
+    'node_modules',
+  ];
 
   const currentDirectoryContents = await readdir(cwd);
 
