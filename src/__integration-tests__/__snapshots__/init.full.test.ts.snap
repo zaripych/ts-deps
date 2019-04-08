@@ -4,17 +4,23 @@ exports[`init given fresh directory after init should build and test and lint 1`
 Array [
   "index.d.ts",
   "index.js",
+  "index.js.map",
   "max/",
   "max/index.d.ts",
   "max/index.js",
+  "max/index.js.map",
   "max/max.d.ts",
   "max/max.js",
+  "max/max.js.map",
   "min/",
   "min/index.d.ts",
   "min/index.js",
+  "min/index.js.map",
   "min/min.js",
+  "min/min.js.map",
   "other.d.ts",
   "other.js",
+  "other.js.map",
 ]
 `;
 
