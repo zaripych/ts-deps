@@ -78,7 +78,7 @@
     "rxjs": "6.4.0",
     "rxjs-tslint-rules": "4.19.1",
     "semantic-release": "16.0.0-beta.18",
-    "source-map-support": "0.5.11",
+    "source-map-support": "0.5.12",
     "tar-fs": "2.0.0",
     "tslint": "5.15.0",
     "tslint-config-prettier": "1.18.0",
