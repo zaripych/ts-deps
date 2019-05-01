@@ -19,5 +19,8 @@
       "pre-commit": "pretty-quick --staged",
       "pre-push": "npm run check"
     }
+  },
+  "devDependencies": {
+    "husky": "2.1.0"
   }
 }
