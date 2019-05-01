@@ -70,12 +70,10 @@
     "deepmerge": "3.2.0",
     "fast-glob": "2.2.6",
     "fs-extra": "7.0.1",
-    "husky": "2.1.0",
     "inquirer": "6.3.1",
     "jest": "24.7.1",
     "prettier": "1.17.0",
     "pretty-quick": "1.10.0",
-    "rxjs": "6.5.1",
     "rxjs-tslint-rules": "4.23.1",
     "semantic-release": "16.0.0-beta.18",
     "source-map-support": "0.5.12",
@@ -87,6 +85,7 @@
   },
   "devDependencies": {
     "@types/node": "8.10.43",
+    "husky": "2.1.0",
     "@types/prettier": "1.16.2",
     "@types/tar-fs": "1.16.1"
   },
