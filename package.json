@@ -85,7 +85,7 @@
   },
   "devDependencies": {
     "@types/node": "8.10.43",
-    "husky": "2.1.0",
+    "husky": "2.2.0",
     "@types/prettier": "1.16.2",
     "@types/tar-fs": "1.16.1"
   },
