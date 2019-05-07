@@ -65,7 +65,7 @@
     "@types/yargs": "13.0.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-plugin-module-resolver": "3.2.0",
-    "commitlint": "7.5.2",
+    "commitlint": "7.6.0",
     "concurrently": "4.1.0",
     "deepmerge": "3.2.0",
     "fast-glob": "2.2.6",
