@@ -71,7 +71,7 @@
     "fast-glob": "2.2.6",
     "fs-extra": "7.0.1",
     "inquirer": "6.3.1",
-    "istanbul-api": "2.1.6",
+    "istanbul-api": "3.0.0",
     "jest": "24.8.0",
     "prettier": "1.17.0",
     "pretty-quick": "1.10.0",
