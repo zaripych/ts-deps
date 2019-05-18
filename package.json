@@ -68,7 +68,7 @@
     "commitlint": "7.5.2",
     "concurrently": "4.1.0",
     "deepmerge": "3.2.0",
-    "fast-glob": "2.2.6",
+    "fast-glob": "2.2.7",
     "fs-extra": "7.0.1",
     "inquirer": "6.3.1",
     "istanbul-api": "2.1.6",
