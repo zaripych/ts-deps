@@ -73,7 +73,7 @@
     "inquirer": "6.3.1",
     "istanbul-api": "2.1.6",
     "jest": "24.8.0",
-    "prettier": "1.17.0",
+    "prettier": "1.17.1",
     "pretty-quick": "1.10.0",
     "rxjs-tslint-rules": "4.23.2",
     "semantic-release": "16.0.0-beta.18",
