@@ -180,7 +180,7 @@ export const sortedDirectoryContents = async (
   directory: string,
   patterns: string[] = ['**', '!node_modules/**', '!.git/**']
 ) => {
-  const results = await fg<string>(patterns, {
+  const results = await fg(patterns, {
     cwd: directory,
     unique: true,
     markDirectories: true,
