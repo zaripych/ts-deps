@@ -30,7 +30,7 @@ const npmInitIfRequired = async () => {
     shell: process.platform === 'win32',
   });
 
-  if (initProcessResult.status !== 0) {
+  if (initProcessResult.status) {
     process.exit(initProcessResult.status);
   }
 
