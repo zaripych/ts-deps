@@ -9,7 +9,7 @@ if: tag IS blank
 stages:
   - name: test and lint
   - name: deploy
-    if: (branch IN (master, alpha) OR branch =~ /^(\d+.x)|(\d+.x.x)|(\d+.\d+.x)$/ ) AND type != pull_request
+    if: type != pull_request AND (branch IN (master, alpha) OR branch =~ /^\d+.x$|^\d+.x.x$|^\d+.\d+.x$/)
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
@@ -19,16 +19,20 @@ after_success:
 jobs:
   include:
     - stage: test and lint
+      name: Compile and Lint
       script:
         - time yarn run check
         - yarn run release --dry-run
     - stage: test and lint
+      name: Unit Tests
       script:
         - time yarn run test --coverage
     - stage: test and lint
+      name: Quick Integration Tests
       script:
         - time yarn integration --coverage
     - stage: test and lint
+      name: Long-Running Integration Tests
       script:
         - time yarn integration-long --coverage
     - stage: deploy
@@ -43,4 +47,4 @@ jobs:
           branch:
             - master
             - alpha
-            - /^(\d+.x)|(\d+.x.x)|(\d+.\d+.x)$/
+            - /^\d+.x$|^\d+.x.x$|^\d+.\d+.x$/
