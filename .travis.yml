@@ -5,13 +5,11 @@ cache:
     - node_modules
 node_js:
   - '8'
-branches:
-  except:
-    - /^v\d+\.\d+\.\d+$/
+if: tag IS blank
 stages:
   - name: test and lint
   - name: deploy
-    if: branch IN (master, release) AND type != pull_request
+    if: (branch IN (master, alpha) OR branch =~ (^\d+.x$)|(^\d+.x.x$)|(^\d+.\d+.x$) ) AND type != pull_request
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
@@ -44,4 +42,5 @@ jobs:
         on:
           branch:
             - master
-            - release
+            - alpha
+            - /(^\d+.x$)|(^\d+.x.x$)|(^\d+.\d+.x$)/
