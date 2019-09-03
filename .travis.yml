@@ -38,9 +38,5 @@ jobs:
     - stage: deploy
       script:
         - yarn build
-      deploy:
-        provider: script
-        script:
-          - yarn run release
-        skip_cleanup: true
+        - yarn run release
         # See deploy stage conditions above
