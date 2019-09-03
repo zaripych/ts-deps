@@ -35,9 +35,7 @@ const jestConfig = (paramsRaw = {}) => {
       };
     }, {});
 
-  const integrationTestMatch = `<rootDir>/${
-    defaults.integrationTestsGlob
-  }/*.test.{${exts}}`;
+  const integrationTestMatch = `<rootDir>/${defaults.integrationTestsGlob}/*.test.{${exts}}`;
   const unitTestMatch = `<rootDir>/${defaults.unitTestsGlob}/*.test.{${exts}}`;
 
   return {
@@ -64,7 +62,7 @@ const jestConfig = (paramsRaw = {}) => {
     globals: {
       INTEGRATION_TEST: false,
     },
-    transformIgnorePatterns: [`.*\\.json`, `.*\\.d\\.ts`],
+    transformIgnorePatterns: ['node_modules', lib, `.*\\.json`, `.*\\.d\\.ts`],
   };
 };
 

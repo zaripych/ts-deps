@@ -44,6 +44,8 @@ Object {
     "lib",
   ],
   "transformIgnorePatterns": Array [
+    "node_modules",
+    "lib",
     ".*\\\\.json",
     ".*\\\\.d\\\\.ts",
   ],
@@ -94,6 +96,8 @@ Object {
     "lib",
   ],
   "transformIgnorePatterns": Array [
+    "node_modules",
+    "lib",
     ".*\\\\.json",
     ".*\\\\.d\\\\.ts",
   ],
@@ -144,6 +148,8 @@ Object {
     "lib",
   ],
   "transformIgnorePatterns": Array [
+    "node_modules",
+    "lib",
     ".*\\\\.json",
     ".*\\\\.d\\\\.ts",
   ],
