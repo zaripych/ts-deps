@@ -5,6 +5,7 @@ const defaults = require('../defaults');
 const { options } = require('../options');
 
 const {
+  ensureSurroundedWithPathSeparator,
   ensureStartsWithPathSeparator,
   trimPathSeparator,
 } = require('../helpers');
@@ -21,7 +22,7 @@ const jestConfig = (paramsRaw = {}) => {
     ...paramsRaw,
   };
   const src = ensureStartsWithPathSeparator(defaults.rootDir);
-  const lib = trimPathSeparator(defaults.outDir);
+  const lib = ensureSurroundedWithPathSeparator(defaults.outDir);
   const extensions = defaults.extensions;
   const exts = defaults.extensions.join(',');
   const moduleNameMapper =

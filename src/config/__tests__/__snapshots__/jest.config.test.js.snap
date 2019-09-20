@@ -32,7 +32,7 @@ Object {
     "^@shared/(.*)$": "<rootDir>/src/shared/$1",
   },
   "modulePathIgnorePatterns": Array [
-    "lib",
+    "/lib/",
   ],
   "setupFiles": Array [],
   "testEnvironment": "node",
@@ -41,11 +41,11 @@ Object {
   ],
   "testPathIgnorePatterns": Array [
     "/node_modules/",
-    "lib",
+    "/lib/",
   ],
   "transformIgnorePatterns": Array [
     "node_modules",
-    "lib",
+    "/lib/",
     ".*\\\\.json",
     ".*\\\\.d\\\\.ts",
   ],
@@ -84,7 +84,7 @@ Object {
     "^ts-deps/(.*)$": "<rootDir>/./src/$1",
   },
   "modulePathIgnorePatterns": Array [
-    "lib",
+    "/lib/",
   ],
   "setupFiles": Array [],
   "testEnvironment": "node",
@@ -93,11 +93,11 @@ Object {
   ],
   "testPathIgnorePatterns": Array [
     "/node_modules/",
-    "lib",
+    "/lib/",
   ],
   "transformIgnorePatterns": Array [
     "node_modules",
-    "lib",
+    "/lib/",
     ".*\\\\.json",
     ".*\\\\.d\\\\.ts",
   ],
@@ -136,7 +136,7 @@ Object {
     "^ts-deps/(.*)$": "<rootDir>/./src/$1",
   },
   "modulePathIgnorePatterns": Array [
-    "lib",
+    "/lib/",
   ],
   "setupFiles": Array [],
   "testEnvironment": "node",
@@ -145,11 +145,11 @@ Object {
   ],
   "testPathIgnorePatterns": Array [
     "/node_modules/",
-    "lib",
+    "/lib/",
   ],
   "transformIgnorePatterns": Array [
     "node_modules",
-    "lib",
+    "/lib/",
     ".*\\\\.json",
     ".*\\\\.d\\\\.ts",
   ],
