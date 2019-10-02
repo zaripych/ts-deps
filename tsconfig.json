@@ -1,7 +1,6 @@
 {
   "extends": "./src/config/tsconfig.default.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": { "ts-deps": ["./src"], "ts-deps/*": ["./src/*"] },
     "outDir": "lib"
   },
