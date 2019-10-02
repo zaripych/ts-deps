@@ -31,6 +31,7 @@ const tsConfig = (paramsRaw = {}) => {
   return {
     extends: baseConfigLocation,
     compilerOptions: {
+      baseUrl: '.',
       paths,
       outDir: lib,
     },

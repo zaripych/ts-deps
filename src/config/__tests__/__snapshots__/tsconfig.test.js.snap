@@ -4,6 +4,7 @@ exports[`given declarations should work 1`] = `
 Object {
   "compilerOptions": Object {
     "allowJs": false,
+    "baseUrl": ".",
     "declaration": true,
     "emitDeclarationOnly": true,
     "noEmit": false,
@@ -31,6 +32,7 @@ Object {
 exports[`given no options should work 1`] = `
 Object {
   "compilerOptions": Object {
+    "baseUrl": ".",
     "outDir": "lib",
     "paths": Object {
       "ts-deps": Array [
@@ -51,6 +53,7 @@ Object {
 exports[`given options should work 1`] = `
 Object {
   "compilerOptions": Object {
+    "baseUrl": ".",
     "outDir": "lib",
     "paths": Object {
       "@shared": Array [
