@@ -1,5 +1,5 @@
 // @ts-check
-const { babelBuild } = require('./build');
+const { babelBuild } = require('./babelBuild');
 const { patch } = require('./patch');
 const { clean } = require('./clean');
 const { init } = require('./init');
