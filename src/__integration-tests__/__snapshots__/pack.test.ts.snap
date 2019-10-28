@@ -23,7 +23,7 @@ Array [
   "package/lib/index.js",
   "package/lib/options.js",
   "package/lib/scripts/",
-  "package/lib/scripts/build.js",
+  "package/lib/scripts/babelBuild.js",
   "package/lib/scripts/clean.js",
   "package/lib/scripts/cli.js",
   "package/lib/scripts/combineCoverage.js",

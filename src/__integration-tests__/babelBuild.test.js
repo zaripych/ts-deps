@@ -6,7 +6,7 @@ import { babelBuild } from '../scripts';
 
 jest.setTimeout(120000);
 
-describe('build', () => {
+describe('babelBuild', () => {
   it('should work', async () => {
     await babelBuild();
 
