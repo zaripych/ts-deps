@@ -24,7 +24,9 @@
     "no-any": true,
     "await-promise": true,
     "no-floating-promises": true,
-    "no-restricted-globals": [true, "name", "length", "event"]
+    "no-restricted-globals": [true, "name", "length", "event"],
+    "strict-string-expressions": true,
+    "cyclomatic-complexity": [true, 16]
   },
   "linterOptions": {
     "exclude": ["src/**/*.test.*"]
