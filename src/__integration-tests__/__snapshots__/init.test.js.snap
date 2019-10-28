@@ -67,6 +67,7 @@ exports[`init given non-empty directory after init, with template parameter (ini
 Array [
   ".gitignore",
   ".yarnrc",
+  "additional.txt",
   "babel.config.js",
   "commitlint.config.js",
   "jest.config.integration.js",

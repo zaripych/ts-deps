@@ -110,7 +110,7 @@ function ensureSurroundedWithPathSeparator(p, sep = '/') {
  */
 function resolveTemplatesDir(candidates) {
   const templatesCandidates = candidates || [
-    resolve(__dirname, '../../template-max'),
+    resolve(__dirname, '../../template-for-libs'),
   ];
 
   const templatesDir = templatesCandidates.find(cnd => existsSync(cnd));

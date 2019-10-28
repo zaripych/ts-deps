@@ -48,6 +48,11 @@ const copyFromTemplates = async ({ templateDirs, currentDir }) => {
   for (const templateDir of templateDirs) {
     const toCopyDir = join(templateDir, 'to-copy');
 
+    const dirToCopy = await stat(toCopyDir).catch(() => Promise.resolve(null));
+    if (!dirToCopy || !dirToCopy.isDirectory()) {
+      throw new Error('Source template directory doesnt exist: ' + toCopyDir);
+    }
+
     await copy(toCopyDir, currentDir, {
       filter: async (_src, dest) => {
         const destStats = await stat(dest).catch(() => Promise.resolve(null));
@@ -167,7 +172,7 @@ const init = async ({ cwd = process.cwd(), template, force } = {}) => {
   if (template) {
     for (const tmplt of templates) {
       if (tmplt.type === 'package') {
-        await remove(join(currentDir, tmplt.dir));
+        await remove(tmplt.dir);
       }
     }
   }

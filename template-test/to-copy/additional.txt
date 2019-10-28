@@ -1,0 +1,1 @@
+This is to test if a file going to be copied from this directory to the output

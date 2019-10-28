@@ -5,7 +5,7 @@ const { resolveTemplatesDir } = require('./helpers');
 const { join, relative, isAbsolute } = require('path');
 const { pathExists, unlink, stat } = require('fs-extra');
 
-const templateDirectories = ['template', 'template-max'];
+const templateDirectories = ['template', 'template-for-libs', 'template-max'];
 
 /**
  * @param {string} depName
@@ -28,9 +28,7 @@ const npmPullTemplate = async (depName, cwd) => {
   const existingTemplatePath = templatePathExist.indexOf(true);
   if (existingTemplatePath >= 0) {
     throw new Error(
-      `Path already exists: ${
-        templateDirectories[existingTemplatePath]
-      }, it would be unsafe to pull templates to this location, please remove or backup the directory manually`
+      `Path already exists: ${templateDirectories[existingTemplatePath]}, it would be unsafe to pull templates to this location, please remove or backup the directory manually`
     );
   }
 
@@ -87,7 +85,7 @@ const pullTemplates = async (template, cwd) => {
 
   return {
     type: 'package',
-    dir: result,
+    dir: join(cwd, result),
   };
 };
 
