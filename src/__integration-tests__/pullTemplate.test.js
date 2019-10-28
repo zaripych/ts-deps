@@ -16,6 +16,7 @@ describe('npmPullTemplate', () => {
     it('should output correct files', async () => {
       const template = await npmPullTemplate('ts-deps@0.2.5', pullDir);
 
+      // for backward compatibility
       expect(template).toBe('template-max');
 
       const contents = await sortedDirectoryContents(join(pullDir, template));

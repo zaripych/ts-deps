@@ -1,7 +1,7 @@
 {
   "groups": {
     "default": {
-      "packages": ["package.json", "template-max/to-process/package.json"],
+      "packages": ["package.json", "template-for-libs/to-process/package.json"],
       "ignore": ["@types/node"]
     }
   }
