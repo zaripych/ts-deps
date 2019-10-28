@@ -1,7 +1,7 @@
 // @ts-check
 const { jestConfig } = require('./config/jest.config');
 const { babelConfig } = require('./config/babel.config');
-const { babelBuild } = require('./scripts/build');
+const { babelBuild } = require('./scripts/babelBuild');
 const { clean } = require('./scripts/clean');
 const { patch } = require('./scripts/patch');
 const { init } = require('./scripts/init');
