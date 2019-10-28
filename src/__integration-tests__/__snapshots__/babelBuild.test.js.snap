@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`build should work 1`] = `
+exports[`babelBuild should work 1`] = `
 Array [
   "cli/",
   "cli/ts-deps.js",
@@ -20,7 +20,7 @@ Array [
   "index.js",
   "options.js",
   "scripts/",
-  "scripts/build.js",
+  "scripts/babelBuild.js",
   "scripts/clean.js",
   "scripts/cli.js",
   "scripts/combineCoverage.js",
