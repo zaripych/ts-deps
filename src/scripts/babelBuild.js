@@ -33,7 +33,7 @@ async function babelBuild({
   doNotOutputTests = true,
   logCommandLine = true,
   extensions = defaults.extensions,
-  outDir = defaults.outDir,
+  outDir = defaults.libOutDir,
   rootDir = defaults.rootDir,
   unitTestsGlob = defaults.unitTestsGlob,
   integrationTestsGlob = defaults.integrationTestsGlob,

@@ -77,7 +77,7 @@ describe('init', () => {
       });
 
       // tslint:disable-next-line
-      const outDir = join(initDir, defaults.outDir);
+      const outDir = join(initDir, defaults.libOutDir);
 
       const libContents = await sortedDirectoryContents(outDir);
 

@@ -1,7 +1,7 @@
 // @ts-check
 module.exports = Object.freeze({
   rootDir: 'src',
-  outDir: 'lib',
+  libOutDir: 'lib',
   extensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
   copyAdditional: [
     '**/*.d.ts',

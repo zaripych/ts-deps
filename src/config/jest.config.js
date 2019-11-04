@@ -22,7 +22,7 @@ const jestConfig = (paramsRaw = {}) => {
     ...paramsRaw,
   };
   const src = ensureStartsWithPathSeparator(defaults.rootDir);
-  const lib = ensureSurroundedWithPathSeparator(defaults.outDir);
+  const lib = ensureSurroundedWithPathSeparator(defaults.libOutDir);
   const extensions = defaults.extensions;
   const exts = defaults.extensions.join(',');
   const moduleNameMapper =
