@@ -2,6 +2,7 @@
 module.exports = Object.freeze({
   rootDir: 'src',
   libOutDir: 'lib',
+  appOutDir: 'dist',
   extensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
   copyAdditional: [
     '**/*.d.ts',
