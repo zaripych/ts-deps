@@ -9,3 +9,4 @@ ts-deps*.tgz
 integration-test-*
 package
 .pnp
+.log
