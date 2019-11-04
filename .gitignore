@@ -1,6 +1,7 @@
 coverage
 coverage-*
 lib
+dist
 node_modules
 .jest-cache
 yarn-error.log
