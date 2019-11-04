@@ -2,6 +2,7 @@
 const { jestConfig } = require('./config/jest.config');
 const { babelConfig } = require('./config/babel.config');
 const { babelBuild } = require('./scripts/babelBuild');
+const { rollupBuild } = require('./scripts/rollupBuild');
 const { clean } = require('./scripts/clean');
 const { patch } = require('./scripts/patch');
 const { init } = require('./scripts/init');
@@ -16,6 +17,7 @@ module.exports = {
   jestConfig,
   babelConfig,
   babelBuild,
+  rollupBuild,
   clean,
   init,
   patch,
