@@ -16,7 +16,7 @@ const tsConfig = (paramsRaw = {}) => {
     ...paramsRaw,
   };
   const src = defaults.rootDir;
-  const lib = defaults.outDir;
+  const lib = defaults.libOutDir;
   const paths =
     aliases &&
     Object.keys(aliases).reduce((acc, key) => {

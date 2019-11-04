@@ -11,7 +11,7 @@ describe('babelBuild', () => {
     await babelBuild();
 
     const buildFiles = await sortedDirectoryContents(
-      join(ROOT, defaults.outDir)
+      join(ROOT, defaults.libOutDir)
     );
 
     expect(buildFiles).toMatchSnapshot();

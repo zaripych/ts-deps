@@ -11,7 +11,7 @@ describe('clean', () => {
     await clean();
 
     const buildFiles = await sortedDirectoryContents(
-      join(ROOT, defaults.outDir)
+      join(ROOT, defaults.libOutDir)
     );
 
     expect(buildFiles).toEqual([]);
