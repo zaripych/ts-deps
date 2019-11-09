@@ -7,7 +7,7 @@ export function max<T>(...args: T[]): T | undefined {
   );
 }
 
-export function valueOrDefault<T, D = null>(value?: T, def: D = null): T | D {
+export function valueOrDefault<T>(value?: T, def: T | null = null): T | null {
   return value ?? def;
 }
 
