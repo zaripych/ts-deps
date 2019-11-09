@@ -43,6 +43,8 @@ const babelConfig = (paramsRaw = {}) => {
         },
       ],
       '@babel/proposal-class-properties',
+      '@babel/plugin-proposal-nullish-coalescing-operator',
+      '@babel/plugin-proposal-optional-chaining',
     ].filter(Boolean),
     ignore: [`${src}/**/*.d.ts`, `${src}/**/*.json`],
   };
