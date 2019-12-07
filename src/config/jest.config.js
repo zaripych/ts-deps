@@ -1,20 +1,20 @@
 // @ts-check
 'use strict';
 
-const defaults = require('../defaults');
-const { options } = require('../options');
+import { defaults } from '../defaults';
+import { options } from '../options';
 
-const {
+import {
   ensureSurroundedWithPathSeparator,
   ensureStartsWithPathSeparator,
   trimPathSeparator,
-} = require('../helpers');
+} from '../helpers';
 
 /**
  *
  * @param {Partial<IJestConfigParams>} paramsRaw
  */
-const jestConfig = (paramsRaw = {}) => {
+export const jestConfig = (paramsRaw = {}) => {
   const opts = options();
   const { aliases, isIntegrationTest } = {
     aliases: opts.aliases,
@@ -65,8 +65,4 @@ const jestConfig = (paramsRaw = {}) => {
     },
     transformIgnorePatterns: ['node_modules', lib, `.*\\.json`, `.*\\.d\\.ts`],
   };
-};
-
-module.exports = {
-  jestConfig,
 };

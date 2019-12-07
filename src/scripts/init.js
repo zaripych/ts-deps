@@ -1,6 +1,6 @@
 // @ts-check
-const { spawnSync } = require('child_process');
-const {
+import { spawnSync } from 'child_process';
+import {
   existsSync,
   copy,
   pathExists,
@@ -8,11 +8,11 @@ const {
   ensureDir,
   remove,
   readdir,
-} = require('fs-extra');
-const { resolve, join } = require('path');
-const { patch } = require('./patch');
-const { initializeTemplates } = require('../helpers');
-const yargs = require('yargs');
+} from 'fs-extra';
+import { resolve, join } from 'path';
+import { patch } from './patch';
+import { initializeTemplates } from '../helpers';
+import yargs from 'yargs';
 
 const PKG_JSON = 'package.json';
 
@@ -142,7 +142,7 @@ const errorIfNotEmpty = async (cwd, force) => {
 /**
  * @param {InitParams} param0
  */
-const init = async ({ cwd = process.cwd(), template, force } = {}) => {
+export const init = async ({ cwd = process.cwd(), template, force } = {}) => {
   const currentDir = resolve(cwd);
 
   await errorIfNotEmpty(currentDir, force);
@@ -197,7 +197,7 @@ async function initHandler(args) {
   }
 }
 
-const initCliModule = {
+export const initCliModule = {
   command: ['init'],
   /**
    * @param {import('yargs').Argv} y
@@ -222,13 +222,7 @@ const initCliModule = {
     'Initialize new package, or integrate with existing package - the cli will overwrite existing files',
 };
 
-async function initCli() {
+export async function initCli() {
   const args = initCliModule.builder(yargs).parse();
   await initHandler(args);
 }
-
-module.exports = {
-  init,
-  initCli,
-  initCliModule,
-};

@@ -2,7 +2,7 @@
 import { ROOT, emptyDirSafe, sortedDirectoryContents } from './helpers';
 import { join } from 'path';
 import { ensureDir } from 'fs-extra';
-const { npmPullTemplate } = require('../helpers');
+import { npmPullTemplate } from '../helpers';
 
 describe('npmPullTemplate', () => {
   describe('given fresh directory', () => {

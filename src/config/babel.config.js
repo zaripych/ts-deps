@@ -1,14 +1,14 @@
 // @ts-check
 'use strict';
 
-const defaults = require('../defaults');
-const { trimPathSeparator } = require('../helpers');
-const { options } = require('../options');
+import { defaults } from '../defaults';
+import { trimPathSeparator } from '../helpers';
+import { options } from '../options';
 
 /**
  * @param {Partial<IBabelConfigParams>} paramsRaw
  */
-const babelConfig = (paramsRaw = {}) => {
+export const babelConfig = (paramsRaw = {}) => {
   const opts = options();
   const { aliases, nodeVersion } = {
     aliases: opts.aliases,
@@ -52,10 +52,4 @@ const babelConfig = (paramsRaw = {}) => {
   return config;
 };
 
-module.exports = {
-  __esModule: {
-    value: true,
-  },
-  default: babelConfig(),
-  babelConfig,
-};
+export default babelConfig();

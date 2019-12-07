@@ -1,4 +1,5 @@
 // @ts-check
-const { clean } = require('../src')
+require('@babel/register');
+const { clean } = require('../src');
 
-clean()
+clean();

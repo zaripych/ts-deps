@@ -1,11 +1,11 @@
-const { jestConfig } = require('../jest.config')
+import { jestConfig } from '../jest.config';
 
 describe('given no options', () => {
   it('should work', () => {
-    const defaultConfig = jestConfig()
-    expect(defaultConfig).toMatchSnapshot()
-  })
-})
+    const defaultConfig = jestConfig();
+    expect(defaultConfig).toMatchSnapshot();
+  });
+});
 
 describe('given aliases', () => {
   it('should work', () => {
@@ -13,16 +13,16 @@ describe('given aliases', () => {
       aliases: {
         ['@shared']: '/src/shared',
       },
-    })
-    expect(defaultConfig).toMatchSnapshot()
-  })
-})
+    });
+    expect(defaultConfig).toMatchSnapshot();
+  });
+});
 
 describe('given integration tests', () => {
   it('should work', () => {
     const defaultConfig = jestConfig({
       isIntegrationTest: true,
-    })
-    expect(defaultConfig).toMatchSnapshot()
-  })
-})
+    });
+    expect(defaultConfig).toMatchSnapshot();
+  });
+});

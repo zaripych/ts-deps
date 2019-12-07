@@ -1,4 +1,2 @@
-module.exports = {
-  ...require('./helpers'),
-  ...require('./pullTemplate'),
-};
+export * from './helpers';
+export * from './pullTemplate';

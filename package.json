@@ -16,7 +16,7 @@
     "declarations": "tsc -p ./tsconfig.declarations.json",
     "type-check": "tsc",
     "lint": "tslint -p . -t verbose",
-    "check": "concurrently \"node ./scripts/build.js\" \"tsc\" \"tslint -p . -t verbose\"",
+    "check": "concurrently --raw -c \"node ./scripts/build.js\" \"tsc\" \"tslint -p . -t verbose\"",
     "patch": "node ./scripts/patch.js",
     "release": "semantic-release"
   },

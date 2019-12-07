@@ -55,7 +55,7 @@ export const spawnAndCheck = (
 
   console.log(result.output.filter(Boolean).join(''));
 
-  if (result.error as (Error | undefined)) {
+  if (result.error as Error | undefined) {
     throw result.error;
   }
 
@@ -129,10 +129,7 @@ export const unarchiveTarGz = async (tar: string, out: string) => {
   const gunzip = createGunzip();
   const stream = createReadStream(tar)
     .pipe(gunzip)
-    .pipe(
-      extract(outPath),
-      { end: true }
-    );
+    .pipe(extract(outPath), { end: true });
   return new Promise((res, rej) => {
     stream.once('end', () => {
       res();
