@@ -38,5 +38,5 @@ jobs:
     - stage: deploy
       script:
         - yarn build
-        - yarn run release
+        - yarn run release --dry-run
         # See deploy stage conditions above
