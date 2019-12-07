@@ -10,9 +10,13 @@ import { options } from '../options';
  */
 export const babelConfig = (paramsRaw = {}) => {
   const opts = options();
-  const { aliases, nodeVersion } = {
+  const { aliases, nodeVersion, presetEnvConfig } = {
     aliases: opts.aliases,
     nodeVersion: opts.nodeVersion || defaults.nodeVersion,
+    /**
+     * @param {{}} defaultConfig
+     */
+    presetEnvConfig: defaultConfig => defaultConfig,
     ...paramsRaw,
   };
   const src = defaults.rootDir;
@@ -21,11 +25,11 @@ export const babelConfig = (paramsRaw = {}) => {
     presets: [
       [
         '@babel/preset-env',
-        {
+        presetEnvConfig({
           targets: {
             node: nodeVersion,
           },
-        },
+        }),
       ],
       '@babel/preset-typescript',
     ],

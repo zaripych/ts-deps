@@ -1,6 +1,7 @@
 interface IBabelConfigParams {
   aliases: IOptions['aliases'];
   nodeVersion: string;
+  presetEnvConfig?: (defaultConfig: {}) => {};
 }
 
 interface IJestConfigParams {
