@@ -1,12 +1,12 @@
 // @ts-check
-const { options } = require('../options');
-const { trimPathSeparator } = require('../helpers');
-const defaults = require('../defaults');
+import { options } from '../options';
+import { trimPathSeparator } from '../helpers';
+import { defaults } from '../defaults';
 
 /**
  * @param {Partial<ITsConfigParams>} paramsRaw
  */
-const tsConfig = (paramsRaw = {}) => {
+export const tsConfig = (paramsRaw = {}) => {
   const opts = options();
   const { aliases, baseConfigLocation } = {
     aliases: opts.aliases,
@@ -42,7 +42,7 @@ const tsConfig = (paramsRaw = {}) => {
 /**
  * @param {Partial<ITsConfigParams>} paramsRaw
  */
-const tsConfigDeclarations = (paramsRaw = {}) => {
+export const tsConfigDeclarations = (paramsRaw = {}) => {
   /**
    * @type {ReturnType<typeof tsConfig> & { exclude?: string[] }}
    */
@@ -63,9 +63,4 @@ const tsConfigDeclarations = (paramsRaw = {}) => {
       defaults.integrationTestsGlob,
     ],
   };
-};
-
-module.exports = {
-  tsConfig,
-  tsConfigDeclarations,
 };

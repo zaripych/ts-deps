@@ -1,25 +1,10 @@
 // @ts-check
-const { jestConfig } = require('./config/jest.config');
-const { babelConfig } = require('./config/babel.config');
-const { babelBuild } = require('./scripts/babelBuild');
-const { rollupBuild } = require('./scripts/rollupBuild');
-const { clean } = require('./scripts/clean');
-const { patch } = require('./scripts/patch');
-const { init } = require('./scripts/init');
-const { combineCoverage } = require('./scripts/combineCoverage');
-const defaults = require('./defaults');
-
-module.exports = {
-  __esModule: {
-    value: true,
-  },
-  defaults,
-  jestConfig,
-  babelConfig,
-  babelBuild,
-  rollupBuild,
-  clean,
-  init,
-  patch,
-  combineCoverage,
-};
+export { jestConfig } from './config/jest.config';
+export { babelConfig } from './config/babel.config';
+export { babelBuild } from './scripts/babelBuild';
+export { rollupBuild } from './scripts/rollupBuild';
+export { clean } from './scripts/clean';
+export { patch } from './scripts/patch';
+export { init } from './scripts/init';
+export { combineCoverage } from './scripts/combineCoverage';
+export { defaults } from './defaults';

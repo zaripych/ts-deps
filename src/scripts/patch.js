@@ -1,14 +1,13 @@
 // @ts-check
-
-const { resolve, extname, join } = require('path');
-const { readFile, writeFile, pathExists } = require('fs-extra');
-const { format, resolveConfig } = require('prettier');
-const { initializeTemplates, promptForOverwrite } = require('../helpers');
-const { options } = require('../options');
-const { patchPackageJsonCore } = require('./patchPackage');
-const { patchTsConfigCore } = require('./patchTsConfig');
-const { patchText } = require('./patchText');
-const yargs = require('yargs');
+import { resolve, extname, join } from 'path';
+import { readFile, writeFile, pathExists } from 'fs-extra';
+import { format, resolveConfig } from 'prettier';
+import { initializeTemplates, promptForOverwrite } from '../helpers';
+import { options } from '../options';
+import { patchPackageJsonCore } from './patchPackage';
+import { patchTsConfigCore } from './patchTsConfig';
+import { patchText } from './patchText';
+import yargs from 'yargs';
 
 const PKG_JSON = 'package.json';
 
@@ -191,7 +190,7 @@ const prettierFormat = (unformattedContents, fullPath, prettierConfig) => {
 /**
  * @param {PatchParams} paramsRaw
  */
-const patch = async (paramsRaw = {}) => {
+export const patch = async (paramsRaw = {}) => {
   const cwd = paramsRaw.cwd || process.cwd();
   const opts = options(cwd);
 
@@ -223,9 +222,9 @@ const patch = async (paramsRaw = {}) => {
 
     const fullPath = resolve(join(params.cwd, item.file));
 
-    const oldContents = await readFile(fullPath, { encoding: 'utf-8' }).catch(
-      () => Promise.resolve(undefined)
-    );
+    const oldContents = await readFile(fullPath, {
+      encoding: 'utf-8',
+    }).catch(() => Promise.resolve(undefined));
 
     const unformattedContents = await item.contents(oldContents);
 
@@ -285,7 +284,7 @@ async function patchHandler(args) {
   }
 }
 
-const patchCliModule = {
+export const patchCliModule = {
   command: ['patch'],
   /**
    * @param {import('yargs').Argv} y
@@ -314,13 +313,7 @@ const patchCliModule = {
     'Patch tsconfig.json and/or package.json files after changes from ts-deps.config.js or after ts-deps upgrade',
 };
 
-async function patchCli() {
+export async function patchCli() {
   const args = patchCliModule.builder(yargs).parse();
   await patchHandler(args);
 }
-
-module.exports = {
-  patch,
-  patchCli,
-  patchCliModule,
-};

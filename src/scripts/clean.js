@@ -1,9 +1,9 @@
 // @ts-check
-const { emptyDir, rmdir, existsSync } = require('fs-extra');
-const { join } = require('path');
-const defaults = require('../defaults');
+import { emptyDir, rmdir, existsSync } from 'fs-extra';
+import { join } from 'path';
+import { defaults } from '../defaults';
 
-const clean = async ({
+export const clean = async ({
   cwd = process.cwd(),
   dirs = [defaults.libOutDir],
 } = {}) => {
@@ -30,8 +30,4 @@ const clean = async ({
     );
     process.exit(-1);
   }
-};
-
-module.exports = {
-  clean,
 };

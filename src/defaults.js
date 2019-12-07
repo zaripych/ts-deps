@@ -1,5 +1,5 @@
 // @ts-check
-module.exports = Object.freeze({
+export const defaults = Object.freeze({
   rootDir: 'src',
   libOutDir: 'lib',
   appOutDir: 'dist',

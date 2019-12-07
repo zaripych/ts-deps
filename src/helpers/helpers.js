@@ -1,7 +1,7 @@
 // @ts-check
-const { resolve, basename } = require('path');
-const { existsSync } = require('fs-extra');
-const { prompt } = require('inquirer');
+import { resolve, basename } from 'path';
+import { existsSync } from 'fs-extra';
+import { prompt } from 'inquirer';
 
 /**
  * @param {string} str
@@ -178,7 +178,7 @@ const promptForOverwrite = async dest => {
 };
 promptForOverwrite.state = copyPromptState;
 
-module.exports = {
+export {
   trim,
   trimLeft,
   trimRight,

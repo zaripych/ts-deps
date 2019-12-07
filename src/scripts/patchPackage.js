@@ -1,5 +1,5 @@
 //@ts-check
-const deepmerge = require('deepmerge');
+import deepmerge from 'deepmerge';
 
 /**
  * @param {PatchPackageJson} tsDepsPkg
@@ -7,7 +7,12 @@ const deepmerge = require('deepmerge');
  * @param {PatchPackageJson} targetPkg
  * @param {PatchCoreOptions} options
  */
-const patchPackageJsonCore = (tsDepsPkg, templatePkg, targetPkg, options) => {
+export const patchPackageJsonCore = (
+  tsDepsPkg,
+  templatePkg,
+  targetPkg,
+  options
+) => {
   const pkgKeys = Object.keys(tsDepsPkg);
   if (
     typeof tsDepsPkg !== 'object' ||
@@ -56,8 +61,4 @@ const patchPackageJsonCore = (tsDepsPkg, templatePkg, targetPkg, options) => {
   result.devDependencies[tsDepsPkg.name] = tsDepsPkg.version;
 
   return result;
-};
-
-module.exports = {
-  patchPackageJsonCore,
 };

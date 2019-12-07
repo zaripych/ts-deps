@@ -1,7 +1,7 @@
 // @ts-check
-const { existsSync } = require('fs');
-const { resolve } = require('path');
-const { optionsFileName } = require('./defaults');
+import { existsSync } from 'fs';
+import { resolve } from 'path';
+import { defaults } from './defaults';
 
 /**
  * @type {IOptions | null}
@@ -17,7 +17,7 @@ function options(cwd = process.cwd()) {
     return opts;
   }
 
-  const path = resolve(cwd, optionsFileName);
+  const path = resolve(cwd, defaults.optionsFileName);
 
   const exists = existsSync(path);
 
@@ -30,6 +30,4 @@ function options(cwd = process.cwd()) {
   return opts || {};
 }
 
-module.exports = {
-  options,
-};
+export { options };

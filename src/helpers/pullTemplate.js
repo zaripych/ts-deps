@@ -1,9 +1,9 @@
 // @ts-check
-const { spawnSync } = require('child_process');
-const { unarchiveTarGz } = require('./unarchive');
-const { resolveTemplatesDir } = require('./helpers');
-const { join, relative, isAbsolute } = require('path');
-const { pathExists, unlink, stat } = require('fs-extra');
+import { spawnSync } from 'child_process';
+import { unarchiveTarGz } from './unarchive';
+import { resolveTemplatesDir } from './helpers';
+import { join, relative, isAbsolute } from 'path';
+import { pathExists, unlink, stat } from 'fs-extra';
 
 const templateDirectories = ['template', 'template-for-libs', 'template-max'];
 
@@ -115,7 +115,4 @@ const initializeTemplates = async (template, cwd) => {
   return templates;
 };
 
-module.exports = {
-  npmPullTemplate,
-  initializeTemplates,
-};
+export { npmPullTemplate, initializeTemplates };

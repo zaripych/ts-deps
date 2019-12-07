@@ -1,10 +1,9 @@
 // @ts-check
-const yargs = require('yargs');
-const { initCliModule } = require('./init');
-const { patchCliModule } = require('./patch');
+import { command } from 'yargs';
+import { initCliModule } from './init';
+import { patchCliModule } from './patch';
 
-yargs
-  .command(initCliModule)
+command(initCliModule)
   .command(patchCliModule)
   .strict()
   .demandCommand(1, 1)

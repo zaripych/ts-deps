@@ -1,7 +1,7 @@
 // @ts-check
 import { join } from 'path';
 import { ROOT, sortedDirectoryContents } from './helpers';
-import defaults from '../defaults';
+import { defaults } from '../defaults';
 import { clean } from '../scripts';
 
 jest.setTimeout(120000);

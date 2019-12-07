@@ -7,7 +7,7 @@ import {
 } from './helpers';
 import { join } from 'path';
 import { ensureDir, copy } from 'fs-extra';
-import defaults from '../defaults';
+import { defaults } from '../defaults';
 
 jest.setTimeout(5 * 60 * 1000);
 

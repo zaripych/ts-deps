@@ -7,7 +7,7 @@ import {
 } from './helpers';
 import { join } from 'path';
 import { ensureDir, copy } from 'fs-extra';
-const { patch } = require('../scripts');
+import { patch } from '../scripts';
 
 jest.setTimeout(2 * 60 * 1000);
 

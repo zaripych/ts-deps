@@ -1,4 +1,5 @@
 // @ts-check
-const { babelBuild } = require('../src')
+require('@babel/register');
+const { babelBuild } = require('../src');
 
-babelBuild()
+babelBuild();

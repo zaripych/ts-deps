@@ -1,9 +1,9 @@
 // @ts-check
-const { spawn } = require('child_process');
-const defaults = require('../defaults');
-const { copy } = require('fs-extra');
-const fg = require('fast-glob');
-const { join } = require('path');
+import { spawn } from 'child_process';
+import { defaults } from '../defaults';
+import { copy } from 'fs-extra';
+import fg from 'fast-glob';
+import { join } from 'path';
 
 /**
  * @param {string[]} args All arguments
@@ -28,7 +28,7 @@ const optionalArgBuilder = (args, lookupArgs, values) => {
 /**
  * @param {BabelBuildParams} param
  */
-async function babelBuild({
+export async function babelBuild({
   overrideWithCommandLineArguments = true,
   doNotOutputTests = true,
   logCommandLine = true,
@@ -125,7 +125,3 @@ async function babelBuild({
   )})`);
   }
 }
-
-module.exports = {
-  babelBuild,
-};
