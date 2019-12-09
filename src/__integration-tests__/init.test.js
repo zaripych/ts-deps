@@ -27,6 +27,7 @@ describe('init', () => {
     it('should output correct files', async () => {
       await init({
         cwd: initDir,
+        targetDirectory: initDir,
       });
 
       const contents = await sortedDirectoryContents(initDir, [
@@ -60,6 +61,7 @@ describe('init', () => {
     it('should fail with warning', async () => {
       const initResult = init({
         cwd: initDir,
+        targetDirectory: initDir,
       });
 
       await expect(initResult).rejects.toThrow();
@@ -95,6 +97,7 @@ describe('init', () => {
     it('should output correct files', async () => {
       await init({
         cwd: initDir,
+        targetDirectory: initDir,
       });
 
       const contents = await sortedDirectoryContents(initDir, [
@@ -137,6 +140,7 @@ describe('init', () => {
       await init({
         template: 'ts-deps@0.2.5',
         cwd: initDir,
+        targetDirectory: initDir,
       });
 
       const contents = await sortedDirectoryContents(initDir, [
@@ -179,6 +183,7 @@ describe('init', () => {
       await init({
         template: '../template-test',
         cwd: initDir,
+        targetDirectory: initDir,
       });
 
       const contents = await sortedDirectoryContents(initDir, [

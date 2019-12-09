@@ -16,8 +16,11 @@ import yargs from 'yargs';
 
 const PKG_JSON = 'package.json';
 
-const npmInitIfRequired = async () => {
-  const packageJsonPath = resolve(PKG_JSON);
+/**
+ * @param {string} initDir
+ */
+const npmInitIfRequired = async initDir => {
+  const packageJsonPath = resolve(initDir, PKG_JSON);
 
   const exists = await pathExists(packageJsonPath);
   if (exists) {
@@ -28,6 +31,7 @@ const npmInitIfRequired = async () => {
     stdio: 'inherit',
     encoding: 'utf8',
     shell: process.platform === 'win32',
+    cwd: initDir,
   });
 
   if (initProcessResult.status) {
@@ -42,9 +46,9 @@ const npmInitIfRequired = async () => {
 };
 
 /**
- * @param {{ templateDirs: string[], currentDir: string }} param0
+ * @param {{ templateDirs: string[], initDir: string }} param0
  */
-const copyFromTemplates = async ({ templateDirs, currentDir }) => {
+const copyFromTemplates = async ({ templateDirs, initDir }) => {
   for (const templateDir of templateDirs) {
     const toCopyDir = join(templateDir, 'to-copy');
 
@@ -53,14 +57,14 @@ const copyFromTemplates = async ({ templateDirs, currentDir }) => {
       throw new Error('Source template directory doesnt exist: ' + toCopyDir);
     }
 
-    await copy(toCopyDir, currentDir, {
+    await copy(toCopyDir, initDir, {
       filter: async (_src, dest) => {
         const destStats = await stat(dest).catch(() => Promise.resolve(null));
         if (destStats && destStats.isDirectory()) {
           return true;
         }
 
-        if (dest !== currentDir) {
+        if (dest !== initDir) {
           console.log('init: writing', dest);
         }
 
@@ -79,7 +83,7 @@ const copyFromTemplates = async ({ templateDirs, currentDir }) => {
 
   await Promise.all(
     dirsToCreate
-      .map(dir => join(currentDir, dir))
+      .map(dir => join(initDir, dir))
       .map(dir => ensureDir(dir).catch(() => Promise.resolve()))
   );
 };
@@ -142,25 +146,42 @@ const errorIfNotEmpty = async (cwd, force) => {
 /**
  * @param {InitParams} param0
  */
-export const init = async ({ cwd = process.cwd(), template, force } = {}) => {
+export const init = async ({
+  cwd = process.cwd(),
+  targetDirectory = process.cwd(),
+  template,
+  force,
+} = {}) => {
   const currentDir = resolve(cwd);
+  const initDir = resolve(targetDirectory);
 
-  await errorIfNotEmpty(currentDir, force);
+  const currentDirStat = await stat(currentDir).catch(_err => null);
+  if (!currentDirStat || !currentDirStat.isDirectory()) {
+    throw new Error('Current directory must resolve to an existing directory');
+  }
 
-  const templates = await initializeTemplates(template, currentDir);
+  const initDirStat = await stat(initDir).catch(_err => null);
+  if (!initDirStat || !initDirStat.isDirectory()) {
+    throw new Error('Init directory must resolve to an existing directory');
+  }
 
-  await npmInitIfRequired();
+  await errorIfNotEmpty(initDir, force);
+
+  const templates = await initializeTemplates(template, currentDir, initDir);
+
+  await npmInitIfRequired(initDir);
 
   const copyTemplates = () =>
     copyFromTemplates({
       templateDirs: templates.map(item => item.dir),
-      currentDir,
+      initDir,
     });
 
   const generate = () =>
     patch({
       initializedTemplates: templates,
       cwd: currentDir,
+      targetDirectory: initDir,
       forceOverwrites: true,
       aggressive: true,
     });
@@ -179,11 +200,14 @@ export const init = async ({ cwd = process.cwd(), template, force } = {}) => {
 };
 
 /**
- * @param {import('yargs').Arguments<{ force: boolean, template?: string }>} args
+ * @param {import('yargs').Arguments<{ directory?: string, force: boolean, template?: string }>} args
  */
 async function initHandler(args) {
   try {
     await init({
+      ...(args.directory && {
+        targetDirectory: args.directory,
+      }),
       ...(args.template && {
         template: args.template,
       }),
@@ -204,6 +228,11 @@ export const initCliModule = {
    */
   builder: y =>
     y
+      .option('directory', {
+        string: true,
+        description:
+          'Directory to initialize new package in, defaults to process.cwd()',
+      })
       .option('template', {
         string: true,
         description:

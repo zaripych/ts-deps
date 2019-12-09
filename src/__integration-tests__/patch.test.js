@@ -35,6 +35,7 @@ describe('patch', () => {
         forceOverwrites: true,
         patchOnly: [],
         cwd: initDir,
+        targetDirectory: initDir,
       });
 
       const contents = await sortedDirectoryContents(initDir, [

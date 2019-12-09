@@ -8,7 +8,11 @@ jest.setTimeout(120000);
 
 describe('babelBuild', () => {
   it('should work', async () => {
-    await babelBuild();
+    await babelBuild({
+      // We should not use command line arguments from the
+      // jest test framework
+      overrideWithCommandLineArguments: false,
+    });
 
     const buildFiles = await sortedDirectoryContents(
       join(ROOT, defaults.libOutDir)

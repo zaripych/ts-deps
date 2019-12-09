@@ -14,7 +14,7 @@ describe('npmPullTemplate', () => {
     });
 
     it('should output correct files', async () => {
-      const template = await npmPullTemplate('ts-deps@0.2.5', pullDir);
+      const template = await npmPullTemplate('ts-deps@0.2.5', pullDir, pullDir);
 
       // for backward compatibility
       expect(template).toBe('template-max');
