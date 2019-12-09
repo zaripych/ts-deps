@@ -35,12 +35,14 @@ type PatchParams = Partial<{
   baseTsConfigLocation: string;
   patchOnly: string[];
   cwd: string;
+  targetDirectory: string;
 
   initializedTemplates: TemplateInfo[];
 }>;
 
 type InitParams = Partial<{
   template: string;
+  targetDirectory: string;
   cwd: string;
   force: boolean;
 }>;

@@ -192,10 +192,12 @@ const prettierFormat = (unformattedContents, fullPath, prettierConfig) => {
  */
 export const patch = async (paramsRaw = {}) => {
   const cwd = paramsRaw.cwd || process.cwd();
+  const patchDir = paramsRaw.targetDirectory || process.cwd();
   const opts = options(cwd);
 
   const params = {
     cwd,
+    patchDir,
     aggressive: false,
     patchOnly: opts.patchOnly || [],
     baseTsConfigLocation: opts.baseTsConfigLocation,
@@ -205,7 +207,7 @@ export const patch = async (paramsRaw = {}) => {
 
   const templates =
     params.initializedTemplates ||
-    (await initializeTemplates(params.template, params.cwd));
+    (await initializeTemplates(params.template, params.cwd, patchDir));
 
   const patchers = buildPatchers(templates, params);
 
@@ -220,7 +222,7 @@ export const patch = async (paramsRaw = {}) => {
       }
     }
 
-    const fullPath = resolve(join(params.cwd, item.file));
+    const fullPath = resolve(join(params.patchDir, item.file));
 
     const oldContents = await readFile(fullPath, {
       encoding: 'utf-8',
