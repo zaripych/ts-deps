@@ -66,3 +66,9 @@ type PatchCoreOptions = {
 type CombineCoverageParams = {
   cwd: string;
 };
+
+type ReleaseParams = Partial<{
+  cwd?: string;
+  docker?: boolean;
+  beta?: boolean;
+}>;

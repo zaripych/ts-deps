@@ -54,6 +54,8 @@ Array [
   "package/lib/scripts/patchText.js.map",
   "package/lib/scripts/patchTsConfig.js",
   "package/lib/scripts/patchTsConfig.js.map",
+  "package/lib/scripts/release.js",
+  "package/lib/scripts/release.js.map",
   "package/lib/scripts/rollupBuild.js",
   "package/lib/scripts/rollupBuild.js.map",
   "package/lib/scripts/types.d.ts",
