@@ -2,7 +2,12 @@
 import { spawnSync } from 'child_process';
 import { options } from '../options';
 
-const defaultProps = () => ({ beta: true, cwd: process.cwd(), docker: true });
+const defaultProps = () => ({
+  beta: true,
+  cwd: process.cwd(),
+  docker: true,
+  setExitCode: true,
+});
 
 /**
  * Release using semantic-release through docker or npx
