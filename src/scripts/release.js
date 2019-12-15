@@ -31,6 +31,10 @@ export async function release(paramsRaw = defaultProps()) {
    * @type Array<string | RegExp>
    */
   const envPatterns = semanticReleaseEnvVars ?? [
+    'GH_TOKEN',
+    'NPM_TOKEN',
+    'DOCKER_USERNAME',
+    'DOCKER_PASSWORD',
     'TRAVIS',
     'TRAVIS_PULL_REQUEST',
     'TRAVIS_COMMIT',
