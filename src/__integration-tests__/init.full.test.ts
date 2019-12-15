@@ -76,6 +76,10 @@ describe('init', () => {
         cwd: initDir,
       });
 
+      spawnAndCheck('npm', ['run', 'release', '--version'], {
+        cwd: initDir,
+      });
+
       // tslint:disable-next-line
       const outDir = join(initDir, defaults.libOutDir);
 

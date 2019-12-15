@@ -74,6 +74,7 @@ Array [
   "package/template-for-libs/to-copy/scripts/build.js",
   "package/template-for-libs/to-copy/scripts/clean.js",
   "package/template-for-libs/to-copy/scripts/combineCoverage.js",
+  "package/template-for-libs/to-copy/scripts/release.js",
   "package/template-for-libs/to-copy/tslint.json",
   "package/template-for-libs/to-process/",
   "package/template-for-libs/to-process/gitignore",
