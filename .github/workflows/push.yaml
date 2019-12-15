@@ -24,6 +24,7 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
+
       - name: Setup Node
         uses: actions/setup-node@v1.1.0
         with:
@@ -48,12 +49,16 @@ jobs:
 
       - name: Checks
         run: yarn run check
+
       - name: Unit Tests
         run: yarn run test --coverage
+
       - name: Integration Tests
         run: yarn integration --coverage
+
       - name: Integration Tests (Long Running)
         run: yarn integration-long --coverage
+
       - name: Release
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
