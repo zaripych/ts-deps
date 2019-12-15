@@ -10,7 +10,7 @@ const defaultProps = () => ({ beta: true, cwd: process.cwd(), docker: true });
  * @param {ReleaseParams} paramsRaw
  */
 export async function release(paramsRaw = defaultProps()) {
-  const { beta, cwd, docker } = {
+  const { beta, cwd, docker, cmdArgs, setExitCode } = {
     ...defaultProps(),
     ...paramsRaw,
   };
@@ -22,20 +22,37 @@ export async function release(paramsRaw = defaultProps()) {
       shell: process.platform === 'win32',
     });
 
+  /**
+   * @type Array<string | RegExp>
+   */
   const envPatterns = semanticReleaseEnvVars ?? [
-    //
-    /TRAVIS_.*/,
-    /GITHUB_.*/,
-    /NPM_TOKEN/,
-    /GH_TOKEN/,
-    /DOCKER_USERNAME/,
-    /DOCKER_PASSWORD/,
+    'TRAVIS',
+    'TRAVIS_PULL_REQUEST',
+    'TRAVIS_COMMIT',
+    'TRAVIS_TAG',
+    'TRAVIS_BUILD_NUMBER',
+    'TRAVIS_BUILD_WEB_URL',
+    'TRAVIS_BRANCH',
+    'TRAVIS_JOB_NUMBER',
+    'TRAVIS_JOB_WEB_URL',
+    'TRAVIS_PULL_REQUEST_BRANCH',
+    'TRAVIS_REPO_SLUG',
+    'TRAVIS_BUILD_DIR',
+    'GITHUB_EVENT_PATH',
+    'GITHUB_ACTION',
+    'GITHUB_EVENT_NAME',
+    'GITHUB_REF',
+    'GITHUB_SHA',
+    'GITHUB_REPOSITORY',
+    'GITHUB_WORKSPACE',
   ];
 
   const envVars = Object.entries(process.env).reduce(
     (acc, [key, value]) => ({
       ...acc,
-      ...(envPatterns.some(pattern => pattern.test(key)) && {
+      ...(envPatterns.some(pattern =>
+        typeof pattern === 'string' ? pattern === key : pattern.test(key)
+      ) && {
         [key]: value,
       }),
     }),
@@ -62,18 +79,22 @@ export async function release(paramsRaw = defaultProps()) {
       '-p',
       semanticRelease,
       'semantic-release',
-      ...process.argv.slice(2),
+      ...(cmdArgs ?? process.argv.slice(2)),
     ];
 
     console.log('🚀  npx', args.join(' '));
 
-    spawnSync('npx', args, {
+    const result = spawnSync('npx', args, {
       env: {
         PATH: process.env.PATH,
         ...envVars,
       },
       stdio: 'inherit',
     });
+
+    if (setExitCode && typeof result.status === 'number') {
+      process.exitCode = result.status;
+    }
   } else {
     const semanticRelease = beta
       ? 'zaripych/semantic-release:beta'
@@ -84,17 +105,21 @@ export async function release(paramsRaw = defaultProps()) {
       '--rm',
       '-v',
       `${process.cwd()}:/opt/cwd`,
-      ...Object.keys(envVars).map(key => `--env ${key}`),
+      ...Object.keys(envVars).reduce((acc, key) => [...acc, '--env', key], []),
       semanticRelease,
       'semantic-release',
-      ...process.argv.slice(2),
+      ...(cmdArgs ?? process.argv.slice(2)),
     ];
 
     console.log('🚀  docker', args.join(' '));
 
-    spawnSync('docker', args, {
+    const result = spawnSync('docker', args, {
       env: envVars,
       stdio: 'inherit',
     });
+
+    if (setExitCode && typeof result.status === 'number') {
+      process.exitCode = result.status;
+    }
   }
 }

@@ -71,4 +71,6 @@ type ReleaseParams = Partial<{
   cwd?: string;
   docker?: boolean;
   beta?: boolean;
+  cmdArgs?: string[];
+  setExitCode?: boolean;
 }>;

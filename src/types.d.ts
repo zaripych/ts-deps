@@ -25,5 +25,5 @@ interface IOptions {
   /**
    * Environment variables semantic-release has access to
    */
-  semanticReleaseEnvVars?: RegExp[];
+  semanticReleaseEnvVars?: Array<string | RegExp>;
 }
