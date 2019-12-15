@@ -37,7 +37,7 @@ jobs:
         run: yarn install
 
       - name: Checks
-        run: yarn run check
+        run: yarn run check && yarn release --dry-run
       - name: Unit Tests
         run: yarn run test --coverage
       - name: Integration Tests
