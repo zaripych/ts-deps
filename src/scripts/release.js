@@ -114,6 +114,8 @@ export async function release(paramsRaw = defaultProps()) {
       '--rm',
       '-v',
       `${process.cwd()}:/opt/cwd`,
+      '-v',
+      `/var/run/docker.sock:/var/run/docker.sock`,
       ...Object.keys(envVars).reduce((acc, key) => [...acc, '--env', key], []),
       semanticRelease,
       'semantic-release',
