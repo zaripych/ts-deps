@@ -33,8 +33,15 @@ export async function release(paramsRaw = defaultProps()) {
   const envPatterns = semanticReleaseEnvVars ?? [
     'GH_TOKEN',
     'NPM_TOKEN',
+
+    'GIT_AUTHOR_EMAIL',
+    'GIT_AUTHOR_NAME',
+    'GIT_COMMITTER_EMAIL',
+    'GIT_COMMITTER_NAME',
+
     'DOCKER_USERNAME',
     'DOCKER_PASSWORD',
+
     'TRAVIS',
     'TRAVIS_PULL_REQUEST',
     'TRAVIS_COMMIT',
@@ -47,6 +54,7 @@ export async function release(paramsRaw = defaultProps()) {
     'TRAVIS_PULL_REQUEST_BRANCH',
     'TRAVIS_REPO_SLUG',
     'TRAVIS_BUILD_DIR',
+
     'GITHUB_EVENT_PATH',
     'GITHUB_ACTION',
     'GITHUB_EVENT_NAME',
