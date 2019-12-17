@@ -24,6 +24,7 @@ export async function release(paramsRaw = defaultProps()) {
   const whichDocker =
     docker &&
     spawnSync('which', ['docker'], {
+      env: process.env,
       shell: process.platform === 'win32',
     });
 
@@ -109,6 +110,10 @@ export async function release(paramsRaw = defaultProps()) {
       stdio: 'inherit',
     });
 
+    if (result.error) {
+      throw result.error;
+    }
+
     if (setExitCode && typeof result.status === 'number') {
       process.exitCode = result.status;
     }
@@ -133,9 +138,16 @@ export async function release(paramsRaw = defaultProps()) {
     console.log('🚀  docker', args.join(' '));
 
     const result = spawnSync('docker', args, {
-      env: envVars,
+      env: {
+        PATH: process.env.PATH,
+        ...envVars,
+      },
       stdio: 'inherit',
     });
+
+    if (result.error) {
+      throw result.error;
+    }
 
     if (setExitCode && typeof result.status === 'number') {
       process.exitCode = result.status;
