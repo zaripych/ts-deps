@@ -18,6 +18,7 @@
     "lint": "tslint -p . -t verbose",
     "check": "concurrently --raw -c \"node ./scripts/build.js\" \"tsc\" \"tslint -p . -t verbose\"",
     "patch": "node ./scripts/patch.js",
+    "prepublishOnly": "yarn run build",
     "release": "node ./scripts/release.js"
   },
   "repository": {
