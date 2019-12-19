@@ -12,3 +12,4 @@ package
 .pnp
 .log
 git-ignored-manual-test-dir
+semantic-release
