@@ -1,6 +1,8 @@
 // @ts-check
 import { spawnSync } from 'child_process';
 import { options } from '../options';
+import { mkdirSync, existsSync } from 'fs';
+import { join } from 'path';
 
 const defaultProps = () => ({
   beta: true,
@@ -78,7 +80,7 @@ export async function release(paramsRaw = defaultProps()) {
   );
 
   if (!docker || (whichDocker && whichDocker.status !== 0)) {
-    // npx is going to be just a little slower because it is more CPU intensive:
+    // npx/npm is going to be just a little slower because it is more CPU intensive:
     // E.g:
     // time npx --ignore-existing --cache ./cache semantic-release --help
     // ... 11.13s user 1.85s system 84% cpu 15.445 total
@@ -88,21 +90,57 @@ export async function release(paramsRaw = defaultProps()) {
     //
     // So CI machine with higher network bandwidth with limited/virtualized CPU should be faster with docker and slower with npx
     if (docker) {
-      console.warn('⚠  Using npx instead of docker ...');
+      console.warn('⚠  Using npm install instead of docker ...');
+    }
+
+    const SUB_DIR = './semantic-release';
+
+    if (!existsSync(SUB_DIR)) {
+      mkdirSync(SUB_DIR);
     }
 
     const semanticRelease = beta ? 'semantic-release@beta' : 'semantic-release';
+    const semanticReleaseExec = beta
+      ? '@semantic-release/exec@beta'
+      : '@semantic-release/exec';
+
+    const installArgs = [
+      'install',
+      '--prefix',
+      SUB_DIR,
+      '--production',
+      semanticRelease,
+      semanticReleaseExec,
+      '--no-save',
+    ];
+
+    console.log('🚀  npm', installArgs.join(' '));
+
+    const installResult = spawnSync('npm', installArgs, {
+      env: {
+        PATH: process.env.PATH,
+      },
+      stdio: 'inherit',
+    });
+
+    if (installResult.error) {
+      throw installResult.error;
+    }
+
+    if (setExitCode && typeof installResult.status === 'number') {
+      process.exitCode = installResult.status;
+    }
+
+    if (installResult.status !== 0) {
+      return;
+    }
 
     const args = [
-      '-p',
-      semanticRelease,
-      'semantic-release',
+      join(SUB_DIR, 'node_modules/.bin/semantic-release'),
       ...(cmdArgs ?? process.argv.slice(2)),
     ];
 
-    console.log('🚀  npx', args.join(' '));
-
-    const result = spawnSync('npx', args, {
+    const result = spawnSync('node', args, {
       env: {
         PATH: process.env.PATH,
         ...envVars,
