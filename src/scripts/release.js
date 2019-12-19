@@ -17,7 +17,7 @@ const defaultProps = () => ({
  * @param {ReleaseParams} paramsRaw
  */
 export async function release(paramsRaw = defaultProps()) {
-  const { beta, cwd, docker, cmdArgs, setExitCode } = {
+  const { beta, cwd, docker, cmdArgs, dockerArgs, setExitCode } = {
     ...defaultProps(),
     ...paramsRaw,
   };
@@ -167,6 +167,7 @@ export async function release(paramsRaw = defaultProps()) {
       `${process.cwd()}:/opt/cwd`,
       '-v',
       `/var/run/docker.sock:/var/run/docker.sock`,
+      ...(dockerArgs || []),
       ...Object.keys(envVars).reduce((acc, key) => [...acc, '--env', key], []),
       semanticRelease,
       'semantic-release',
