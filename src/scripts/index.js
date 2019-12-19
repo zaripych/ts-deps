@@ -1,14 +1,18 @@
 // @ts-check
-const { babelBuild } = require('./build');
-const { patch } = require('./patch');
-const { clean } = require('./clean');
-const { init } = require('./init');
-const { combineCoverage } = require('./combineCoverage');
+import { babelBuild } from './babelBuild';
+import { patch } from './patch';
+import { clean } from './clean';
+import { init } from './init';
+import { combineCoverage } from './combineCoverage';
+import { rollupBuild } from './rollupBuild';
+import { release } from './release';
 
-module.exports = {
+export {
   babelBuild,
   patch,
   clean,
   init,
   combineCoverage,
+  rollupBuild,
+  release,
 };

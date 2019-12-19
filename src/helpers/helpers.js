@@ -1,7 +1,7 @@
 // @ts-check
-const { resolve, basename } = require('path');
-const { existsSync } = require('fs-extra');
-const { prompt } = require('inquirer');
+import { resolve, basename } from 'path';
+import { existsSync } from 'fs-extra';
+import { prompt } from 'inquirer';
 
 /**
  * @param {string} str
@@ -110,7 +110,7 @@ function ensureSurroundedWithPathSeparator(p, sep = '/') {
  */
 function resolveTemplatesDir(candidates) {
   const templatesCandidates = candidates || [
-    resolve(__dirname, '../../template-max'),
+    resolve(__dirname, '../../template-for-libs'),
   ];
 
   const templatesDir = templatesCandidates.find(cnd => existsSync(cnd));
@@ -178,7 +178,7 @@ const promptForOverwrite = async dest => {
 };
 promptForOverwrite.state = copyPromptState;
 
-module.exports = {
+export {
   trim,
   trimLeft,
   trimRight,

@@ -11,6 +11,18 @@ type BabelBuildParams = Partial<{
   copyAdditional: string[];
 }>;
 
+type RollupBuildParams = Partial<{
+  overrideWithCommandLineArguments: boolean;
+  logCommandLine: boolean;
+  exitOnCompletion: boolean;
+  extensions: string[];
+  outDir: string;
+  rootDir: string;
+  unitTestsGlob: string;
+  integrationTestsGlob: string;
+  copyAdditional: string[];
+}>;
+
 type TemplateInfo = {
   type: 'directory' | 'package' | 'default';
   dir: string;
@@ -23,12 +35,14 @@ type PatchParams = Partial<{
   baseTsConfigLocation: string;
   patchOnly: string[];
   cwd: string;
+  targetDirectory: string;
 
   initializedTemplates: TemplateInfo[];
 }>;
 
 type InitParams = Partial<{
   template: string;
+  targetDirectory: string;
   cwd: string;
   force: boolean;
 }>;
@@ -52,3 +66,11 @@ type PatchCoreOptions = {
 type CombineCoverageParams = {
   cwd: string;
 };
+
+type ReleaseParams = Partial<{
+  cwd?: string;
+  docker?: boolean;
+  beta?: boolean;
+  cmdArgs?: string[];
+  setExitCode?: boolean;
+}>;

@@ -1,6 +1,7 @@
 coverage
 coverage-*
 lib
+dist
 node_modules
 .jest-cache
 yarn-error.log
@@ -9,3 +10,6 @@ ts-deps*.tgz
 integration-test-*
 package
 .pnp
+.log
+git-ignored-manual-test-dir
+semantic-release

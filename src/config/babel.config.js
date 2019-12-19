@@ -1,18 +1,22 @@
 // @ts-check
 'use strict';
 
-const defaults = require('../defaults');
-const { trimPathSeparator } = require('../helpers');
-const { options } = require('../options');
+import { defaults } from '../defaults';
+import { trimPathSeparator } from '../helpers';
+import { options } from '../options';
 
 /**
  * @param {Partial<IBabelConfigParams>} paramsRaw
  */
-const babelConfig = (paramsRaw = {}) => {
+export const babelConfig = (paramsRaw = {}) => {
   const opts = options();
-  const { aliases, nodeVersion } = {
+  const { aliases, nodeVersion, presetEnvConfig } = {
     aliases: opts.aliases,
     nodeVersion: opts.nodeVersion || defaults.nodeVersion,
+    /**
+     * @param {{}} defaultConfig
+     */
+    presetEnvConfig: defaultConfig => defaultConfig,
     ...paramsRaw,
   };
   const src = defaults.rootDir;
@@ -21,11 +25,11 @@ const babelConfig = (paramsRaw = {}) => {
     presets: [
       [
         '@babel/preset-env',
-        {
+        presetEnvConfig({
           targets: {
             node: nodeVersion,
           },
-        },
+        }),
       ],
       '@babel/preset-typescript',
     ],
@@ -52,10 +56,4 @@ const babelConfig = (paramsRaw = {}) => {
   return config;
 };
 
-module.exports = {
-  __esModule: {
-    value: true,
-  },
-  default: babelConfig(),
-  babelConfig,
-};
+export default babelConfig();

@@ -1,13 +1,12 @@
 // @ts-check
-
-const { EOL } = require('os');
+import { EOL } from 'os';
 
 const newLineRegex = /\r\n|\n/g;
 
 /**
  * @param {{oldText?: string, newText?: string, unique: boolean}} param0
  */
-function patchText({ oldText, newText, unique }) {
+export function patchText({ oldText, newText, unique }) {
   const oldLines =
     (typeof oldText === 'string' && oldText.split(newLineRegex)) || [];
   const newLines =
@@ -28,7 +27,3 @@ function patchText({ oldText, newText, unique }) {
 
   return result.join(EOL);
 }
-
-module.exports = {
-  patchText,
-};

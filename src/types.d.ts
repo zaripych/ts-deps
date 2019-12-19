@@ -21,4 +21,9 @@ interface IOptions {
    * Location of the ts config we should extend from
    */
   baseTsConfigLocation?: string;
+
+  /**
+   * Environment variables semantic-release has access to
+   */
+  semanticReleaseEnvVars?: Array<string | RegExp>;
 }

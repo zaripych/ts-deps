@@ -1,11 +1,11 @@
-const {
+import {
   escapeRegExp,
   ensureSurroundedWithPathSeparator,
   ensureStartsWithPathSeparator,
   ensureEndsWithPathSeparator,
   ensureSamePathSeparator,
   trim,
-} = require('../helpers');
+} from '../helpers';
 
 describe('escapeRegExp', () => {
   it('should work', () => {

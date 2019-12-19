@@ -1,4 +1,4 @@
-const { tsConfig, tsConfigDeclarations } = require('../tsconfig');
+import { tsConfig, tsConfigDeclarations } from '../tsconfig';
 
 describe('given no options', () => {
   it('should work', () => {

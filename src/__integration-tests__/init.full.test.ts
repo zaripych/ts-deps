@@ -7,7 +7,7 @@ import {
 } from './helpers';
 import { join } from 'path';
 import { ensureDir, copy } from 'fs-extra';
-import defaults from '../defaults';
+import { defaults } from '../defaults';
 
 jest.setTimeout(5 * 60 * 1000);
 
@@ -76,8 +76,12 @@ describe('init', () => {
         cwd: initDir,
       });
 
+      spawnAndCheck('npm', ['run', 'release', '--version'], {
+        cwd: initDir,
+      });
+
       // tslint:disable-next-line
-      const outDir = join(initDir, defaults.outDir);
+      const outDir = join(initDir, defaults.libOutDir);
 
       const libContents = await sortedDirectoryContents(outDir);
 

@@ -40,6 +40,7 @@ Array [
   "scripts/build.js",
   "scripts/clean.js",
   "scripts/combineCoverage.js",
+  "scripts/release.js",
   "src/",
   "src/__integration-tests__/",
   "src/__tests__/",

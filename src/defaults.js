@@ -1,7 +1,8 @@
 // @ts-check
-module.exports = Object.freeze({
+export const defaults = Object.freeze({
   rootDir: 'src',
-  outDir: 'lib',
+  libOutDir: 'lib',
+  appOutDir: 'dist',
   extensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
   copyAdditional: [
     '**/*.d.ts',

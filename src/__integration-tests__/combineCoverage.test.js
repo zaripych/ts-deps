@@ -1,5 +1,5 @@
 // @ts-check
-const { clean, combineCoverage } = require('../scripts');
+import { clean, combineCoverage } from '../scripts';
 
 jest.setTimeout(120000);
 

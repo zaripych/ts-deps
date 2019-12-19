@@ -1,4 +1,5 @@
 // @ts-check
-const { combineCoverage } = require('../src')
+require('@babel/register');
+const { combineCoverage } = require('../src');
 
-combineCoverage()
+combineCoverage();

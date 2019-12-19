@@ -1,17 +1,18 @@
 // @ts-check
-const { spawnSync } = require('child_process');
-const { unarchiveTarGz } = require('./unarchive');
-const { resolveTemplatesDir } = require('./helpers');
-const { join, relative, isAbsolute } = require('path');
-const { pathExists, unlink, stat } = require('fs-extra');
+import { spawnSync } from 'child_process';
+import { unarchiveTarGz } from './unarchive';
+import { resolveTemplatesDir } from './helpers';
+import { join, relative, isAbsolute } from 'path';
+import { pathExists, unlink, stat } from 'fs-extra';
 
-const templateDirectories = ['template', 'template-max'];
+const templateDirectories = ['template', 'template-for-libs', 'template-max'];
 
 /**
  * @param {string} depName
  * @param {string} cwd
+ * @param {string} targetDir
  */
-const npmPullTemplate = async (depName, cwd) => {
+const npmPullTemplate = async (depName, cwd, targetDir) => {
   const infoProcessResult = spawnSync('npm', ['info', depName], {
     encoding: 'utf8',
     shell: process.platform === 'win32',
@@ -19,18 +20,18 @@ const npmPullTemplate = async (depName, cwd) => {
   });
 
   if (infoProcessResult.status !== 0) {
-    throw new Error(`Couldn't find '${depName}' package`);
+    throw new Error(`Couldn't find '${depName}' package in npm repository`);
   }
 
+  const templateFullDirs = templateDirectories.map(dir => join(targetDir, dir));
+
   const templatePathExist = await Promise.all(
-    templateDirectories.map(dir => pathExists(join(cwd, dir)))
+    templateFullDirs.map(dir => pathExists(dir))
   );
   const existingTemplatePath = templatePathExist.indexOf(true);
   if (existingTemplatePath >= 0) {
     throw new Error(
-      `Path already exists: ${
-        templateDirectories[existingTemplatePath]
-      }, it would be unsafe to pull templates to this location, please remove or backup the directory manually`
+      `Path already exists: ${templateFullDirs[existingTemplatePath]}, it would be unsafe to pull templates to this location, please remove or backup the directory manually`
     );
   }
 
@@ -61,18 +62,16 @@ const npmPullTemplate = async (depName, cwd) => {
 
   await unlink(fullPackagePath);
 
-  return relative(
-    cwd,
-    resolveTemplatesDir(templateDirectories.map(dir => join(cwd, dir)))
-  );
+  return relative(cwd, resolveTemplatesDir(templateFullDirs));
 };
 
 /**
  * @param {string} template
  * @param {string} cwd
+ * @param {string} targetDir
  * @returns {Promise<TemplateInfo>}
  */
-const pullTemplates = async (template, cwd) => {
+const pullTemplates = async (template, cwd, targetDir) => {
   const templatePath = isAbsolute(template) ? template : join(cwd, template);
   const templatesStat = await stat(templatePath).catch(_err => null);
 
@@ -83,20 +82,21 @@ const pullTemplates = async (template, cwd) => {
     };
   }
 
-  const result = await npmPullTemplate(template, cwd);
+  const result = await npmPullTemplate(template, cwd, targetDir);
 
   return {
     type: 'package',
-    dir: result,
+    dir: join(cwd, result),
   };
 };
 
 /**
  * @param {string} [template]
  * @param {string} cwd
+ * @param {string} targetDir
  * @returns {Promise<TemplateInfo[]>}
  */
-const initializeTemplates = async (template, cwd) => {
+const initializeTemplates = async (template, cwd, targetDir) => {
   /**
    * @type TemplateInfo
    */
@@ -106,7 +106,7 @@ const initializeTemplates = async (template, cwd) => {
   };
 
   const templateInfo = template
-    ? await pullTemplates(template, cwd)
+    ? await pullTemplates(template, cwd, targetDir)
     : defTemplateInfo;
 
   const templates =
@@ -117,7 +117,4 @@ const initializeTemplates = async (template, cwd) => {
   return templates;
 };
 
-module.exports = {
-  npmPullTemplate,
-  initializeTemplates,
-};
+export { npmPullTemplate, initializeTemplates };

@@ -7,7 +7,7 @@ import {
 } from './helpers';
 import { join } from 'path';
 import { ensureDir, copy } from 'fs-extra';
-const { patch } = require('../scripts');
+import { patch } from '../scripts';
 
 jest.setTimeout(2 * 60 * 1000);
 
@@ -35,6 +35,7 @@ describe('patch', () => {
         forceOverwrites: true,
         patchOnly: [],
         cwd: initDir,
+        targetDirectory: initDir,
       });
 
       const contents = await sortedDirectoryContents(initDir, [

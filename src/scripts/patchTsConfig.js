@@ -1,6 +1,6 @@
 // @ts-check
-const { tsConfig, tsConfigDeclarations } = require('../config/tsconfig');
-const deepmerge = require('deepmerge');
+import { tsConfig, tsConfigDeclarations } from '../config/tsconfig';
+import deepmerge from 'deepmerge';
 
 const defaultDeps = Object.freeze({
   tsConfig,
@@ -11,7 +11,7 @@ const defaultDeps = Object.freeze({
  *
  * @param {{ oldConfig: {}, baseTsConfigLocation?: string, aggressive: boolean, declarations: boolean}} param0
  */
-const patchTsConfigCore = async (
+export const patchTsConfigCore = async (
   { oldConfig, baseTsConfigLocation, aggressive, declarations },
   deps = defaultDeps
 ) => {
@@ -35,7 +35,3 @@ const patchTsConfigCore = async (
 };
 
 patchTsConfigCore.defaultDeps = defaultDeps;
-
-module.exports = {
-  patchTsConfigCore,
-};
