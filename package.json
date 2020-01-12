@@ -87,7 +87,7 @@
     "tslint": "5.20.1",
     "tslint-config-prettier": "1.18.0",
     "typescript": "3.7.4",
-    "yargs": "15.0.2"
+    "yargs": "15.1.0"
   },
   "devDependencies": {
     "@babel/register": "7.7.7",
