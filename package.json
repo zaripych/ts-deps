@@ -93,7 +93,7 @@
     "@babel/register": "7.7.7",
     "@types/node": "10",
     "@types/prettier": "1.19.0",
-    "@types/tar-fs": "1.16.1",
+    "@types/tar-fs": "1.16.2",
     "husky": "4.0.7"
   },
   "engines": {
