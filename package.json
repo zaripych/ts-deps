@@ -2,67 +2,73 @@
   "name": "ts-deps",
   "version": "0.0.0-development",
   "description": "TypeScript related dependencies and libraries to setup/scaffold typical build/lint/format/test pipeline and CI/CD pipeline using babel, jest, prettier, tslint and semantic-release. Meant to be added as dev dependency.",
-  "main": "lib/index.js",
-  "scripts": {
-    "ts-deps": "node ./scripts/cli.js",
-    "test": "jest --color",
-    "integration": "jest --config ./jest.config.integration.js --color -i --testPathIgnorePatterns full",
-    "integration-long": "jest --config ./jest.config.integration.js --color -i --testPathPattern full",
-    "integration-all": "jest --config ./jest.config.integration.js --color -i",
-    "combine-coverage": "node ./scripts/combineCoverage.js",
-    "clean": "node ./scripts/clean.js",
-    "prebuild": "node ./scripts/clean.js",
-    "build": "node ./scripts/build.js -s",
-    "declarations": "tsc -p ./tsconfig.declarations.json",
-    "type-check": "tsc",
-    "lint": "tslint -p . -t verbose",
-    "check": "concurrently --raw -c \"node ./scripts/build.js\" \"tsc\" \"tslint -p . -t verbose\"",
-    "patch": "node ./scripts/patch.js",
-    "prepublishOnly": "yarn run build",
-    "release": "node ./scripts/release.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/Aimee-Blue/ts-deps.git"
-  },
   "keywords": [
     "TypeScript",
     "Dependencies",
     "Build-Pipeline"
   ],
-  "author": "@zaripych",
-  "license": "MIT",
+  "homepage": "https://github.com/Aimee-Blue/ts-deps#readme",
   "bugs": {
     "url": "https://github.com/Aimee-Blue/ts-deps/issues"
   },
-  "homepage": "https://github.com/Aimee-Blue/ts-deps#readme",
-  "bin": {
-    "ts-deps": "./lib/cli/ts-deps.js"
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Aimee-Blue/ts-deps.git"
   },
+  "license": "MIT",
+  "author": "@zaripych",
   "files": [
     "lib",
     "template-for-libs"
   ],
+  "main": "lib/index.js",
+  "bin": {
+    "ts-deps": "./lib/cli/ts-deps.js"
+  },
+  "scripts": {
+    "prebuild": "node ./scripts/clean.js",
+    "build": "node ./scripts/build.js -s",
+    "check": "concurrently --raw -c \"node ./scripts/build.js\" \"tsc\" \"tslint -p . -t verbose\"",
+    "clean": "node ./scripts/clean.js",
+    "combine-coverage": "node ./scripts/combineCoverage.js",
+    "declarations": "tsc -p ./tsconfig.declarations.json",
+    "integration": "jest --config ./jest.config.integration.js --color -i --testPathIgnorePatterns full",
+    "integration-all": "jest --config ./jest.config.integration.js --color -i",
+    "integration-long": "jest --config ./jest.config.integration.js --color -i --testPathPattern full",
+    "lint": "tslint -p . -t verbose",
+    "patch": "node ./scripts/patch.js",
+    "prepublishOnly": "yarn run build",
+    "release": "node ./scripts/release.js",
+    "test": "jest --color",
+    "ts-deps": "node ./scripts/cli.js",
+    "type-check": "tsc"
+  },
   "husky": {
     "hooks": {
+      "pre-commit": "lint-staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "pretty-quick --staged",
       "pre-push": "yarn run check"
     }
   },
+  "lint-staged": {
+    "*.{tsx,jsx,ts,js,json,md,yaml,yml}": [
+      "prettier --write"
+    ],
+    "package.json": [
+      "sort-package-json"
+    ]
+  },
   "dependencies": {
-    "@babel/cli": "7.7.7",
-    "@babel/core": "7.7.7",
-    "@babel/plugin-proposal-class-properties": "7.7.4",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "7.7.4",
-    "@babel/plugin-proposal-object-rest-spread": "7.7.7",
-    "@babel/plugin-proposal-optional-chaining": "7.7.5",
-    "@babel/preset-env": "7.7.7",
-    "@babel/preset-typescript": "7.7.7",
+    "@babel/cli": "7.8.3",
+    "@babel/core": "7.8.3",
+    "@babel/plugin-proposal-class-properties": "7.8.3",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "7.8.3",
+    "@babel/preset-env": "7.8.3",
+    "@babel/preset-typescript": "7.8.3",
     "@commitlint/cli": "8.3.4",
     "@commitlint/config-conventional": "8.3.4",
-    "@rollup/plugin-json": "4.0.1",
-    "@rollup/plugin-node-resolve": "7.0.0",
     "@types/fs-extra": "8.0.1",
     "@types/inquirer": "6.5.0",
     "@types/jest": "24.0.25",
@@ -79,9 +85,7 @@
     "jest": "24.9.0",
     "prettier": "1.19.1",
     "pretty-quick": "2.0.1",
-    "rollup": "1.28.0",
-    "rollup-plugin-babel": "4.3.3",
-    "rollup-plugin-commonjs": "10.1.0",
+    "sort-package-json": "1.39.0",
     "source-map-support": "0.5.16",
     "tar-fs": "2.0.0",
     "tslint": "5.20.1",
@@ -90,11 +94,12 @@
     "yargs": "15.1.0"
   },
   "devDependencies": {
-    "@babel/register": "7.7.7",
+    "@babel/register": "7.8.3",
     "@types/node": "10",
     "@types/prettier": "1.19.0",
-    "@types/tar-fs": "1.16.1",
-    "husky": "4.0.7"
+    "@types/tar-fs": "1.16.2",
+    "husky": "4.0.7",
+    "lint-staged": "10.0.0-beta.15"
   },
   "engines": {
     "node": ">= 8.12"
