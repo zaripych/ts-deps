@@ -11,3 +11,4 @@ node_modules
 out
 template-test
 test-sources
+git-ignored-manual-test-dir
