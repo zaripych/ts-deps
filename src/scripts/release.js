@@ -16,7 +16,7 @@ const defaultProps = () => ({
  *
  * @param {ReleaseParams} paramsRaw
  */
-export async function release(paramsRaw = defaultProps()) {
+export function release(paramsRaw = defaultProps()) {
   const { beta, cwd, docker, cmdArgs, dockerArgs, setExitCode } = {
     ...defaultProps(),
     ...paramsRaw,

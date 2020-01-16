@@ -1,7 +1,5 @@
 // @ts-check
-// @ts-ignore
 import { createCoverageMap } from 'istanbul-lib-coverage';
-// @ts-ignore
 import { createReporter } from 'istanbul-api';
 import { sync } from 'fast-glob';
 

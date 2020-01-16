@@ -11,7 +11,7 @@ const defaultDeps = Object.freeze({
  *
  * @param {{ oldConfig: {}, baseTsConfigLocation?: string, aggressive: boolean, declarations: boolean}} param0
  */
-export const patchTsConfigCore = async (
+export const patchTsConfigCore = (
   { oldConfig, baseTsConfigLocation, aggressive, declarations },
   deps = defaultDeps
 ) => {

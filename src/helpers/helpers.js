@@ -36,7 +36,7 @@ function trimLeft(str, character) {
 function trimRight(str, character) {
   let charSuffixLength = 0;
 
-  for (let i = str.length - 1; i >= 0; i++) {
+  for (let i = str.length - 1; i >= 0; i--) {
     const char = str[i];
 
     if (char !== character) {
@@ -158,7 +158,7 @@ const promptForOverwrite = async dest => {
   const result = await prompt([
     {
       name: 'overwrite',
-      message: `destination file \"${fileName}\" already exists, overwrite?`,
+      message: `destination file "${fileName}" already exists, overwrite?`,
       type: 'expand',
       choices: [
         { name: 'Overwrite', value: true, key: 'y' },

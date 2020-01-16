@@ -7,6 +7,7 @@ export const defaults = Object.freeze({
   copyAdditional: [
     '**/*.d.ts',
     '**/*.json',
+    '!@types/**/*.d.ts',
     '!**/__tests__/**',
     '!__integration-tests__/**',
   ],

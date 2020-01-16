@@ -34,6 +34,7 @@ scripts/combineCoverage.js
 src/
 src/__integration-tests__
 src/__tests__
+.eslintrc.js
 babel.config.js
 commitlint.config.js
 jest.config.integration.js
@@ -43,7 +44,6 @@ prettier.config.js
 release.config.js
 tsconfig.json
 tsconfig.declarations.json
-tslint.json
 ```
 
 Following packages already included for you:
@@ -51,7 +51,7 @@ Following packages already included for you:
 - babel - Babel 7 to build `.js` or `.ts` which brings more transformation options and speed
 - typescript - TypeScript used for type checking and declarations
 - jest - Jest uses same babel config as build pipeline
-- tslint
+- eslint
 - prettier https://prettier.io/
 - semantic-release https://github.com/semantic-release/semantic-release
 - husky

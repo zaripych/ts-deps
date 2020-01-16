@@ -11,7 +11,7 @@ describe('given aliases', () => {
   it('should work', () => {
     const defaultConfig = jestConfig({
       aliases: {
-        ['@shared']: '/src/shared',
+        '@shared': '/src/shared',
       },
     });
     expect(defaultConfig).toMatchSnapshot();
