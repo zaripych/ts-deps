@@ -6,6 +6,7 @@ build
 coverage*
 integration-test-*
 lib
+dist
 node_modules
 template-test
 test-sources
