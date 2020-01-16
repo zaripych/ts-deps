@@ -243,6 +243,7 @@ export function eslintConfig(params) {
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/interface-name-prefix': 'warn',
       '@typescript-eslint/require-await': 'warn',
+      '@typescript-eslint/prefer-regexp-exec': 'warn',
 
       ...params?.src?.rules,
     },
