@@ -1,5 +1,4 @@
 type BabelBuildParams = Partial<{
-  overrideWithCommandLineArguments: boolean;
   doNotOutputTests: boolean;
   logCommandLine: boolean;
   exitOnCompletion: boolean;
@@ -9,10 +8,10 @@ type BabelBuildParams = Partial<{
   unitTestsGlob: string;
   integrationTestsGlob: string;
   copyAdditional: string[];
+  commandLine: string[];
 }>;
 
 type RollupBuildParams = Partial<{
-  overrideWithCommandLineArguments: boolean;
   logCommandLine: boolean;
   exitOnCompletion: boolean;
   extensions: string[];
@@ -21,6 +20,7 @@ type RollupBuildParams = Partial<{
   unitTestsGlob: string;
   integrationTestsGlob: string;
   copyAdditional: string[];
+  commandLine: string[];
 }>;
 
 type TemplateInfo = {

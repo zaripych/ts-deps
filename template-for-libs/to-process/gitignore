@@ -3,8 +3,10 @@
 .pnp
 coverage
 coverage-*
+dist
 lib
 node_modules
+out
 package
 .pnp
 .local-semantic-release

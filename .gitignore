@@ -9,6 +9,7 @@ git-ignored-manual-test-dir
 integration-test-*
 lib
 node_modules
+out
 package
 .pnp
 .log

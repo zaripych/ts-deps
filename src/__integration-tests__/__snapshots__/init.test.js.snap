@@ -147,6 +147,5 @@ Array [
   "ts-deps.config.js",
   "tsconfig.declarations.json",
   "tsconfig.json",
-  "tslint.json",
 ]
 `;

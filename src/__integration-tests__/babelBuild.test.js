@@ -11,7 +11,7 @@ describe('babelBuild', () => {
     await babelBuild({
       // We should not use command line arguments from the
       // jest test framework
-      overrideWithCommandLineArguments: false,
+      commandLine: ['-s'],
     });
 
     const buildFiles = await sortedDirectoryContents(
