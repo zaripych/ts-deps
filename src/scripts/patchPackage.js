@@ -1,5 +1,6 @@
 //@ts-check
 import deepmerge from 'deepmerge';
+import sortPackageJson from 'sort-package-json';
 
 /**
  * @param {PatchPackageJson} tsDepsPkg
@@ -60,5 +61,5 @@ export const patchPackageJsonCore = (
   }
   result.devDependencies[tsDepsPkg.name] = tsDepsPkg.version;
 
-  return result;
+  return sortPackageJson(result);
 };
