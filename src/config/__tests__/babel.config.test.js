@@ -37,8 +37,8 @@ describe('given aliases', () => {
   it('should work', () => {
     const cfg = babelConfig({
       aliases: {
-        ['@shared']: '/src/shared',
-        ['@feature']: 'src/feature/',
+        '@shared': '/src/shared',
+        '@feature': 'src/feature/',
       },
     });
     expect(cfg).toMatchSnapshot();
@@ -51,7 +51,7 @@ describe('given options', () => {
   it('should work', () => {
     const cfg = babelConfig({
       aliases: {
-        ['@shared']: '/src/shared/',
+        '@shared': '/src/shared/',
       },
       nodeVersion: '10',
     });

@@ -4,7 +4,7 @@ import { trimPathSeparator } from '../helpers';
 import { defaults } from '../defaults';
 
 /**
- * @param {Partial<ITsConfigParams>} paramsRaw
+ * @param {Partial<TsConfigParams>} paramsRaw
  */
 export const tsConfig = (paramsRaw = {}) => {
   const opts = options();
@@ -40,7 +40,7 @@ export const tsConfig = (paramsRaw = {}) => {
 };
 
 /**
- * @param {Partial<ITsConfigParams>} paramsRaw
+ * @param {Partial<TsConfigParams>} paramsRaw
  */
 export const tsConfigDeclarations = (paramsRaw = {}) => {
   /**

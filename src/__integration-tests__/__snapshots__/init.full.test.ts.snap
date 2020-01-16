@@ -26,6 +26,8 @@ Array [
 
 exports[`init given fresh directory after init should output correct files 1`] = `
 Array [
+  ".eslintignore",
+  ".eslintrc.js",
   ".gitignore",
   ".yarnrc",
   "babel.config.js",
@@ -61,6 +63,5 @@ Array [
   "ts-deps.config.js",
   "tsconfig.declarations.json",
   "tsconfig.json",
-  "tslint.json",
 ]
 `;

@@ -2,6 +2,8 @@
 
 exports[`init given bare directory after init (init-bare) should output correct files 1`] = `
 Array [
+  ".eslintignore",
+  ".eslintrc.js",
   ".gitignore",
   ".yarnrc",
   "babel.config.js",
@@ -21,12 +23,13 @@ Array [
   "src/__tests__/",
   "tsconfig.declarations.json",
   "tsconfig.json",
-  "tslint.json",
 ]
 `;
 
 exports[`init given non-empty directory after init (init-non-empty) should output correct files 1`] = `
 Array [
+  ".eslintignore",
+  ".eslintrc.js",
   ".gitignore",
   ".yarnrc",
   "babel.config.js",
@@ -61,12 +64,13 @@ Array [
   "ts-deps.config.js",
   "tsconfig.declarations.json",
   "tsconfig.json",
-  "tslint.json",
 ]
 `;
 
 exports[`init given non-empty directory after init, with template parameter (init-template-dir) should output correct files 1`] = `
 Array [
+  ".eslintignore",
+  ".eslintrc.js",
   ".gitignore",
   ".yarnrc",
   "additional.txt",
@@ -102,12 +106,13 @@ Array [
   "ts-deps.config.js",
   "tsconfig.declarations.json",
   "tsconfig.json",
-  "tslint.json",
 ]
 `;
 
 exports[`init given non-empty directory after init, with template parameter (init-template-package) should output correct files 1`] = `
 Array [
+  ".eslintignore",
+  ".eslintrc.js",
   ".gitignore",
   ".yarnrc",
   "babel.config.js",

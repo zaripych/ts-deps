@@ -9,6 +9,7 @@ import { join } from 'path';
  * @param {string[]} args All arguments
  * @param {string[]} lookupArgs Arguments we are interested in
  * @param {string[]} values Values to set
+ * @returns {string[]}
  */
 const optionalArgBuilder = (args, lookupArgs, values) => {
   const contains = args.some(arg =>
@@ -37,10 +38,9 @@ export async function rollupBuild({
 } = {}) {
   const args = overrideWithCommandLineArguments ? process.argv.splice(2) : [];
 
-  const isHelpNeeded =
-    args.indexOf('--help') !== -1 || args.indexOf('-h') !== -1;
+  const isHelpNeeded = args.includes('--help') || args.includes('-h');
 
-  const skipCopying = args.indexOf('--no-copy-files') !== -1;
+  const skipCopying = args.includes('--no-copy-files');
 
   if (!isHelpNeeded && !skipCopying && copyAdditional.length > 0) {
     console.log();
