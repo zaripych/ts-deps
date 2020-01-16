@@ -248,7 +248,7 @@ export function eslintConfig(params) {
 
     overrides: [
       {
-        files: ['src/__tests__/**/*.ts?(x)', 'src/__tests__/**/*.js?(x)'],
+        files: ['src/**/__tests__/**/*.ts?(x)', 'src/**/__tests__/**/*.js?(x)'],
         rules: {
           '@typescript-eslint/ban-ts-ignore': 'off',
           '@typescript-eslint/no-explicit-any': 'off',
