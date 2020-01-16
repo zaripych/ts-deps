@@ -1,12 +1,10 @@
 // @ts-check
-'use strict';
-
 import { defaults } from '../defaults';
 import { trimPathSeparator } from '../helpers';
 import { options } from '../options';
 
 /**
- * @param {Partial<IBabelConfigParams>} paramsRaw
+ * @param {Partial<BabelConfigParams>} paramsRaw
  */
 export const babelConfig = (paramsRaw = {}) => {
   const opts = options();

@@ -1,0 +1,11 @@
+.dependabot
+.github
+.jest-cache
+.vscode
+build
+coverage*
+integration-test-*
+lib
+node_modules
+template-test
+test-sources

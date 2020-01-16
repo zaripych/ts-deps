@@ -44,7 +44,7 @@ const patchPackageJson = async ({ toPatch, templatesDir, aggressive }) => {
  *
  * @param {{ toPatch?: string, baseTsConfigLocation?: string, aggressive?: boolean, declarations?: boolean}} param0
  */
-const patchTsConfig = async ({
+const patchTsConfig = ({
   toPatch,
   baseTsConfigLocation,
   aggressive = false,
@@ -52,7 +52,7 @@ const patchTsConfig = async ({
 }) => {
   const oldConfig = (toPatch && JSON.parse(toPatch)) || {};
 
-  const result = await patchTsConfigCore({
+  const result = patchTsConfigCore({
     oldConfig,
     baseTsConfigLocation,
     aggressive,
@@ -75,7 +75,7 @@ const patchGitignore = async ({ toPatch, templatesDir }) => {
 
   const newText = await readFile(templateGitignorePath, { encoding: 'utf-8' });
 
-  const result = await patchText({
+  const result = patchText({
     oldText: toPatch,
     newText,
     unique: true,
@@ -104,8 +104,8 @@ const buildPatcherPerTemplate = (template, params) => {
       /**
        * @param {string|undefined} toPatch
        */
-      contents: async toPatch =>
-        await patchPackageJson({
+      contents: toPatch =>
+        patchPackageJson({
           toPatch,
           templatesDir: template.dir,
           aggressive: params.aggressive,
@@ -138,8 +138,8 @@ const buildPatchers = (templates, params) => {
       /**
        * @param {string|undefined} toPatch
        */
-      contents: async toPatch =>
-        await patchTsConfig({
+      contents: toPatch =>
+        patchTsConfig({
           toPatch,
           baseTsConfigLocation,
           aggressive,
@@ -150,8 +150,8 @@ const buildPatchers = (templates, params) => {
       /**
        * @param {string|undefined} toPatch
        */
-      contents: async toPatch =>
-        await patchTsConfig({
+      contents: toPatch =>
+        patchTsConfig({
           toPatch,
           baseTsConfigLocation,
           aggressive,
