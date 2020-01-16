@@ -4,7 +4,8 @@
 .vscode
 build
 coverage*
+dist
 integration-test-*
 lib
-dist
 node_modules
+out

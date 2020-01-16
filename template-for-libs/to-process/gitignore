@@ -3,7 +3,9 @@
 .pnp
 coverage
 coverage-*
+dist
 lib
 node_modules
+out
 package
 yarn-error.log
