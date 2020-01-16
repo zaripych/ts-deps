@@ -240,12 +240,23 @@ export function eslintConfig(params) {
     },
   };
 
+  const tests = {
+    ...typeScript,
+    rules: {
+      '@typescript-eslint/ban-ts-ignore': 'off',
+    },
+  };
+
   return {
     ...rootJavaScriptConfig,
     overrides: [
       {
         files: ['src/**/*.ts?(x)', 'src/**/*.js?(x)'],
         ...typeScript,
+      },
+      {
+        files: ['src/__tests__/**/*.ts?(x)', 'src/__tests__/**/*.js?(x)'],
+        ...tests,
       },
     ],
   };
