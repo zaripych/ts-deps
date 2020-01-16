@@ -242,6 +242,7 @@ export function eslintConfig(params) {
       '@typescript-eslint/no-useless-constructor': 'warn',
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/interface-name-prefix': 'warn',
+      '@typescript-eslint/require-await': 'warn',
 
       ...params?.src?.rules,
     },
@@ -252,6 +253,7 @@ export function eslintConfig(params) {
         rules: {
           '@typescript-eslint/ban-ts-ignore': 'off',
           '@typescript-eslint/no-explicit-any': 'off',
+          '@typescript-eslint/require-await': 'off',
           ...params?.tests?.rules,
         },
       },
