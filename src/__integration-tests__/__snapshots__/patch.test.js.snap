@@ -2,8 +2,22 @@
 
 exports[`patch given fresh directory after init should output correct files 1`] = `
 Array [
+  ".eslintignore",
+  ".eslintrc.js",
   ".gitignore",
+  ".yarnrc",
+  "babel.config.js",
+  "commitlint.config.js",
+  "jest.config.integration.js",
+  "jest.config.js",
   "package.json",
+  "prettier.config.js",
+  "release.config.js",
+  "scripts/",
+  "scripts/build.js",
+  "scripts/clean.js",
+  "scripts/combineCoverage.js",
+  "scripts/release.js",
   "src/",
   "src/__tests__/",
   "src/__tests__/max.test.ts",

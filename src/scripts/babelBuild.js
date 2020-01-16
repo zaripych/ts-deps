@@ -29,7 +29,7 @@ const optionalArgBuilder = (args, lookupArgs, values) => {
  * @param {BabelBuildParams} param
  */
 export async function babelBuild({
-  overrideWithCommandLineArguments = true,
+  commandLine,
   doNotOutputTests = true,
   logCommandLine = true,
   extensions = defaults.extensions,
@@ -41,7 +41,9 @@ export async function babelBuild({
 } = {}) {
   const exts = extensions.map(ext => `.${ext}`).join(',');
 
-  const args = overrideWithCommandLineArguments ? process.argv.splice(2) : [];
+  const args = !Array.isArray(commandLine)
+    ? process.argv.splice(2)
+    : commandLine;
 
   const isHelpNeeded = args.includes('--help') || args.includes('-h');
 
