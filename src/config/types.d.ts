@@ -64,4 +64,5 @@ interface EsLintConfigParams {
 interface EsLintConfig {
   root?: EsLintConfigParams;
   src?: EsLintConfigParams;
+  tests?: EsLintConfigParams;
 }
