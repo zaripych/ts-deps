@@ -1,8 +1,9 @@
+.DS_Store
+.jest-cache
+.pnp
 coverage
 coverage-*
 lib
 node_modules
-.jest-cache
-yarn-error.log
 package
-.pnp
+yarn-error.log

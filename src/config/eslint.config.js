@@ -171,6 +171,13 @@ export function eslintConfig(params) {
 
   const typeScript = {
     parser: '@typescript-eslint/parser',
+    env: {
+      browser: false,
+      es6: true,
+      node: true,
+      jest: true,
+      ...params?.src?.env,
+    },
     parserOptions: {
       project: './tsconfig.json',
       ecmaVersion: 2018,
@@ -238,6 +245,17 @@ export function eslintConfig(params) {
 
       ...params?.src?.rules,
     },
+
+    overrides: [
+      {
+        files: ['src/__tests__/**/*.ts?(x)', 'src/__tests__/**/*.js?(x)'],
+        rules: {
+          '@typescript-eslint/ban-ts-ignore': 'off',
+          '@typescript-eslint/no-explicit-any': 'off',
+          ...params?.tests?.rules,
+        },
+      },
+    ],
   };
 
   return {
