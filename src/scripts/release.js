@@ -84,7 +84,7 @@ export async function release(paramsRaw = defaultProps()) {
       console.warn('⚠  Using npm install instead of docker ...');
     }
 
-    const SUB_DIR = './semantic-release';
+    const SUB_DIR = './.local-semantic-release';
 
     if (!existsSync(SUB_DIR)) {
       mkdirSync(SUB_DIR);
@@ -97,8 +97,6 @@ export async function release(paramsRaw = defaultProps()) {
 
     const installArgs = [
       'install',
-      '--prefix',
-      SUB_DIR,
       '--production',
       semanticRelease,
       semanticReleaseExec,
@@ -111,6 +109,7 @@ export async function release(paramsRaw = defaultProps()) {
       env: {
         PATH: process.env.PATH,
       },
+      cwd: SUB_DIR,
       stdio: 'inherit',
     });
 
