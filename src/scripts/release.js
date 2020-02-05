@@ -1,7 +1,7 @@
 // @ts-check
 import { spawnSync } from 'child_process';
 import { options } from '../options';
-import { mkdirSync, existsSync } from 'fs';
+import { mkdirSync, existsSync, writeFileSync } from 'fs';
 import { join } from 'path';
 
 const defaultProps = () => ({
@@ -103,12 +103,19 @@ export async function release(paramsRaw = defaultProps()) {
       '--no-save',
     ];
 
-    spawnSync('npm', ['init', '-y'], {
-      env: {
-        PATH: process.env.PATH,
-      },
-      cwd: SUB_DIR,
-    });
+    writeFileSync(
+      join(SUB_DIR, 'package.json'),
+      `{
+      "name": "local-semantic-release",
+      "version": "1.0.0",
+      "main": "index.js",
+      "scripts": {},
+      "keywords": [],
+      "author": "",
+      "license": "ISC",
+      "description": ""
+    }`
+    );
 
     console.log('🚀  npm', installArgs.join(' '));
 
