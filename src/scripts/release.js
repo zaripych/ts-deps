@@ -103,6 +103,13 @@ export async function release(paramsRaw = defaultProps()) {
       '--no-save',
     ];
 
+    spawnSync('npm', ['init', '-y'], {
+      env: {
+        PATH: process.env.PATH,
+      },
+      cwd: SUB_DIR,
+    });
+
     console.log('🚀  npm', installArgs.join(' '));
 
     const installResult = spawnSync('npm', installArgs, {
