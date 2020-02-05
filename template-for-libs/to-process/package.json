@@ -29,7 +29,7 @@
     ]
   },
   "devDependencies": {
-    "husky": "4.0.7",
-    "lint-staged": "10.0.0-beta.15"
+    "husky": "4.2.1",
+    "lint-staged": "10.0.7"
   }
 }

@@ -5,7 +5,7 @@ import { mkdirSync, existsSync } from 'fs';
 import { join } from 'path';
 
 const defaultProps = () => ({
-  beta: true,
+  beta: false,
   cwd: process.cwd(),
   docker: true,
   setExitCode: true,
@@ -80,15 +80,6 @@ export async function release(paramsRaw = defaultProps()) {
   );
 
   if (!docker || (whichDocker && whichDocker.status !== 0)) {
-    // npx/npm is going to be just a little slower because it is more CPU intensive:
-    // E.g:
-    // time npx --ignore-existing --cache ./cache semantic-release --help
-    // ... 11.13s user 1.85s system 84% cpu 15.445 total
-    // vs
-    // time ./scripts/semantic-release.sh --help
-    // ...  0.17s user 0.10s system 1% cpu 13.967 total
-    //
-    // So CI machine with higher network bandwidth with limited/virtualized CPU should be faster with docker and slower with npx
     if (docker) {
       console.warn('⚠  Using npm install instead of docker ...');
     }
