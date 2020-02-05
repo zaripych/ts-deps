@@ -82,7 +82,7 @@
     "fs-extra": "8.1.0",
     "inquirer": "7.0.3",
     "istanbul-api": "2.1.6",
-    "jest": "24.9.0",
+    "jest": "25.1.0",
     "prettier": "1.19.1",
     "pretty-quick": "2.0.1",
     "sort-package-json": "1.39.0",
