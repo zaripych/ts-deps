@@ -74,4 +74,5 @@ type ReleaseParams = Partial<{
   dockerArgs?: string[];
   cmdArgs?: string[];
   setExitCode?: boolean;
+  extraEnvVars?: string[];
 }>;

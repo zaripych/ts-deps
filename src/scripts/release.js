@@ -17,7 +17,15 @@ const defaultProps = () => ({
  * @param {ReleaseParams} paramsRaw
  */
 export async function release(paramsRaw = defaultProps()) {
-  const { beta, cwd, docker, cmdArgs, dockerArgs, setExitCode } = {
+  const {
+    beta,
+    cwd,
+    docker,
+    cmdArgs,
+    dockerArgs,
+    setExitCode,
+    extraEnvVars,
+  } = {
     ...defaultProps(),
     ...paramsRaw,
   };
@@ -33,7 +41,7 @@ export async function release(paramsRaw = defaultProps()) {
   /**
    * @type Array<string | RegExp>
    */
-  const envPatterns = semanticReleaseEnvVars ?? [
+  const envPatterns = [
     'GH_TOKEN',
     'NPM_TOKEN',
 
@@ -65,6 +73,8 @@ export async function release(paramsRaw = defaultProps()) {
     'GITHUB_SHA',
     'GITHUB_REPOSITORY',
     'GITHUB_WORKSPACE',
+    ...(semanticReleaseEnvVars ?? []),
+    ...(extraEnvVars ?? []),
   ];
 
   const envVars = Object.entries(process.env).reduce(
