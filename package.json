@@ -91,7 +91,7 @@
     "sort-package-json": "1.40.0",
     "source-map-support": "0.5.16",
     "tar-fs": "2.0.0",
-    "tslint": "5.20.1",
+    "tslint": "6.0.0",
     "tslint-config-prettier": "1.18.0",
     "typescript": "3.8.2",
     "yargs": "15.1.0"
