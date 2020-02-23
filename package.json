@@ -56,6 +56,9 @@
     ],
     "package.json": [
       "sort-package-json"
+    ],
+    "src/**/*.{tsx,jsx,ts,js,json,md,yaml,yml}": [
+      "prettier --write"
     ]
   },
   "dependencies": {
