@@ -1,10 +1,57 @@
 // @ts-check
 import restrictedGlobals from 'confusing-browser-globals';
 
+const typescriptTypeCheckRequiredFor = [
+  '@typescript-eslint/await-thenable',
+  '@typescript-eslint/no-for-in-array',
+  '@typescript-eslint/no-misused-promises',
+  '@typescript-eslint/no-unnecessary-type-assertion',
+  '@typescript-eslint/prefer-includes',
+  '@typescript-eslint/prefer-regexp-exec',
+  '@typescript-eslint/prefer-string-starts-ends-with',
+  'require-await',
+  '@typescript-eslint/require-await',
+  '@typescript-eslint/unbound-method',
+  'no-var',
+  'prefer-const',
+  'prefer-rest-params',
+  'prefer-spread',
+];
+
+/**
+ *  @param {object} rules
+ */
+function filterRules(rules) {
+  return Object.entries(rules).reduce((acc, [key, value]) => {
+    return !typescriptTypeCheckRequiredFor.includes(key)
+      ? {
+          ...acc,
+          [key]: value,
+        }
+      : acc;
+  }, {});
+}
+
+/**
+ *  @param {string[]} list
+ */
+function filterExtends(list) {
+  return list.filter(
+    item =>
+      item !== 'plugin:@typescript-eslint/recommended-requiring-type-checking'
+  );
+}
+
 /**
  * @param {EsLintConfig} params
  */
 export function eslintConfig(params) {
+  const rootMerge =
+    typeof params?.root !== 'function' ? params?.root : undefined;
+  const srcMerge = typeof params?.src !== 'function' ? params?.src : undefined;
+  const testsMerge =
+    typeof params?.tests !== 'function' ? params?.tests : undefined;
+
   const rootJavaScriptConfig = {
     root: true,
 
@@ -12,22 +59,18 @@ export function eslintConfig(params) {
       browser: false,
       es6: true,
       node: true,
-      ...params?.root?.env,
+      ...rootMerge?.env,
     },
 
     parser: 'babel-eslint',
 
     plugins: ['import'],
 
-    extends: [
-      'eslint:recommended',
-      'prettier',
-      ...(params?.root?.extends || []),
-    ],
+    extends: ['eslint:recommended', 'prettier', ...(rootMerge?.extends ?? [])],
 
     parserOptions: {
       ecmaVersion: 2018,
-      ...params?.root?.parserOptions,
+      ...rootMerge?.parserOptions,
     },
 
     rules: {
@@ -165,18 +208,28 @@ export function eslintConfig(params) {
           argsIgnorePattern: '_.*',
         },
       ],
-      ...params?.root?.rules,
+      ...rootMerge?.rules,
     },
   };
 
-  const typeScript = {
+  const testsConfig = {
+    files: ['src/**/__tests__/**/*.ts?(x)', 'src/**/__tests__/**/*.js?(x)'],
+    rules: {
+      '@typescript-eslint/ban-ts-ignore': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      ...testsMerge?.rules,
+    },
+  };
+
+  const srcBase = {
+    files: ['src/**/*.ts?(x)', 'src/**/*.js?(x)'],
     parser: '@typescript-eslint/parser',
     env: {
       browser: false,
       es6: true,
       node: true,
       jest: true,
-      ...params?.src?.env,
+      ...srcMerge?.env,
     },
     parserOptions: {
       project: './tsconfig.json',
@@ -186,7 +239,7 @@ export function eslintConfig(params) {
         jsx: true,
       },
       warnOnUnsupportedTypeScriptVersion: true,
-      ...params?.src?.parserOptions,
+      ...srcMerge?.parserOptions,
     },
     plugins: ['import', '@typescript-eslint'],
     extends: [
@@ -196,7 +249,7 @@ export function eslintConfig(params) {
       'plugin:@typescript-eslint/recommended-requiring-type-checking',
       'prettier',
       'prettier/@typescript-eslint',
-      ...(params?.src?.extends ?? []),
+      ...(srcMerge?.extends ?? []),
     ],
     rules: {
       strict: ['warn', 'never'],
@@ -244,28 +297,41 @@ export function eslintConfig(params) {
       '@typescript-eslint/interface-name-prefix': 'warn',
       '@typescript-eslint/require-await': 'off',
       '@typescript-eslint/prefer-regexp-exec': 'warn',
-
-      ...params?.src?.rules,
+      ...srcMerge?.rules,
     },
 
     overrides: [
-      {
-        files: ['src/**/__tests__/**/*.ts?(x)', 'src/**/__tests__/**/*.js?(x)'],
-        rules: {
-          '@typescript-eslint/ban-ts-ignore': 'off',
-          '@typescript-eslint/no-explicit-any': 'off',
-          ...params?.tests?.rules,
-        },
-      },
+      typeof params?.tests === 'function'
+        ? params.tests(testsConfig)
+        : testsConfig,
     ],
   };
 
+  /**
+   * @type {EsLintConfigParams}
+   */
+  const srcConfig =
+    typeof params?.src === 'function' ? params.src(srcBase) : srcBase;
+
   return {
-    ...rootJavaScriptConfig,
+    ...(typeof params?.root === 'function'
+      ? params.root(rootJavaScriptConfig)
+      : rootJavaScriptConfig),
     overrides: [
       {
-        files: ['src/**/*.ts?(x)', 'src/**/*.js?(x)'],
-        ...typeScript,
+        ...srcConfig,
+        ...(srcConfig.rules && {
+          rules:
+            !srcConfig.parserOptions || !srcConfig?.parserOptions?.project
+              ? filterRules(srcConfig.rules)
+              : srcConfig.rules,
+        }),
+        ...(srcConfig.extends && {
+          extends:
+            !srcConfig.parserOptions || !srcConfig?.parserOptions?.project
+              ? filterExtends(srcConfig.extends)
+              : srcConfig.extends,
+        }),
       },
     ],
   };

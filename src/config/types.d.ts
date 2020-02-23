@@ -56,13 +56,19 @@ interface EsLintConfigParams {
   env?: Record<string, boolean>;
   extends?: string[];
   ignorePatterns?: string[];
-  parserOptions?: object;
+  parserOptions?: object & {
+    project?: string;
+  };
   rules?: object;
   [key: string]: unknown;
 }
 
+type ParamsOrBuilder =
+  | EsLintConfigParams
+  | ((def: EsLintConfigParams) => EsLintConfigParams);
+
 interface EsLintConfig {
-  root?: EsLintConfigParams;
-  src?: EsLintConfigParams;
-  tests?: EsLintConfigParams;
+  root?: ParamsOrBuilder;
+  src?: ParamsOrBuilder;
+  tests?: ParamsOrBuilder;
 }
