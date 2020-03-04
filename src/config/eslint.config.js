@@ -294,7 +294,7 @@ export function eslintConfig(params) {
       'no-useless-constructor': 'off',
       '@typescript-eslint/no-useless-constructor': 'warn',
       '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/interface-name-prefix': 'warn',
+      '@typescript-eslint/interface-name-prefix': 'off',
       '@typescript-eslint/require-await': 'off',
       '@typescript-eslint/prefer-regexp-exec': 'warn',
       ...srcMerge?.rules,
