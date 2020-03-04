@@ -1,6 +1,4 @@
 // @ts-check
-'use strict';
-
 import { defaults } from '../defaults';
 import { options } from '../options';
 
@@ -12,7 +10,7 @@ import {
 
 /**
  *
- * @param {Partial<IJestConfigParams>} paramsRaw
+ * @param {Partial<JestConfigParams>} paramsRaw
  */
 export const jestConfig = (paramsRaw = {}) => {
   const opts = options();

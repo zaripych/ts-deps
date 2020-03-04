@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 // @ts-nocheck
 
 const argvBefore = process.argv;
-const processExitBefore = process.exit;
+const processExitBefore = process.exit.bind(process);
 
 describe('cli', () => {
   beforeAll(() => {

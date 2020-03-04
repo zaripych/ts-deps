@@ -1,6 +1,6 @@
 // @ts-check
 import { resolve, extname, join } from 'path';
-import { readFile, writeFile, pathExists } from 'fs-extra';
+import { readFile, writeFile, pathExists, unlink, stat, copy } from 'fs-extra';
 import { format, resolveConfig } from 'prettier';
 import { initializeTemplates, promptForOverwrite } from '../helpers';
 import { options } from '../options';
@@ -44,7 +44,7 @@ const patchPackageJson = async ({ toPatch, templatesDir, aggressive }) => {
  *
  * @param {{ toPatch?: string, baseTsConfigLocation?: string, aggressive?: boolean, declarations?: boolean}} param0
  */
-const patchTsConfig = async ({
+const patchTsConfig = ({
   toPatch,
   baseTsConfigLocation,
   aggressive = false,
@@ -52,7 +52,7 @@ const patchTsConfig = async ({
 }) => {
   const oldConfig = (toPatch && JSON.parse(toPatch)) || {};
 
-  const result = await patchTsConfigCore({
+  const result = patchTsConfigCore({
     oldConfig,
     baseTsConfigLocation,
     aggressive,
@@ -75,7 +75,7 @@ const patchGitignore = async ({ toPatch, templatesDir }) => {
 
   const newText = await readFile(templateGitignorePath, { encoding: 'utf-8' });
 
-  const result = await patchText({
+  const result = patchText({
     oldText: toPatch,
     newText,
     unique: true,
@@ -94,6 +94,38 @@ const promptForOverwriteBeforePatch = async dest => {
 };
 
 /**
+ * @param {{ templateDirs: string[], patchDir: string }} param0
+ */
+const copyNonExistingFromTemplates = async ({ templateDirs, patchDir }) => {
+  for (const templateDir of templateDirs) {
+    const toCopyDir = join(templateDir, 'to-copy');
+
+    const dirToCopy = await stat(toCopyDir).catch(() => Promise.resolve(null));
+    if (!dirToCopy || !dirToCopy.isDirectory()) {
+      throw new Error('Source template directory doesnt exist: ' + toCopyDir);
+    }
+
+    await copy(toCopyDir, patchDir, {
+      filter: async (_src, dest) => {
+        const destStats = await stat(dest).catch(() => Promise.resolve(null));
+        if (destStats && destStats.isDirectory()) {
+          return true;
+        }
+
+        const shouldWrite = !destStats;
+
+        if (dest !== patchDir && shouldWrite) {
+          console.log('patch: writing', dest);
+        }
+
+        return shouldWrite;
+      },
+      overwrite: false,
+    });
+  }
+};
+
+/**
  * @param {TemplateInfo} template
  * @param {PatchParams} params
  */
@@ -104,8 +136,8 @@ const buildPatcherPerTemplate = (template, params) => {
       /**
        * @param {string|undefined} toPatch
        */
-      contents: async toPatch =>
-        await patchPackageJson({
+      contents: toPatch =>
+        patchPackageJson({
           toPatch,
           templatesDir: template.dir,
           aggressive: params.aggressive,
@@ -138,8 +170,8 @@ const buildPatchers = (templates, params) => {
       /**
        * @param {string|undefined} toPatch
        */
-      contents: async toPatch =>
-        await patchTsConfig({
+      contents: toPatch =>
+        patchTsConfig({
           toPatch,
           baseTsConfigLocation,
           aggressive,
@@ -150,13 +182,17 @@ const buildPatchers = (templates, params) => {
       /**
        * @param {string|undefined} toPatch
        */
-      contents: async toPatch =>
-        await patchTsConfig({
+      contents: toPatch =>
+        patchTsConfig({
           toPatch,
           baseTsConfigLocation,
           aggressive,
           declarations: true,
         }),
+    },
+    {
+      file: 'tslint.json',
+      delete: true,
     },
   ];
 
@@ -215,6 +251,11 @@ export const patch = async (paramsRaw = {}) => {
     join(params.cwd, './package.json')
   );
 
+  await copyNonExistingFromTemplates({
+    templateDirs: templates.map(template => template.dir),
+    patchDir,
+  });
+
   for (const item of patchers) {
     if (Array.isArray(params.patchOnly) && params.patchOnly.length > 0) {
       if (!params.patchOnly.includes(item.file)) {
@@ -223,6 +264,19 @@ export const patch = async (paramsRaw = {}) => {
     }
 
     const fullPath = resolve(join(params.patchDir, item.file));
+
+    if ('delete' in item && item.delete) {
+      const exists = await pathExists(fullPath);
+      if (exists) {
+        console.log('patch: deleting', fullPath);
+        await unlink(fullPath);
+      }
+      continue;
+    }
+
+    if (!item.contents) {
+      continue;
+    }
 
     const oldContents = await readFile(fullPath, {
       encoding: 'utf-8',
@@ -269,6 +323,9 @@ export const patch = async (paramsRaw = {}) => {
 async function patchHandler(args) {
   try {
     await patch({
+      ...(typeof args.aggressive === 'boolean' && {
+        aggressive: args.aggressive,
+      }),
       ...(typeof args.interactive === 'boolean' && {
         forceOverwrites: !args.interactive,
       }),
@@ -297,6 +354,12 @@ export const patchCliModule = {
       .alias('i', 'interactive')
       .describe('interactive', 'Prompt to patch for every existing file')
       .default('interactive', false)
+      .boolean('aggressive')
+      .default('aggressive', true)
+      .describe(
+        'aggressive',
+        'Allows to override keys in package.json and tsconfig.json (recommended to keep up to date with template)'
+      )
       .array('only')
       .describe('only', 'Patch only selected files')
       .example(

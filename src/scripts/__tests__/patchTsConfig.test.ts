@@ -34,8 +34,8 @@ describe('patchTsConfigCore', () => {
     const declarations = false;
     const baseTsConfigLocation = './node_modules/tsconfig.json';
 
-    it('should work', async () => {
-      const result = await patchTsConfigCore(
+    it('should work', () => {
+      const result = patchTsConfigCore(
         {
           oldConfig,
           baseTsConfigLocation,
@@ -69,8 +69,8 @@ describe('patchTsConfigCore', () => {
       tsConfigDeclarations: () => newConfig,
     });
 
-    it('should work', async () => {
-      const result = await patchTsConfigCore(
+    it('should work', () => {
+      const result = patchTsConfigCore(
         {
           oldConfig,
           baseTsConfigLocation,
@@ -95,8 +95,8 @@ describe('patchTsConfigCore', () => {
     const declarations = true;
     const baseTsConfigLocation = './node_modules/tsconfig.json';
 
-    it('should work', async () => {
-      const result = await patchTsConfigCore(
+    it('should work', () => {
+      const result = patchTsConfigCore(
         {
           oldConfig,
           baseTsConfigLocation,
@@ -135,8 +135,8 @@ describe('patchTsConfigCore', () => {
       tsConfigDeclarations: () => newConfig,
     });
 
-    it('should work', async () => {
-      const result = await patchTsConfigCore(
+    it('should work', () => {
+      const result = patchTsConfigCore(
         {
           oldConfig,
           baseTsConfigLocation,

@@ -7,6 +7,6 @@ describe('combineCoverage', () => {
   it('should work', async () => {
     await clean();
 
-    await combineCoverage();
+    combineCoverage();
   });
 });

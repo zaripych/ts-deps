@@ -4,13 +4,13 @@ import { resolve } from 'path';
 import { defaults } from './defaults';
 
 /**
- * @type {IOptions | null}
+ * @type {Options | null}
  */
 let opts = null;
 
 /**
  * @param {string|undefined} cwd
- * @returns {IOptions}
+ * @returns {Options}
  */
 function options(cwd = process.cwd()) {
   if (opts) {

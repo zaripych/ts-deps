@@ -1,4 +1,4 @@
-interface IOptions {
+interface Options {
   /**
    * A map between module id imported in the code
    * and relative-to-root directory location the module maps to

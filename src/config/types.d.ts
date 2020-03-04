@@ -18,7 +18,7 @@ type Targets = {
   [key in Environments]?: string;
 };
 
-interface IBabelPresetEnvConfig {
+interface BabelPresetEnvConfig {
   targets?: string | Array<string> | Targets;
   spec?: boolean;
   loose?: boolean;
@@ -34,20 +34,41 @@ interface IBabelPresetEnvConfig {
   shippedProposals?: boolean;
 }
 
-interface IBabelConfigParams {
-  aliases: IOptions['aliases'];
+interface BabelConfigParams {
+  aliases: Options['aliases'];
   nodeVersion: string;
   presetEnvConfig?: (
-    defaultConfig: IBabelPresetEnvConfig
-  ) => IBabelPresetEnvConfig;
+    defaultConfig: BabelPresetEnvConfig
+  ) => BabelPresetEnvConfig;
 }
 
-interface IJestConfigParams {
-  aliases: IOptions['aliases'];
+interface JestConfigParams {
+  aliases: Options['aliases'];
   nodeVersion: string;
 }
 
-interface ITsConfigParams {
-  aliases: IOptions['aliases'];
+interface TsConfigParams {
+  aliases: Options['aliases'];
   baseConfigLocation: string;
+}
+
+interface EsLintConfigParams {
+  env?: Record<string, boolean>;
+  extends?: string[];
+  ignorePatterns?: string[];
+  parserOptions?: object & {
+    project?: string;
+  };
+  rules?: object;
+  [key: string]: unknown;
+}
+
+type ParamsOrBuilder =
+  | EsLintConfigParams
+  | ((def: EsLintConfigParams) => EsLintConfigParams);
+
+interface EsLintConfig {
+  root?: ParamsOrBuilder;
+  src?: ParamsOrBuilder;
+  tests?: ParamsOrBuilder;
 }

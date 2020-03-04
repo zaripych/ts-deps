@@ -1,0 +1,14 @@
+.dependabot
+.github
+.jest-cache
+.vscode
+build
+coverage*
+dist
+integration-test-*
+lib
+node_modules
+out
+template-test
+test-sources
+git-ignored-manual-test-dir
