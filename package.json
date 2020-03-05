@@ -92,7 +92,7 @@
     "eslint-plugin-import": "2.20.1",
     "fast-glob": "3.2.2",
     "fs-extra": "8.1.0",
-    "inquirer": "7.0.5",
+    "inquirer": "7.0.6",
     "istanbul-api": "2.1.6",
     "jest": "25.1.0",
     "prettier": "1.19.1",
