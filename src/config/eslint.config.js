@@ -208,6 +208,14 @@ export function eslintConfig(params) {
           argsIgnorePattern: '_.*',
         },
       ],
+
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: ['src/*'],
+        },
+      ],
+
       ...rootMerge?.rules,
     },
   };
