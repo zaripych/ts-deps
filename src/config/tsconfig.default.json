@@ -24,7 +24,8 @@
     "isolatedModules": false,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "noEmit": true
+    "noEmit": true,
+    "jsx": "preserve"
   },
   "compileOnSave": false
 }
