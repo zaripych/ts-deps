@@ -66,7 +66,12 @@ export function eslintConfig(params) {
 
     plugins: ['import'],
 
-    extends: ['eslint:recommended', 'prettier', ...(rootMerge?.extends ?? [])],
+    extends: [
+      'eslint:recommended',
+      'prettier',
+      'plugin:react/recommended',
+      ...(rootMerge?.extends ?? []),
+    ],
 
     parserOptions: {
       ecmaVersion: 2018,
@@ -215,6 +220,8 @@ export function eslintConfig(params) {
           patterns: ['src/*'],
         },
       ],
+
+      'react/prop-types': 'off',
 
       ...rootMerge?.rules,
     },

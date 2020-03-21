@@ -34,6 +34,7 @@ export const tsConfig = (paramsRaw = {}) => {
       baseUrl: '.',
       paths,
       outDir: lib,
+      jsx: 'react',
     },
     include: [src],
   };
