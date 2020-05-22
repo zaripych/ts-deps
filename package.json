@@ -106,7 +106,7 @@
     "@types/prettier": "1.19.1",
     "@types/tar-fs": "1.16.3",
     "husky": "4.2.3",
-    "lint-staged": "10.0.8"
+    "lint-staged": "10.2.6"
   },
   "engines": {
     "node": ">= 8.12"
