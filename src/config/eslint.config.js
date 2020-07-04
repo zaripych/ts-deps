@@ -237,8 +237,15 @@ export function eslintConfig(params) {
     },
     extends: ['plugin:jest/recommended'],
     rules: {
-      '@typescript-eslint/ban-ts-ignore': 'off',
+      '@typescript-eslint/ban-ts-comment': [
+        'error',
+        {
+          'ts-expect-error': false,
+          'ts-check': false,
+        },
+      ],
       '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
       ...testsMerge?.rules,
     },
   };
@@ -253,8 +260,15 @@ export function eslintConfig(params) {
     },
     extends: ['plugin:jest/recommended'],
     rules: {
-      '@typescript-eslint/ban-ts-ignore': 'off',
+      '@typescript-eslint/ban-ts-comment': [
+        'error',
+        {
+          'ts-expect-error': false,
+          'ts-check': false,
+        },
+      ],
       '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
       ...testsMerge?.rules,
     },
   };
@@ -335,6 +349,7 @@ export function eslintConfig(params) {
       '@typescript-eslint/interface-name-prefix': 'off',
       '@typescript-eslint/require-await': 'off',
       '@typescript-eslint/prefer-regexp-exec': 'warn',
+      '@typescript-eslint/ban-types': 'off',
       ...srcMerge?.rules,
     },
 
