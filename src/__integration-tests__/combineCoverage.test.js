@@ -4,9 +4,13 @@ import { clean, combineCoverage } from '../scripts';
 jest.setTimeout(120000);
 
 describe('combineCoverage', () => {
-  it('should work', async () => {
+  beforeAll(async () => {
     await clean();
+  });
 
-    combineCoverage();
+  it('should work', () => {
+    expect(() => {
+      combineCoverage();
+    }).not.toThrow();
   });
 });

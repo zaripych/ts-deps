@@ -61,7 +61,9 @@ export const spawnAndCheck = (
 
   if (result.status !== 0) {
     throw new Error(
-      `process ${args[0]} exit with non-zero status code: ${result.status}`
+      `process ${args[0]} exit with non-zero status code: ${String(
+        result.status
+      )}`
     );
   }
 
@@ -140,7 +142,7 @@ export const unarchiveTarGz = async (tar: string, out: string) => {
     stream.once('finish', () => {
       res();
     });
-    stream.once('error', err => {
+    stream.once('error', (err) => {
       rej(err);
     });
   });

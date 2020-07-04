@@ -99,14 +99,14 @@ describe('init', () => {
         await copy(sourceLocation, initDir, {
           overwrite: true,
         });
-
-        spawnAndCheck('npx', ['ts-deps', 'patch'], {
-          cwd: initDir,
-        });
       });
 
       it('should patch', () => {
-        return;
+        expect(() => {
+          spawnAndCheck('npx', ['ts-deps', 'patch'], {
+            cwd: initDir,
+          });
+        }).not.toThrow();
       });
     });
   });

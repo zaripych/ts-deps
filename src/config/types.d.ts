@@ -56,10 +56,10 @@ interface EsLintConfigParams {
   env?: Record<string, boolean>;
   extends?: string[];
   ignorePatterns?: string[];
-  parserOptions?: object & {
+  parserOptions?: Record<string, unknown> & {
     project?: string;
   };
-  rules?: object;
+  rules?: Record<string, unknown>;
   [key: string]: unknown;
 }
 

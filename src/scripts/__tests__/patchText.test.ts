@@ -18,7 +18,7 @@ describe('patchText', () => {
     });
   });
 
-  describe('given undefined and non-empty', () => {
+  describe('given undefined old text and non-empty new text', () => {
     const oldText = undefined;
     const newText = 'line';
 
@@ -33,7 +33,7 @@ describe('patchText', () => {
     });
   });
 
-  describe('given undefined and non-empty', () => {
+  describe('given non-empty old text and undefined new text', () => {
     const oldText = 'line';
     const newText = undefined;
 

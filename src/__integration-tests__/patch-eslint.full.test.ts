@@ -79,9 +79,11 @@ describe('init', () => {
       });
 
       it('should lint', () => {
-        spawnAndCheck('npm', ['run', 'lint'], {
-          cwd: initDir,
-        });
+        expect(() => {
+          spawnAndCheck('npm', ['run', 'lint'], {
+            cwd: initDir,
+          });
+        }).not.toThrow();
       });
     });
   });

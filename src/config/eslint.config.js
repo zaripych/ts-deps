@@ -37,7 +37,7 @@ function filterRules(rules) {
  */
 function filterExtends(list) {
   return list.filter(
-    item =>
+    (item) =>
       item !== 'plugin:@typescript-eslint/recommended-requiring-type-checking'
   );
 }
@@ -227,8 +227,31 @@ export function eslintConfig(params) {
     },
   };
 
-  const testsConfig = {
-    files: ['src/**/__tests__/**/*.ts?(x)', 'src/**/__tests__/**/*.js?(x)'],
+  const jsTestsConfig = {
+    files: [
+      'src/**/__tests__/**/*.js?(x)',
+      'src/**/__integration-tests__/**/*.js?(x)',
+    ],
+    env: {
+      'jest/globals': true,
+    },
+    extends: ['plugin:jest/recommended'],
+    rules: {
+      '@typescript-eslint/ban-ts-ignore': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      ...testsMerge?.rules,
+    },
+  };
+
+  const tsTestsConfig = {
+    files: [
+      'src/**/__tests__/**/*.ts?(x)',
+      'src/**/__integration-tests__/**/*.ts?(x)',
+    ],
+    env: {
+      'jest/globals': true,
+    },
+    extends: ['plugin:jest/recommended'],
     rules: {
       '@typescript-eslint/ban-ts-ignore': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
@@ -237,7 +260,7 @@ export function eslintConfig(params) {
   };
 
   const srcBase = {
-    files: ['src/**/*.ts?(x)', 'src/**/*.js?(x)'],
+    files: ['src/**/*.ts?(x)'],
     parser: '@typescript-eslint/parser',
     env: {
       browser: false,
@@ -317,8 +340,8 @@ export function eslintConfig(params) {
 
     overrides: [
       typeof params?.tests === 'function'
-        ? params.tests(testsConfig)
-        : testsConfig,
+        ? params.tests(tsTestsConfig)
+        : tsTestsConfig,
     ],
   };
 
@@ -333,6 +356,7 @@ export function eslintConfig(params) {
       ? params.root(rootJavaScriptConfig)
       : rootJavaScriptConfig),
     overrides: [
+      jsTestsConfig,
       {
         ...srcConfig,
         ...(srcConfig.rules && {

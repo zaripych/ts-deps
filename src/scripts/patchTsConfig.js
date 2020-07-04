@@ -25,6 +25,7 @@ export const patchTsConfigCore = (
     ? deps.tsConfigDeclarations(tsParams)
     : deps.tsConfig(tsParams);
 
+  /** @type {typeof config} */
   const result = aggressive
     ? config
     : deepmerge(oldConfig, config, {
