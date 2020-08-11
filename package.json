@@ -98,7 +98,7 @@
     "sort-package-json": "1.44.0",
     "source-map-support": "0.5.19",
     "tar-fs": "2.1.0",
-    "typescript": "3.9.6",
+    "typescript": "3.9.7",
     "yargs": "15.4.1"
   },
   "devDependencies": {
