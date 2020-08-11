@@ -99,7 +99,7 @@
     "source-map-support": "0.5.19",
     "tar-fs": "2.1.0",
     "typescript": "3.9.6",
-    "yargs": "15.4.0"
+    "yargs": "15.4.1"
   },
   "devDependencies": {
     "@babel/register": "7.10.5",
