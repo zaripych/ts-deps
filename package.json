@@ -80,7 +80,7 @@
     "babel-eslint": "10.1.0",
     "babel-plugin-module-resolver": "4.0.0",
     "commitlint": "9.1.0",
-    "concurrently": "5.2.0",
+    "concurrently": "5.3.0",
     "confusing-browser-globals": "1.0.9",
     "deepmerge": "4.2.2",
     "eslint": "7.6.0",
