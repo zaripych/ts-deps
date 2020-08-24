@@ -93,7 +93,7 @@
     "inquirer": "7.3.3",
     "istanbul-api": "3.0.0",
     "jest": "26.4.0",
-    "prettier": "2.0.5",
+    "prettier": "2.1.0",
     "sort-package-json": "1.44.0",
     "source-map-support": "0.5.19",
     "tar-fs": "2.1.0",
