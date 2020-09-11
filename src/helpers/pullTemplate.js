@@ -23,10 +23,12 @@ const npmPullTemplate = async (depName, cwd, targetDir) => {
     throw new Error(`Couldn't find '${depName}' package in npm repository`);
   }
 
-  const templateFullDirs = templateDirectories.map(dir => join(targetDir, dir));
+  const templateFullDirs = templateDirectories.map((dir) =>
+    join(targetDir, dir)
+  );
 
   const templatePathExist = await Promise.all(
-    templateFullDirs.map(dir => pathExists(dir))
+    templateFullDirs.map((dir) => pathExists(dir))
   );
   const existingTemplatePath = templatePathExist.indexOf(true);
   if (existingTemplatePath >= 0) {
@@ -45,7 +47,7 @@ const npmPullTemplate = async (depName, cwd, targetDir) => {
   const fullPackagePath = join(cwd, packagePath);
 
   await unarchiveTarGz(fullPackagePath, cwd, {
-    map: header => {
+    map: (header) => {
       const name = header.name.replace('package/', '');
       return {
         ...header,
@@ -56,7 +58,7 @@ const npmPullTemplate = async (depName, cwd, targetDir) => {
       if (!headers) {
         return false;
       }
-      return templateDirectories.every(dir => !headers.name.startsWith(dir));
+      return templateDirectories.every((dir) => !headers.name.startsWith(dir));
     },
   });
 
@@ -73,7 +75,7 @@ const npmPullTemplate = async (depName, cwd, targetDir) => {
  */
 const pullTemplates = async (template, cwd, targetDir) => {
   const templatePath = isAbsolute(template) ? template : join(cwd, template);
-  const templatesStat = await stat(templatePath).catch(_err => null);
+  const templatesStat = await stat(templatePath).catch((_err) => null);
 
   if (templatesStat && templatesStat.isDirectory()) {
     return {
@@ -91,7 +93,7 @@ const pullTemplates = async (template, cwd, targetDir) => {
 };
 
 /**
- * @param {string} [template]
+ * @param {string | undefined} template
  * @param {string} cwd
  * @param {string} targetDir
  * @returns {Promise<TemplateInfo[]>}
