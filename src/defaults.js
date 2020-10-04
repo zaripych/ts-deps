@@ -11,7 +11,7 @@ export const defaults = Object.freeze({
     '!**/__tests__/**',
     '!__integration-tests__/**',
   ],
-  nodeVersion: '8.12',
+  nodeVersion: '12',
   unitTestsGlob: 'src/**/__tests__/**',
   integrationTestsGlob: 'src/__integration-tests__/**',
   optionsFileName: 'ts-deps.config.js',
