@@ -5,6 +5,7 @@ Object {
   "ignore": Array [
     "src/**/*.d.ts",
     "src/**/*.json",
+    "src/**/.#*",
   ],
   "plugins": Array [
     Array [
@@ -41,6 +42,7 @@ Object {
   "ignore": Array [
     "src/**/*.d.ts",
     "src/**/*.json",
+    "src/**/.#*",
   ],
   "plugins": Array [
     Array [
@@ -78,6 +80,7 @@ Object {
   "ignore": Array [
     "src/**/*.d.ts",
     "src/**/*.json",
+    "src/**/.#*",
   ],
   "plugins": Array [
     Array [
@@ -114,6 +117,7 @@ Object {
   "ignore": Array [
     "src/**/*.d.ts",
     "src/**/*.json",
+    "src/**/.#*",
   ],
   "plugins": Array [
     Array [
@@ -150,6 +154,7 @@ Object {
   "ignore": Array [
     "src/**/*.d.ts",
     "src/**/*.json",
+    "src/**/.#*",
   ],
   "plugins": Array [
     Array [
