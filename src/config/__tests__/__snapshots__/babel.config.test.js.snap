@@ -27,7 +27,7 @@ Object {
       "@babel/preset-env",
       Object {
         "targets": Object {
-          "node": "8.12",
+          "node": "12",
         },
       },
     ],
@@ -64,7 +64,7 @@ Object {
       "@babel/preset-env",
       Object {
         "targets": Object {
-          "node": "8.12",
+          "node": "12",
         },
       },
     ],
@@ -100,7 +100,7 @@ Object {
       "@babel/preset-env",
       Object {
         "targets": Object {
-          "node": "8.12",
+          "node": "12",
         },
       },
     ],
