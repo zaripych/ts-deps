@@ -14,7 +14,7 @@ export const babelConfig = (paramsRaw = {}) => {
     /**
      * @param {{}} defaultConfig
      */
-    presetEnvConfig: defaultConfig => defaultConfig,
+    presetEnvConfig: (defaultConfig) => defaultConfig,
     ...paramsRaw,
   };
   const src = defaults.rootDir;
@@ -48,7 +48,7 @@ export const babelConfig = (paramsRaw = {}) => {
       '@babel/plugin-proposal-nullish-coalescing-operator',
       '@babel/plugin-proposal-optional-chaining',
     ].filter(Boolean),
-    ignore: [`${src}/**/*.d.ts`, `${src}/**/*.json`],
+    ignore: [`${src}/**/*.d.ts`, `${src}/**/*.json`, `${src}/**/.#*`],
   };
 
   return config;

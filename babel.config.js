@@ -26,5 +26,5 @@ module.exports = {
     '@babel/plugin-proposal-nullish-coalescing-operator',
     '@babel/plugin-proposal-optional-chaining',
   ],
-  ignore: ['src/**/*.d.ts', 'src/**/*.json'],
+  ignore: ['src/**/*.d.ts', 'src/**/*.json', 'src/**/.#*'],
 };
