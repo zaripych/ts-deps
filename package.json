@@ -70,7 +70,7 @@
     "@babel/preset-typescript": "7.10.4",
     "@commitlint/cli": "11.0.0",
     "@commitlint/config-conventional": "11.0.0",
-    "@types/fs-extra": "9.0.1",
+    "@types/fs-extra": "9.0.2",
     "@types/inquirer": "7.3.1",
     "@types/jest": "26.0.14",
     "@types/yargs": "15.0.7",
