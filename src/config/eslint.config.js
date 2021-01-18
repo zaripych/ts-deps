@@ -359,6 +359,9 @@ export function eslintConfig(params) {
       '@typescript-eslint/require-await': 'off',
       '@typescript-eslint/prefer-regexp-exec': 'warn',
       '@typescript-eslint/ban-types': 'off',
+
+      '@typescript-eslint/consistent-type-imports': 'error',
+
       ...srcMerge?.rules,
     },
 
