@@ -11,8 +11,8 @@ import { join } from 'path';
  * @param {string[]} values Values to set
  */
 const optionalArgBuilder = (args, lookupArgs, values) => {
-  const contains = args.some(arg =>
-    lookupArgs.some(lookupArg => lookupArg === arg)
+  const contains = args.some((arg) =>
+    lookupArgs.some((lookupArg) => lookupArg === arg)
   );
   // if arguments already contain one of the arguments
   // we define by default, then return an empty array
@@ -21,7 +21,7 @@ const optionalArgBuilder = (args, lookupArgs, values) => {
   }
 
   return values
-    .map(val => (val ? [lookupArgs[0], val] : [lookupArgs[0]]))
+    .map((val) => (val ? [lookupArgs[0], val] : [lookupArgs[0]]))
     .reduce((acc, item) => [...acc, ...item], []);
 };
 
@@ -39,7 +39,7 @@ export async function babelBuild({
   integrationTestsGlob = defaults.integrationTestsGlob,
   copyAdditional = defaults.copyAdditional,
 } = {}) {
-  const exts = extensions.map(ext => `.${ext}`).join(',');
+  const exts = extensions.map((ext) => `.${ext}`).join(',');
 
   const args = !Array.isArray(commandLine)
     ? process.argv.splice(2)
@@ -66,7 +66,7 @@ export async function babelBuild({
     });
 
     await Promise.all(
-      files.map(path => {
+      files.map((path) => {
         const src = join(rootDir, path);
         const dest = join(outDir, path);
         return copy(src, dest);
@@ -111,7 +111,7 @@ export async function babelBuild({
   });
 
   const waitForBabel = new Promise((res, _rej) => {
-    babelProc.on('exit', code => {
+    babelProc.on('exit', (code) => {
       res(code);
     });
   });

@@ -113,7 +113,7 @@ function resolveTemplatesDir(candidates) {
     resolve(__dirname, '../../template-for-libs'),
   ];
 
-  const templatesDir = templatesCandidates.find(cnd => existsSync(cnd));
+  const templatesDir = templatesCandidates.find((cnd) => existsSync(cnd));
   if (!templatesDir) {
     throw new Error('Cannot find templates directory');
   }
@@ -128,7 +128,7 @@ const copyPromptState = {
 /**
  * @param {{ overwrite: boolean | 'a' | 'c' }} result
  */
-const handleCopyPromptResult = result => {
+const handleCopyPromptResult = (result) => {
   if (result.overwrite === 'a') {
     copyPromptState.overwriteAll = true;
     return Promise.resolve(true);
@@ -148,7 +148,7 @@ const handleCopyPromptResult = result => {
 /**
  * @param {string} dest
  */
-const promptForOverwrite = async dest => {
+const promptForOverwrite = async (dest) => {
   if (copyPromptState.overwriteAll) {
     return Promise.resolve(true);
   }

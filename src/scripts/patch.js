@@ -87,8 +87,8 @@ const patchGitignore = async ({ toPatch, templatesDir }) => {
 /**
  * @param {string} dest
  */
-const promptForOverwriteBeforePatch = async dest => {
-  return pathExists(dest).then(exists =>
+const promptForOverwriteBeforePatch = async (dest) => {
+  return pathExists(dest).then((exists) =>
     exists ? promptForOverwrite(dest) : Promise.resolve(true)
   );
 };
@@ -136,7 +136,7 @@ const buildPatcherPerTemplate = (template, params) => {
       /**
        * @param {string|undefined} toPatch
        */
-      contents: toPatch =>
+      contents: (toPatch) =>
         patchPackageJson({
           toPatch,
           templatesDir: template.dir,
@@ -148,7 +148,7 @@ const buildPatcherPerTemplate = (template, params) => {
       /**
        * @param {string|undefined} toPatch
        */
-      contents: async toPatch =>
+      contents: async (toPatch) =>
         await patchGitignore({
           toPatch,
           templatesDir: template.dir,
@@ -170,7 +170,7 @@ const buildPatchers = (templates, params) => {
       /**
        * @param {string|undefined} toPatch
        */
-      contents: toPatch =>
+      contents: (toPatch) =>
         patchTsConfig({
           toPatch,
           baseTsConfigLocation,
@@ -182,7 +182,7 @@ const buildPatchers = (templates, params) => {
       /**
        * @param {string|undefined} toPatch
        */
-      contents: toPatch =>
+      contents: (toPatch) =>
         patchTsConfig({
           toPatch,
           baseTsConfigLocation,
@@ -199,7 +199,7 @@ const buildPatchers = (templates, params) => {
   return [
     ...defaultPatchers,
     ...templates
-      .map(template => buildPatcherPerTemplate(template, params))
+      .map((template) => buildPatcherPerTemplate(template, params))
       .reduce((acc, patchers) => [...acc, ...patchers], []),
   ];
 };
@@ -252,7 +252,7 @@ export const patch = async (paramsRaw = {}) => {
   );
 
   await copyNonExistingFromTemplates({
-    templateDirs: templates.map(template => template.dir),
+    templateDirs: templates.map((template) => template.dir),
     patchDir,
   });
 
@@ -348,7 +348,7 @@ export const patchCliModule = {
   /**
    * @param {import('yargs').Argv} y
    */
-  builder: y =>
+  builder: (y) =>
     y
       .boolean('interactive')
       .alias('i', 'interactive')

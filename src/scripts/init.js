@@ -19,7 +19,7 @@ const PKG_JSON = 'package.json';
 /**
  * @param {string} initDir
  */
-const npmInitIfRequired = async initDir => {
+const npmInitIfRequired = async (initDir) => {
   const packageJsonPath = resolve(initDir, PKG_JSON);
 
   const exists = await pathExists(packageJsonPath);
@@ -83,8 +83,8 @@ const copyFromTemplates = async ({ templateDirs, initDir }) => {
 
   await Promise.all(
     dirsToCreate
-      .map(dir => join(initDir, dir))
-      .map(dir => ensureDir(dir).catch(() => Promise.resolve()))
+      .map((dir) => join(initDir, dir))
+      .map((dir) => ensureDir(dir).catch(() => Promise.resolve()))
   );
 };
 
@@ -108,7 +108,7 @@ const errorIfNotEmpty = async (cwd, force) => {
   const currentDirectoryContents = await readdir(cwd);
 
   const dirContentsFiltered = currentDirectoryContents.filter(
-    item => !item.startsWith('.') && !ignoreFiles.includes(item)
+    (item) => !item.startsWith('.') && !ignoreFiles.includes(item)
   );
 
   if (dirContentsFiltered.length > 0) {
@@ -155,12 +155,12 @@ export const init = async ({
   const currentDir = resolve(cwd);
   const initDir = resolve(targetDirectory);
 
-  const currentDirStat = await stat(currentDir).catch(_err => null);
+  const currentDirStat = await stat(currentDir).catch((_err) => null);
   if (!currentDirStat || !currentDirStat.isDirectory()) {
     throw new Error('Current directory must resolve to an existing directory');
   }
 
-  const initDirStat = await stat(initDir).catch(_err => null);
+  const initDirStat = await stat(initDir).catch((_err) => null);
   if (!initDirStat || !initDirStat.isDirectory()) {
     throw new Error('Init directory must resolve to an existing directory');
   }
@@ -173,7 +173,7 @@ export const init = async ({
 
   const copyTemplates = () =>
     copyFromTemplates({
-      templateDirs: templates.map(item => item.dir),
+      templateDirs: templates.map((item) => item.dir),
       initDir,
     });
 
@@ -226,7 +226,7 @@ export const initCliModule = {
   /**
    * @param {import('yargs').Argv} y
    */
-  builder: y =>
+  builder: (y) =>
     y
       .option('directory', {
         string: true,

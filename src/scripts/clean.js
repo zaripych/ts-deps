@@ -10,7 +10,7 @@ export const clean = async ({
   const packageJson = join(cwd, 'package.json');
 
   if (existsSync(packageJson)) {
-    const existing = dirs.filter(dir => existsSync(dir));
+    const existing = dirs.filter((dir) => existsSync(dir));
     if (existing.length === 0) {
       console.log('👌  clean: nothing to clean');
       return;

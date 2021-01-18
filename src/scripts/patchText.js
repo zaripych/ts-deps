@@ -19,10 +19,10 @@ export function patchText({ oldText, newText, unique }) {
     return oldText;
   }
 
-  const set = new Set(oldLines.filter(text => !!text));
+  const set = new Set(oldLines.filter((text) => !!text));
 
   const result = unique
-    ? [...oldLines, ...newLines.filter(line => !set.has(line))]
+    ? [...oldLines, ...newLines.filter((line) => !set.has(line))]
     : [...oldLines, ...newLines];
 
   return result.join(EOL);

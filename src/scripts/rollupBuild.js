@@ -12,8 +12,8 @@ import { join } from 'path';
  * @returns {string[]}
  */
 const optionalArgBuilder = (args, lookupArgs, values) => {
-  const contains = args.some(arg =>
-    lookupArgs.some(lookupArg => lookupArg === arg)
+  const contains = args.some((arg) =>
+    lookupArgs.some((lookupArg) => lookupArg === arg)
   );
   // if arguments already contain one of the arguments
   // we define by default, then return an empty array
@@ -22,7 +22,7 @@ const optionalArgBuilder = (args, lookupArgs, values) => {
   }
 
   return values
-    .map(val => (val ? [lookupArgs[0], val] : [lookupArgs[0]]))
+    .map((val) => (val ? [lookupArgs[0], val] : [lookupArgs[0]]))
     .reduce((acc, item) => [...acc, ...item], []);
 };
 
@@ -61,7 +61,7 @@ export async function rollupBuild({
     });
 
     await Promise.all(
-      files.map(path => {
+      files.map((path) => {
         const src = join(rootDir, path);
         const dest = join(outDir, path);
         return copy(src, dest);
@@ -94,7 +94,7 @@ export async function rollupBuild({
   });
 
   const waitForRollup = new Promise((res, _rej) => {
-    babelProc.on('exit', code => {
+    babelProc.on('exit', (code) => {
       res(code);
     });
   });

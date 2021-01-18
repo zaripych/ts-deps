@@ -18,7 +18,7 @@ export const combineCoverage = (paramsRaw = {}) => {
     absolute: true,
   });
 
-  const coverageData = filePaths.map(filePath => require(filePath));
+  const coverageData = filePaths.map((filePath) => require(filePath));
 
   const map = createCoverageMap();
   for (const data of coverageData) {

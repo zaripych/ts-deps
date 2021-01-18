@@ -80,7 +80,7 @@ export function release(paramsRaw = defaultProps()) {
   const envVars = Object.entries(process.env).reduce(
     (acc, [key, value]) => ({
       ...acc,
-      ...(envPatterns.some(pattern =>
+      ...(envPatterns.some((pattern) =>
         typeof pattern === 'string' ? pattern === key : pattern.test(key)
       ) && {
         [key]: value,
