@@ -15,7 +15,10 @@ export const unarchiveTarGz = async (tar, out, opts) => {
   const stream = createReadStream(tar)
     .pipe(gunzip)
     .pipe(extract(outPath, opts), { end: true });
-  return new Promise((res, rej) => {
+  /**
+   * @type {Promise<void>}
+   */
+  const result = new Promise((res, rej) => {
     stream.once('end', () => {
       res();
     });
@@ -25,8 +28,9 @@ export const unarchiveTarGz = async (tar, out, opts) => {
     stream.once('finish', () => {
       res();
     });
-    stream.once('error', err => {
+    stream.once('error', (err) => {
       rej(err);
     });
   });
+  return result;
 };

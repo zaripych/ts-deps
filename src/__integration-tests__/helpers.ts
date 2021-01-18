@@ -132,7 +132,7 @@ export const unarchiveTarGz = async (tar: string, out: string) => {
   const stream = createReadStream(tar)
     .pipe(gunzip)
     .pipe(extract(outPath), { end: true });
-  return new Promise((res, rej) => {
+  return new Promise<void>((res, rej) => {
     stream.once('end', () => {
       res();
     });
