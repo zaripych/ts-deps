@@ -60,14 +60,14 @@
     ]
   },
   "dependencies": {
-    "@babel/cli": "7.12.1",
-    "@babel/core": "7.12.3",
+    "@babel/cli": "7.12.10",
+    "@babel/core": "7.12.10",
     "@babel/plugin-proposal-class-properties": "7.12.1",
     "@babel/plugin-proposal-nullish-coalescing-operator": "7.12.1",
     "@babel/plugin-proposal-object-rest-spread": "7.12.1",
-    "@babel/plugin-proposal-optional-chaining": "7.12.1",
-    "@babel/preset-env": "7.12.1",
-    "@babel/preset-typescript": "7.12.1",
+    "@babel/plugin-proposal-optional-chaining": "7.12.7",
+    "@babel/preset-env": "7.12.11",
+    "@babel/preset-typescript": "7.12.7",
     "@commitlint/cli": "11.0.0",
     "@commitlint/config-conventional": "11.0.0",
     "@types/fs-extra": "9.0.4",
@@ -78,7 +78,7 @@
     "@typescript-eslint/parser": "4.7.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
-    "babel-plugin-module-resolver": "4.0.0",
+    "babel-plugin-module-resolver": "4.1.0",
     "concurrently": "5.3.0",
     "confusing-browser-globals": "1.0.10",
     "deepmerge": "4.2.2",
@@ -101,7 +101,7 @@
     "yargs": "16.1.0"
   },
   "devDependencies": {
-    "@babel/register": "7.12.1",
+    "@babel/register": "7.12.10",
     "@types/node": "12",
     "@types/prettier": "2.1.5",
     "@types/tar-fs": "2.0.0",
