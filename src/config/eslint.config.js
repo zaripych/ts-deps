@@ -3,19 +3,28 @@ import restrictedGlobals from 'confusing-browser-globals';
 
 const typescriptTypeCheckRequiredFor = [
   '@typescript-eslint/await-thenable',
+  '@typescript-eslint/no-floating-promises',
   '@typescript-eslint/no-for-in-array',
+  '@typescript-eslint/no-implied-eval',
   '@typescript-eslint/no-misused-promises',
   '@typescript-eslint/no-unnecessary-type-assertion',
+  '@typescript-eslint/no-unsafe-assignment',
+  '@typescript-eslint/no-unsafe-call',
+  '@typescript-eslint/no-unsafe-member-access',
+  '@typescript-eslint/no-unsafe-return',
   '@typescript-eslint/prefer-includes',
   '@typescript-eslint/prefer-regexp-exec',
   '@typescript-eslint/prefer-string-starts-ends-with',
-  'require-await',
   '@typescript-eslint/require-await',
+  '@typescript-eslint/restrict-plus-operands',
+  '@typescript-eslint/restrict-template-expressions',
   '@typescript-eslint/unbound-method',
+  'no-implied-eval',
   'no-var',
   'prefer-const',
   'prefer-rest-params',
   'prefer-spread',
+  'require-await',
 ];
 
 /**
