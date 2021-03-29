@@ -101,7 +101,7 @@
     "yargs": "16.2.0"
   },
   "devDependencies": {
-    "@babel/register": "7.12.10",
+    "@babel/register": "7.13.14",
     "@types/node": "12",
     "@types/prettier": "2.1.6",
     "@types/tar-fs": "2.0.0",
